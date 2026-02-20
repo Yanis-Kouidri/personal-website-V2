@@ -1,0 +1,20 @@
+{
+	"name": "whole-wind",
+	"type": "module",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "astro dev --open",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro"
+	},
+	"dependencies": {
+		"@tailwindcss/vite": "^4.2.0",
+		"astro": "^5.17.1",
+		"tailwindcss": "^4.2.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.4.3",
+		"@types/bun": "^1.3.9"
+	}
+}
