@@ -14,7 +14,7 @@
 		"check": "biome check",
 		"check:fix": "biome check --write",
 		"typecheck": "astro check",
-		"typeckeck:watch": "astro check --watch",
+		"typecheck:watch": "astro check --watch",
 		"prepare": "husky"
 	},
 	"dependencies": {
