@@ -1,0 +1,98 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  quality-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Lint and format with Biome
+        run: bun run check
+
+      - name: Check Typescript
+        run: bun run typecheck
+  
+  prepare:
+    name: Prepare metadata
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.pkg.outputs.version }}
+      image: ${{ steps.image.outputs.name }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Extract version from package.json
+        id: pkg
+        run: echo "version=$(jq -r .version package.json)" >> "$GITHUB_OUTPUT"
+
+      - name: Prepare image name (lowercase)
+        id: image
+        run: |
+          OWNER_LC=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+          REPO_NAME_LC=$(echo "${{ github.event.repository.name }}" | tr '[:upper:]' '[:lower:]')
+          echo "name=ghcr.io/$OWNER_LC/$REPO_NAME_LC" >> "$GITHUB_OUTPUT"      
+
+  build-and-push:
+    name: Build and push Podman image
+    needs: [quality-check, prepare]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Connect to GitHub Container Registry
+        uses: redhat-actions/podman-login@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Build podman image
+        id: build-image
+        uses: redhat-actions/buildah-build@v2
+        with:
+          image: ${{needs.prepare.outputs.image}}
+          context: .
+          platforms: linux/amd64
+          tags: |
+            latest
+            ${{ needs.prepare.outputs.version }}
+            sha-${{ github.sha }}
+          containerfiles: |
+            ./Containerfile
+
+      - name: Push to GHCR
+        if: github.event_name == 'push'
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: ${{ steps.build-image.outputs.image }}
+          tags: ${{ steps.build-image.outputs.tags }}
+          registry: ghcr.io
+
+      - name: Verify build status
+        run: |
+          if [ "${{ github.event_name }}" == "push" ]; then
+            echo "Image built and pushed on GHCR."
+            echo "Image pushed:"
+            echo "${{ needs.prepare.outputs.image }}:latest"
+            echo "${{ needs.prepare.outputs.image }}:${{ needs.prepare.outputs.version }}"
+            echo "${{ needs.prepare.outputs.image }}:sha-${{ github.sha }}"
+          else
+            echo "Image built but not pushed (tests PR)"
+          fi
