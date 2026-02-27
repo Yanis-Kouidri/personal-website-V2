@@ -17,6 +17,11 @@
 		"typecheck:watch": "astro check --watch",
 		"prepare": "husky"
 	},
+	"lint-staged": {
+		"*.{js,ts,jsx,tsx,astro,json}": [
+			"biome check --write --no-errors-on-unmatched"
+		]
+	},
 	"dependencies": {
 		"@astrojs/check": "^0.9.6",
 		"@tailwindcss/vite": "^4.2.0",
@@ -27,6 +32,7 @@
 	"devDependencies": {
 		"@biomejs/biome": "2.4.3",
 		"@types/bun": "^1.3.9",
-		"husky": "^9.1.7"
+		"husky": "^9.1.7",
+		"lint-staged": "^16.2.7"
 	}
 }
