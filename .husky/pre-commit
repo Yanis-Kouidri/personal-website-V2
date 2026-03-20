@@ -1,2 +1,2 @@
-bunx lint-staged
+bun run check --write --no-errors-on-unmatched
 bun run typecheck
