@@ -1,7 +1,7 @@
 FROM docker.io/oven/bun:1.3.10-alpine AS build
 WORKDIR /usr/src/app
 
-COPY package.json bun.lock .
+COPY package.json bun.lock ./
 RUN bun install --frozen-lockfile
 COPY . .
 ENV NODE_ENV=production
