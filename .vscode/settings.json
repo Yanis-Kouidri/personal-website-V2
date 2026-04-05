@@ -8,5 +8,6 @@
 
 	"[astro]": {
 		"editor.defaultFormatter": "biomejs.biome"
-	}
+	},
+	"ltex.language": "auto"
 }
