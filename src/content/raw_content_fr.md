@@ -51,21 +51,21 @@ Date : 2026 - 2029
 
 ### Doctorat (Thèse CIFRE)
 
-**Sujet :** Dorsales de communication éphémères pour la collecte de données dans les réseaux de capteurs sans fil (WSN).
+Sujet : Dorsales de communication éphémères pour la collecte de données dans les réseaux de capteurs sans fil (WSN).
 
 ### Projet de fin d'étude - Thales Alenia Space
 
-**Chargé de développement logiciel (Rust) | Mars 2025 - Sept. 2025**
-*Toulouse, France*
+Chargé de développement logiciel (Rust) | Mars 2025 - Sept. 2025
+Toulouse, France
 
-Développement d'une bibliothèque en **Rust** pour le démultiplexage des données images pour les satellites d’observation de la Terre.
+Développement d'une bibliothèque en Rust pour le démultiplexage des données images pour les satellites d’observation de la Terre.
 
-- Étude des recommandations du **CCSDS** pour les télécommunications et analyse des interfaces bord-sol.
+- Étude des recommandations du CCSDS pour les télécommunications et analyse des interfaces bord-sol.
 - Conception logicielle pour le traitement de flux de données complexes.
 
 ### Semestre Erasmus - Université de Rome Tor Vergata
 
-**Échange international | Italie**
+Échange international | Italie
 Approfondissement des thématiques du secteur spatial et numérique :
 
 - Internet par satellite
@@ -75,39 +75,39 @@ Approfondissement des thématiques du secteur spatial et numérique :
 
 ### Diplôme d'Ingénieur ENSEEIHT (en alternance)
 
-Filière : **Sciences du Numérique** 2022 - 2025 *Toulouse, France*
+Filière : Sciences du Numérique 2022 - 2025 *Toulouse, France*
 
 Alternance Thales Alenia space Toulouse :
 
 Spécialisation dans l'orchestration de traitements algorithmiques et les architectures Cloud Native.
 
-- **Cloud & DevOps :** Déploiement sur **Kubernetes**, création de workflows avec **Argo Workflow** et implémentation de Luigi.
-- **Docs as Code :** Automatisation de la documentation technique via un pipeline **Antora** et Jenkins (format Adoc).
-- **Analyse comparative :** Rédaction d'une étude technique sur les orchestrateurs de données.
+- Cloud & DevOps : Déploiement sur Kubernetes, création de workflows avec Argo Workflow et implémentation de Luigi.
+- Docs as Code : Automatisation de la documentation technique via un pipeline Antora et Jenkins (format Adoc).
+- Analyse comparative : Rédaction d'une étude technique sur les orchestrateurs de données.
 
 ### Stage de fin de DUT - Thales Alenia Space
 
-**Développeur d'outils d'exploitation de données | Avr. 2022 - Sept. 2022**
+Développeur d'outils d'exploitation de données | Avr. 2022 - Sept. 2022
 *Cannes, France*
 
-Analyse et traitement des données binaires issues des tests avioniques (Projet Artemis).
+Analyse et traitement des données binaires issues des tests avioniques.
 
-- **Python Data Science :** Développement d'outils d'analyse de trames (bus CAN) avec **NumPy, Pandas et Matplotlib**.
-- **Réseaux :** Conversion de captures réseaux (PCAP) en formats binaires propriétaires.
-- **Transmission :** Animation de sessions d'introduction aux réseaux informatiques pour les ingénieurs du service.
+- Python Data Science : Développement d'outils d'analyse de trames (bus CAN) avec NumPy, Pandas et Matplotlib.
+- Réseaux : Conversion de captures réseaux (PCAP) en formats binaires propriétaires.
+- Transmission : Animation de sessions d'introduction aux réseaux informatiques pour les ingénieurs du service.
 
 ### DUT Réseaux & Télécommunications
 
 Formation pluridisciplinaire axée sur trois piliers :
 
-- **Télécommunications :** Traitement du signal, modulations et transmissions numériques.
-- **Réseaux :** Architecture Internet (WAN) et réseaux locaux (LAN).
-- **Informatique :** Programmation, systèmes d'exploitation et administration.
+- Télécommunications : Traitement du signal, modulations et transmissions numériques.
+- Réseaux : Architecture Internet (WAN) et réseaux locaux (LAN).
+- Informatique : Programmation, systèmes d'exploitation et administration.
 
 ### Baccalauréat scientifique SVT
 
-**Spécialité Mathématiques | Mention Très Bien**
-*Lycée Jules Ferry, Cannes*
+Spécialité Mathématiques | Mention Très Bien
+Lycée Jules Ferry, Cannes
 
 ## Projets
 
@@ -123,5 +123,5 @@ M'étant rendu compte que la V1 de mon site commençait à devenir inutilement c
 
 ## Footer
 
-Copyright 2026 - Yanis Kouidri. Site réalisé avec le Framework Astro.
-Merci de m'avoir lu jusqu'ici.
+Copyright 2026 - Yanis Kouidri.
+Merci de m’avoir lu jusqu’ici. Site écrit par Yanis Kouidri grâce au Framework Astro. Ni le code de ce site ni le contenu n’ont été générés par IA.
