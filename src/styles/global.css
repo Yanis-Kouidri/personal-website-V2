@@ -8,4 +8,6 @@
 
 :root {
 	font-family: "Inter Custom", system-ui, sans-serif;
+	--color-secondary: #f2f4f3;
+	--color-font: #070b07;
 }
