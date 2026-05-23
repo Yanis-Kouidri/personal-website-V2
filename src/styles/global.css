@@ -1,1 +1,11 @@
-@import "tailwindcss";
+@font-face {
+	font-family: "Inter Custom";
+	src: url("/fonts/inter-variable.woff2") format("woff2-variations");
+	font-weight: 100 900;
+	font-style: normal;
+	font-display: swap;
+}
+
+:root {
+	font-family: "Inter Custom", system-ui, sans-serif;
+}

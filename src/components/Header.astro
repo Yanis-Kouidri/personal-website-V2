@@ -1,9 +1,35 @@
 ---
 import "../styles/global.css";
+import { Menu } from "lucide-astro";
 ---
-<header class="bg-mist-200 w-full">
-    <nav class="px-4 flex justify-between items-center">
-        <a>Yanis Kouidri</a>
-        <button> Menu </button>
+<style>
+    nav {
+        background-color: #F2F4F3;
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+    }
+
+    #my-name {
+        font-size: 1.2rem;
+        font-weight: 800;
+    }
+
+    #menu {
+        border: 0;
+    }
+
+    a:-webkit-any-link {
+        color: black;
+        text-decoration: none;
+    }
+</style>
+
+<header>
+    <nav>
+        <a id="my-name" href="/">Yanis Kouidri</a>
+        <button id="menu" type="button">
+            <Menu />
+        </button>
     </nav>
 </header>
