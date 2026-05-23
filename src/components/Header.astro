@@ -1,5 +1,5 @@
 ---
-import { Menu } from "lucide-astro";
+import { Menu, X } from "lucide-astro";
 ---
 <style>
     nav {
@@ -8,6 +8,8 @@ import { Menu } from "lucide-astro";
         justify-content: space-between;
         align-items: center;
         padding: 1.25rem;
+        position: relative; 
+        z-index: 20;
     }
 
     #my-name {
@@ -17,19 +19,91 @@ import { Menu } from "lucide-astro";
         text-decoration: none;
     }
 
-    #menu {
+    #menu-button, #icon-menu {
         border: 0;
         background: transparent;
         padding: 0;
     }
 
+    .mobile-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: var(--color-secondary);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        transform: translateY(-100%);
+        transition: transform 0.3s ease-in-out;
+        z-index: 10;
+    }
+
+    .mobile-menu.is-open {
+        transform: translateY(0);
+    }
+
+    .mobile-menu a {
+        font-size: 1.5rem;
+        font-weight: 600;
+        text-decoration: none;
+        color: var(--color-text);
+    }
+
 </style>
+
+<script>
+  const menuButton = document.getElementById('menu-button') as HTMLButtonElement | null;
+  const mobileMenu = document.getElementById('mobile-menu') as HTMLElement | null;
+  const iconMenu = document.getElementById('icon-menu') as HTMLElement | null;
+  const iconClose = document.getElementById('icon-close') as HTMLElement | null;
+  const menuLinks = document.querySelectorAll('.mobile-menu a') as NodeListOf<HTMLAnchorElement>;
+
+  if (!menuButton || !mobileMenu || !iconMenu || !iconClose) {
+    console.error("Éléments du menu manquants dans le DOM");
+  } else {
+    
+    const toggleMenu = (): void => {
+      const isOpen = mobileMenu.classList.toggle('is-open');
+      menuButton.setAttribute('aria-expanded', isOpen.toString());
+      
+      iconMenu.classList.toggle('hidden');
+      iconClose.classList.toggle('hidden');
+
+      // Proper scroll management
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    };
+
+    menuButton.addEventListener('click', toggleMenu);
+
+    menuLinks.forEach((link: HTMLAnchorElement) => {
+      link.addEventListener('click', () => {
+        if (mobileMenu.classList.contains('is-open')) {
+          toggleMenu();
+        }
+      });
+    });
+  }
+</script>
 
 <header>
     <nav>
         <a id="my-name" href="/">Yanis Kouidri</a>
-        <button id="menu" type="button">
-            <Menu />
+        <button id="menu-button" type="button">
+            <Menu id="icon-menu" />
+            <X id="icon-close" class="hidden" />
         </button>
     </nav>
+
+    <div id="mobile-menu" class="mobile-menu">
+        <a href="#home">Accueil</a>
+        <a href="#phd">Doctorat</a>
+        <a href="#journey">Parcours</a>
+        <a href="#skills">Compétences</a>
+        <a href="#Projects">Projets</a>
+        <a href="#contact">Contact</a>
+    </div>
 </header>
