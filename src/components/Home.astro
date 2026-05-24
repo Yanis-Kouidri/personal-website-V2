@@ -1,10 +1,159 @@
 ---
-import "../styles/global.css";
+/**
+ * Home Component
+ * Implementation of the hero section for mobile view
+ */
+import { BookMarked, Github, Linkedin, Mail } from "lucide-astro";
+
+// Social links configuration
+const socialLinks = [
+	{
+		href: "https://yanis-kouidri.github.io/personal-doc/",
+		icon: BookMarked,
+		label: "Docs",
+	},
+	{
+		href: "https://linkedin.com/in/yanis-kouidri",
+		icon: Linkedin,
+		label: "LinkedIn",
+	},
+	{
+		href: "mailto:yanis.kouidri@neusta.fr",
+		icon: Mail,
+		label: "Email",
+	},
+	{
+		href: "https://github.com/Yanis-Kouidri",
+		icon: Github,
+		label: "GitHub",
+	},
+];
 ---
-<div class="p-1 m-1">
-    <h1 class="center">Yanis Kouidri</h1>
-</div>
-<div class="p-2 m-1">
-    <p>
-        Doctorant en première année de thèse CIFRE entre l'IRIT et Neusta
-</div>
+
+<section id="home" class="hero-container">
+  <div class="content-wrapper">
+    <h1 class="name-title">Yanis Kouidri</h1>
+
+    <p class="description">
+      Doctorant en première année de thèse CIFRE entre l'IRIT et Neusta
+    </p>
+
+    <div class="social-links">
+      {
+        socialLinks.map((social) => (
+          <a
+            href={social.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={social.label}
+            class="social-icon"
+          >
+            <social.icon size={32} strokeWidth={2.5} />
+          </a>
+        ) )
+      }
+    </div>
+
+    <a href="#phd" class="cta-button">
+      En savoir plus
+    </a>
+
+    <div class="profile-image-container">
+      <img 
+        src="src/assets/Yanis_Kouidri_home.jpg" 
+        alt="Yanis Kouidri" 
+        class="profile-image"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4rem 1.5rem 2rem;
+    min-height: calc(100vh - 80px); /* Adjust based on header height */
+    background-color: var(--color-background);
+  }
+
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+  }
+
+  .name-title {
+    font-size: 2.25rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    color: var(--color-font);
+  }
+
+  .description {
+    font-size: 1.25rem;
+    line-height: 1.4;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    color: var(--color-font);
+  }
+
+  .social-links {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .social-icon {
+    color: var(--color-font);
+    transition: transform 0.2s ease;
+  }
+
+  .social-icon:hover {
+    transform: translateY(-3px);
+    color: var(--color-primary);
+  }
+
+  .cta-button {
+    background-color: var(--color-secondary);
+    color: var(--color-font);
+    padding: 0.8rem 2.5rem;
+    border-radius: 9999px; /* Pill shape */
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-decoration: none;
+    margin-bottom: 3rem;
+    transition: filter 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  }
+
+  .cta-button:active {
+    transform: scale(0.98);
+  }
+
+  .profile-image-container {
+    width: 230px;
+    height: 230px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  }
+
+  .profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Specific adjustment for the provided screenshot look */
+  @media (max-width: 640px) {
+    .name-title {
+      margin-top: 2rem;
+    }
+  }
+</style>
