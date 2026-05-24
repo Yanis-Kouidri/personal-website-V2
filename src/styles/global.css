@@ -8,8 +8,11 @@
 
 :root {
 	font-family: "Inter Custom", system-ui, sans-serif;
-	--color-secondary: #f2f4f3;
+	--color-background: #f2f4f3;
 	--color-font: #070b07;
+	--color-accent: #57ec5e;
+	--color-primary: #006e1a;
+	--color-secondary: #8ae68e;
 }
 .hidden {
 	display: none;
