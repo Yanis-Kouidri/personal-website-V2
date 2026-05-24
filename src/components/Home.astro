@@ -32,38 +32,25 @@ const socialLinks = [
 
 <section id="home" class="hero-container">
   <div class="content-wrapper">
-    <h1 class="name-title">Yanis Kouidri</h1>
+    <div class="text-content">
+      <h1 class="name-title">Yanis Kouidri</h1>
+      <p class="description">
+        Doctorant en première année de thèse CIFRE entre l'IRIT et Neusta
+      </p>
 
-    <p class="description">
-      Doctorant en première année de thèse CIFRE entre l'IRIT et Neusta
-    </p>
-
-    <div class="social-links">
-      {
-        socialLinks.map((social) => (
-          <a
-            href={social.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={social.label}
-            class="social-icon"
-          >
+      <div class="social-links">
+        {socialLinks.map((social) => (
+          <a href={social.href} target="_blank" rel="noopener noreferrer" aria-label={social.label} class="social-icon">
             <social.icon size={32} strokeWidth={2.5} />
           </a>
-        ) )
-      }
+        ))}
+      </div>
+
+      <a href="#phd" class="cta-button">En savoir plus</a>
     </div>
 
-    <a href="#phd" class="cta-button">
-      En savoir plus
-    </a>
-
     <div class="profile-image-container">
-      <img 
-        src="src/assets/Yanis_Kouidri_home.jpg" 
-        alt="Yanis Kouidri" 
-        class="profile-image"
-      />
+      <img src="src/assets/Yanis_Kouidri_home.jpg" alt="Yanis Kouidri" class="profile-image" />
     </div>
   </div>
 </section>
@@ -71,35 +58,67 @@ const socialLinks = [
 <style>
   .hero-container {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    padding: 4rem 1.5rem 2rem;
-    min-height: calc(100vh - 80px); /* Adjust based on header height */
+    justify-content: center;
+    min-height: calc(100vh - 80px);
     background-color: var(--color-background);
+    padding: 2rem 1.5rem;
   }
 
-  .content-wrapper {
+.content-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    max-width: 400px;
+    gap: 3rem;
     width: 100%;
+    max-width: 1200px; 
+  }
+
+  .text-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+
+  @media (min-width: 1024px) {
+    .content-wrapper {
+      flex-direction: row;
+      justify-content: center; /* Changement : on centre le groupe (texte + image) */
+      text-align: left;
+      
+      /* AJUSTEMENTS POUR RAPPROCHER LE CONTENU */
+      gap: 8rem;          /* Espace fixe entre le texte et l'image */
+      max-width: 1000px;  /* On réduit la largeur maximale pour resserrer l'ensemble */
+      margin: 0 auto;     /* On centre le conteneur dans la page */
+      padding: 0 10%;     /* Ajout de marge interne à gauche et à droite */
+    }
+
+    .text-content {
+      align-items: flex-start;
+      flex: 0 1 auto;     /* Le texte ne prend que la place dont il a besoin */
+    }
+
+    .profile-image-container {
+      flex-shrink: 0;     /* Empêche l'image de rétrécir */
+      width: 380px;
+      height: 380px;
+    }
   }
 
   .name-title {
-    font-size: 2.25rem;
+    font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 800;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     color: var(--color-font);
   }
 
   .description {
     font-size: 1.25rem;
-    line-height: 1.4;
-    font-weight: 500;
+    max-width: 500px;
     margin-bottom: 2rem;
-    color: var(--color-font);
+    line-height: 1.5;
   }
 
   .social-links {
@@ -108,52 +127,43 @@ const socialLinks = [
     margin-bottom: 2.5rem;
   }
 
-  .social-icon {
+  .cta-button {
+    display: inline-block;
+    background-color: var(--color-secondary);
     color: var(--color-font);
+    padding: 1rem 2.5rem;
+    border-radius: 9999px;
+    font-weight: 700;
+    text-decoration: none;
     transition: transform 0.2s ease;
   }
 
-  .social-icon:hover {
-    transform: translateY(-3px);
-    color: var(--color-primary);
-  }
-
-  .cta-button {
-    background-color: var(--color-secondary);
-    color: var(--color-font);
-    padding: 0.8rem 2.5rem;
-    border-radius: 9999px; /* Pill shape */
-    font-weight: 700;
-    font-size: 1.1rem;
-    text-decoration: none;
-    margin-bottom: 3rem;
-    transition: filter 0.2s ease, transform 0.2s ease;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-  }
-
-  .cta-button:active {
-    transform: scale(0.98);
-  }
-
   .profile-image-container {
-    width: 230px;
-    height: 230px;
+    width: 250px;
+    height: 250px;
     border-radius: 50%;
     overflow: hidden;
-    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
   }
 
   .profile-image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    display: block;
+    object-fit: cover; /* [cite: 19] */
   }
 
-  /* Specific adjustment for the provided screenshot look */
-  @media (max-width: 640px) {
-    .name-title {
-      margin-top: 2rem;
-    }
-  }
+  .social-icon, 
+.social-icon:visited, 
+.social-icon:active,
+.social-icon:link {
+  /* On force la couleur définie dans tes variables, peu importe l'état du lien */
+  color: var(--color-font); 
+  text-decoration: none;
+  outline: none;
+}
+
+.social-icon:hover {
+  transform: translateY(-3px);
+  color: var(--color-primary); /* Ici il changera de couleur seulement au survol */
+}
 </style>
