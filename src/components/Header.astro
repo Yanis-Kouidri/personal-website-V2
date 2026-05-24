@@ -1,109 +1,190 @@
 ---
 import { Menu, X } from "lucide-astro";
+
+/**
+ * Main navigation links for the center area
+ */
+const mainLinks = [
+	{ href: "#home", label: "Accueil" },
+	{ href: "#phd", label: "Doctorat" },
+	{ href: "#journey", label: "Parcours" },
+	{ href: "#skills", label: "Compétences" },
+	{ href: "#Projects", label: "Projets" },
+];
+
+/**
+ * Separate contact link for the right side
+ */
+const contactLink = { href: "#contact", label: "Contact" };
 ---
+
+<header>
+  <nav class="nav-bar">
+    <div class="nav-identity">
+      <a id="brand-name" href="/">Yanis Kouidri</a>
+    </div>
+
+    <ul class="nav-menu-desktop">
+      {mainLinks.map((link) => (
+        <li><a href={link.href} class="nav-item">{link.label}</a></li>
+      ))}
+    </ul>
+
+    <div class="nav-actions">
+      <a href={contactLink.href} class="contact-cta-desktop">
+        {contactLink.label}
+      </a>
+      
+      <button id="menu-button" type="button" aria-label="Toggle menu" aria-expanded="false">
+        <Menu id="icon-menu" />
+        <X id="icon-close" class="hidden" />
+      </button>
+    </div>
+  </nav>
+
+  <div id="mobile-menu" class="mobile-menu-overlay">
+    {[...mainLinks, contactLink].map((link) => (
+      <a href={link.href} class="mobile-nav-link">{link.label}</a>
+    ))}
+  </div>
+</header>
+
 <style>
-    nav {
-        background-color: var(--color-secondary);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1.25rem;
-        position: relative; 
-        z-index: 20;
+  /* --- Base Navigation (Mobile First) --- */
+  .nav-bar {
+    background-color: var(--color-secondary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem;
+    position: relative;
+    z-index: 20;
+  }
+
+  #brand-name {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--color-font);
+    text-decoration: none;
+  }
+
+  /* Hide desktop-specific elements by default */
+  .nav-menu-desktop, 
+  .contact-cta-desktop {
+    display: none;
+  }
+
+  #menu-button {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    color: var(--color-font);
+    padding: 0;
+  }
+
+  /* --- Mobile Overlay Styles --- */
+  .mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--color-secondary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 10;
+  }
+
+  .mobile-menu-overlay.is-open {
+    transform: translateY(0);
+  }
+
+  .mobile-nav-link {
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--color-font);
+  }
+
+  /* --- Desktop Breakpoint (1024px+) --- */
+  @media (min-width: 1024px) {
+    .nav-bar {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr; /* Centering trick */
+      padding: 1.25rem 2rem;
     }
 
-    #my-name {
-        font-size: 1.2rem;
-        font-weight: 800;
-        color: var(--color-font);
-        text-decoration: none;
+    /* Show desktop elements */
+    .nav-menu-desktop {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      margin: 0;
+      padding: 0;
     }
 
-    #menu-button, #icon-menu {
-        border: 0;
-        background: transparent;
-        padding: 0;
+    .contact-cta-desktop {
+      display: inline-block;
+      text-decoration: none;
+      background-color: var(--color-font);
+      color: var(--color-secondary);
+      padding: 0.6rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: transform 0.2s ease;
     }
 
-    .mobile-menu {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        background-color: var(--color-secondary);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 2rem;
-        transform: translateY(-100%);
-        transition: transform 0.3s ease-in-out;
-        z-index: 10;
+    .contact-cta-desktop:hover {
+      transform: translateY(-2px);
     }
 
-    .mobile-menu.is-open {
-        transform: translateY(0);
+    .nav-item {
+      text-decoration: none;
+      color: var(--color-font);
+      font-weight: 500;
     }
 
-    .mobile-menu a {
-        font-size: 1.5rem;
-        font-weight: 600;
-        text-decoration: none;
-        color: var(--color-text);
+    .nav-actions {
+      justify-self: end;
     }
 
+    /* Hide mobile-only elements */
+    #menu-button, 
+    .mobile-menu-overlay {
+      display: none;
+    }
+  }
 </style>
 
 <script>
-  const menuButton = document.getElementById('menu-button') as HTMLButtonElement | null;
-  const mobileMenu = document.getElementById('mobile-menu') as HTMLElement | null;
-  const iconMenu = document.getElementById('icon-menu') as HTMLElement | null;
-  const iconClose = document.getElementById('icon-close') as HTMLElement | null;
-  const menuLinks = document.querySelectorAll('.mobile-menu a') as NodeListOf<HTMLAnchorElement>;
+  /**
+   * Toggle mobile navigation overlay
+   */
+  const setupNavigation = (): void => {
+    const toggleBtn = document.getElementById('menu-button') as HTMLButtonElement | null;
+    const menuOverlay = document.getElementById('mobile-menu') as HTMLElement | null;
+    const openIcon = document.getElementById('icon-menu') as HTMLElement | null;
+    const closeIcon = document.getElementById('icon-close') as HTMLElement | null;
 
-  if (!menuButton || !mobileMenu || !iconMenu || !iconClose) {
-    console.error("Éléments du menu manquants dans le DOM");
-  } else {
-    
-    const toggleMenu = (): void => {
-      const isOpen = mobileMenu.classList.toggle('is-open');
-      menuButton.setAttribute('aria-expanded', isOpen.toString());
+    if (!toggleBtn || !menuOverlay || !openIcon || !closeIcon) return;
+
+    toggleBtn.addEventListener('click', () => {
+      const isExpanded = menuOverlay.classList.toggle('is-open');
+      toggleBtn.setAttribute('aria-expanded', isExpanded.toString());
       
-      iconMenu.classList.toggle('hidden');
-      iconClose.classList.toggle('hidden');
-
-      // Proper scroll management
-      document.body.style.overflow = isOpen ? 'hidden' : '';
-    };
-
-    menuButton.addEventListener('click', toggleMenu);
-
-    menuLinks.forEach((link: HTMLAnchorElement) => {
-      link.addEventListener('click', () => {
-        if (mobileMenu.classList.contains('is-open')) {
-          toggleMenu();
-        }
-      });
+      openIcon.classList.toggle('hidden');
+      closeIcon.classList.toggle('hidden');
+      
+      // Disable body scroll when menu is open
+      document.body.style.overflow = isExpanded ? 'hidden' : '';
     });
-  }
+  };
+
+  // Initialize on DOM load
+  setupNavigation();
 </script>
-
-<header>
-    <nav>
-        <a id="my-name" href="/">Yanis Kouidri</a>
-        <button id="menu-button" type="button">
-            <Menu id="icon-menu" />
-            <X id="icon-close" class="hidden" />
-        </button>
-    </nav>
-
-    <div id="mobile-menu" class="mobile-menu">
-        <a href="#home">Accueil</a>
-        <a href="#phd">Doctorat</a>
-        <a href="#journey">Parcours</a>
-        <a href="#skills">Compétences</a>
-        <a href="#Projects">Projets</a>
-        <a href="#contact">Contact</a>
-    </div>
-</header>
