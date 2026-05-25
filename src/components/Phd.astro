@@ -1,0 +1,247 @@
+---
+interface ResearchDetail {
+	label: string;
+	value: string;
+}
+
+// Content data
+const title = "Mon doctorat";
+const projectCode = "DMX : Data Mule eXpress";
+const subtitle =
+	"Dorsales de communication éphémères pour la collecte de données dans les réseaux de capteurs sans fil";
+const period = "2026 — 2029";
+
+const description = `Ma thèse porte sur l'optimisation de la collecte de données dans l'Internet des Objets (IoT). Au sein du projet DMX, je développe des architectures réseaux éphémères capables de s'adapter aux mouvements de collecteurs mobiles (comme des drones ou des véhicules). En combinant des techniques de calculs de bord (edge computing) et de communications opportunistes, mon objectif est de rendre les réseaux de capteurs plus intelligents, plus efficaces et plus économes en énergie, même dans des environnements complexes.`;
+
+const keywords: string[] = [
+	"WSN",
+	"UAV",
+	"Edge computing",
+	"Routage opportuniste",
+	"DTN",
+	"Multi-RAT",
+	"AoI",
+	"IoT",
+	"Data mule",
+	"NTN",
+	"5G",
+	"6G",
+];
+
+const sidebarDetails: ResearchDetail[] = [
+	{ label: "Cadre", value: "Thèse CIFRE" },
+	{ label: "Partenaires", value: "IRIT & Neusta France" },
+	{ label: "Lieu", value: "Toulouse, France" },
+	{ label: "Statut", value: "En cours" },
+];
+---
+
+<section id="phd" class="phd-section">
+  <div class="container">
+    <header class="phd-header">
+      <span class="period-badge">{period}</span>
+      <h2 class="main-title">{title}</h2>
+      <div class="project-summary">
+        <h3 class="project-id">{projectCode}</h3>
+        <p class="project-subtitle">{subtitle}</p>
+      </div>
+    </header>
+
+    <div class="content-layout">
+      <div class="description-column">
+        <h4 class="column-label">Aperçu du projet</h4>
+        <p class="description-text">
+          {description}
+        </p>
+        
+        <div class="tags-group">
+          {keywords.map((tag) => (
+            <span class="tag">{tag}</span>
+          ))}
+        </div>
+      </div>
+
+      <aside class="details-column">
+        <div class="info-card">
+          <p class="collaboration-text">
+            Thèse <strong>CIFRE</strong> menée en collaboration entre l'<strong>IRIT</strong> et <strong>Neusta France</strong> à Toulouse.
+          </p>
+          
+          <div class="details-grid">
+            {sidebarDetails.map((item) => (
+              <div class="detail-entry">
+                <span class="detail-label">{item.label}</span>
+                <span class="detail-value">{item.value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* MOBILE FIRST STYLES
+  */
+  .phd-section {
+    padding: 4rem 1.25rem;
+    background-color: var(--color-background);
+    color: var(--color-font);
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .phd-header {
+    margin-bottom: 3rem;
+  }
+
+  .period-badge {
+    display: inline-block;
+    padding: 0.3rem 0.7rem;
+    background-color: var(--color-primary);
+    color: white;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border-radius: 4px;
+    margin-bottom: 0rem;
+  }
+
+  .main-title {
+    font-size: clamp(2.2rem, 8vw, 3.5rem);
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    color: var(--color-font);
+  }
+
+  .project-summary {
+    padding: 1.5rem;
+    background-color: white;
+    border-left: 5px solid var(--color-accent);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  }
+
+  .project-id {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    margin-bottom: 0.25rem;
+  }
+
+  .project-subtitle {
+    font-size: 1.1rem;
+    line-height: 1.4;
+    font-weight: 500;
+    opacity: 0.9;
+  }
+
+  /* Layout */
+  .content-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .column-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 1.5rem;
+  }
+
+  .description-text {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+
+  .tags-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .tag {
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.4rem 0.75rem;
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+    border-radius: 6px;
+    transition: transform 0.2s ease;
+  }
+
+  .tag:hover {
+    transform: translateY(-2px);
+  }
+
+  /* Sidebar Card */
+  .info-card {
+    background-color: var(--color-font);
+    color: white;
+    padding: 2rem;
+    border-radius: 16px;
+  }
+
+  .collaboration-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .collaboration-text strong {
+    color: var(--color-accent);
+  }
+
+  .details-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .detail-entry {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .detail-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    opacity: 0.6;
+    font-weight: 600;
+  }
+
+  .detail-value {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
+  /* DESKTOP ADJUSTMENTS (From 768px)
+  */
+  @media (min-width: 768px) {
+    .phd-section {
+      padding: 8rem 2rem;
+    }
+
+    .content-layout {
+      display: grid;
+      grid-template-columns: 1.7fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .info-card {
+      position: sticky;
+      top: 2rem;
+    }
+  }
+</style>
