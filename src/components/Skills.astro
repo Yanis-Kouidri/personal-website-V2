@@ -1,0 +1,394 @@
+---
+import { type Icon as IconType } from "@lucide/astro";
+
+/**
+ * Skills Component
+ * Displays technical skills categorized by theme with an interactive filter.
+ * Uses mobile-first approach and follows the project's color palette.
+ */
+import {
+	ChevronRight,
+	Code2,
+	Globe,
+	Infinity as InfinityLogo,
+	Network,
+	Server,
+	ShieldCheck,
+} from "lucide-astro";
+
+interface SkillCategory {
+	id: string;
+	label: string;
+	icon: typeof IconType;
+	skills: string[];
+}
+
+const skillCategories: SkillCategory[] = [
+	{
+		id: "web",
+		label: "Web",
+		icon: Globe,
+		skills: [
+			"JavaScript",
+			"TypeScript",
+			"React",
+			"Bun",
+			"NodeJS",
+			"Astro",
+			"HTML",
+			"CSS",
+			"Vite",
+			"Strapi",
+			"Figma",
+		],
+	},
+	{
+		id: "programming",
+		label: "Programmation",
+		icon: Code2,
+		skills: [
+			"Ada",
+			"Python",
+			"Rust",
+			"C",
+			"C++",
+			"Java",
+			"PHP",
+			"OCaml",
+			"Bash",
+		],
+	},
+	{
+		id: "network",
+		label: "Réseau",
+		icon: Network,
+		skills: [
+			"Switch",
+			"Routeur",
+			"Cisco",
+			"Frame Relay",
+			"TCP",
+			"UDP",
+			"X.25",
+			"ATM",
+			"Wireshark",
+			"HTTP",
+			"DNS",
+			"DHCP",
+			"MPLS",
+			"OSPF",
+			"BGP",
+		],
+	},
+	{
+		id: "infra",
+		label: "Infra",
+		icon: Server,
+		skills: [
+			"Docker",
+			"Kubernetes",
+			"Podman",
+			"Helm",
+			"Linux",
+			"Cert-manager",
+			"Envoy",
+			"AWS EC2",
+			"AWS Route 53",
+		],
+	},
+	{
+		id: "cyber",
+		label: "Cyber",
+		icon: ShieldCheck,
+		skills: [
+			"Crowdsec",
+			"Cryptographie symétrique",
+			"Cryprographie asymétrique",
+			"Wireguard VPN",
+			"TOR",
+			"Firewall",
+		],
+	},
+	{
+		id: "devops",
+		label: "DevOps",
+		icon: InfinityLogo,
+		skills: [
+			"Git",
+			"Ansible",
+			"GitLab CI/CD",
+			"GitHub Actions",
+			"Dependabot",
+			"Renovate",
+			"Jenkins",
+			"Antora",
+			"Luigi",
+			"Argo Workflow",
+			"n8n",
+			"SonarQube",
+			"Mkdocs",
+		],
+	},
+];
+---
+
+<section id="skills" class="skills-section">
+  <div class="container">
+    <h2 class="section-title">Compétences</h2>
+    
+    <div class="skills-grid">
+      <div class="categories-menu" role="tablist">
+        {skillCategories.map((category) => (
+          <button 
+            class="category-btn" 
+            data-category={category.id}
+            role="tab"
+            aria-selected="false"
+            aria-controls={`panel-${category.id}`}
+          >
+            <div class="btn-content">
+              <category.icon size={20} class="category-icon" />
+              <span>{category.label}</span>
+            </div>
+            <ChevronRight size={16} class="chevron" />
+          </button>
+        ))}
+      </div>
+
+      <div class="skills-display">
+        {skillCategories.map((category) => (
+          <div 
+            id={`panel-${category.id}`} 
+            class="skills-panel hidden" 
+            role="tabpanel"
+          >
+            <h3 class="panel-title">{category.label}</h3>
+            <div class="tags-container">
+              {category.skills.map((skill) => (
+                <span class="skill-tag">
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+        
+        <div id="skills-placeholder" class="placeholder-msg">
+          <p>Sélectionnez une catégorie pour voir les détails</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills-section {
+    padding: 4rem 1.5rem;
+    background-color: var(--color-background);
+    color: var(--color-font);
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 2.5rem;
+    text-align: center;
+  }
+
+  .skills-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  /* Categories Menu */
+  .categories-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .category-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    background: white;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    color: var(--color-font);
+    font-weight: 600;
+    text-align: left;
+  }
+
+  .category-btn:hover {
+    border-color: var(--color-secondary);
+    transform: translateX(4px);
+  }
+
+  .category-btn.active {
+    background-color: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+  }
+
+  .btn-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .category-icon {
+    opacity: 0.8;
+  }
+
+  .active .category-icon {
+    opacity: 1;
+  }
+
+  .chevron {
+    transition: transform 0.3s ease;
+  }
+
+  .active .chevron {
+    transform: rotate(90deg);
+  }
+
+  /* Skills Display */
+  .skills-display {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 16px;
+    min-height: 200px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .skills-panel {
+    width: 100%;
+    animation: fadeIn 0.4s ease;
+  }
+
+  .panel-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    color: var(--color-primary);
+    border-left: 4px solid var(--color-accent);
+    padding-left: 0.75rem;
+  }
+
+  .tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .skill-tag {
+    background-color: var(--color-background);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: 1px solid rgba(0,0,0,0.05);
+    transition: all 0.2s ease;
+  }
+
+  .skill-tag:hover {
+    background-color: var(--color-secondary);
+    transform: scale(1.05);
+  }
+
+  .placeholder-msg {
+    color: #666;
+    font-style: italic;
+    text-align: center;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Desktop layout (1024px+) */
+  @media (min-width: 1024px) {
+    .section-title {
+      text-align: left;
+      font-size: 2.5rem;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .skills-display {
+      padding: 2.5rem;
+      min-height: 400px;
+    }
+
+    .category-btn {
+      padding: 1.25rem 1.5rem;
+    }
+  }
+</style>
+
+<script>
+  /**
+   * Logic to handle skill category switching
+   */
+  const initSkills = (): void => {
+    const buttons = document.querySelectorAll<HTMLButtonElement>('.category-btn');
+    const panels = document.querySelectorAll<HTMLElement>('.skills-panel');
+    const placeholder = document.getElementById('skills-placeholder');
+
+    const setActiveCategory = (categoryId: string): void => {
+      // Update buttons
+      buttons.forEach(btn => {
+        const isActive = btn.dataset.category === categoryId;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-selected', isActive.toString());
+      });
+
+      // Update panels
+      panels.forEach(panel => {
+        const isTarget = panel.id === `panel-${categoryId}`;
+        panel.classList.toggle('hidden', !isTarget);
+      });
+
+      // Hide placeholder
+      if (placeholder) {
+        placeholder.classList.add('hidden');
+      }
+    };
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        const categoryId = button.dataset.category;
+        if (categoryId) setActiveCategory(categoryId);
+      });
+    });
+
+    // Optional: Auto-select first category on mobile if desired
+    // Or keep placeholder for clean initial state
+  };
+
+  // Run on page load
+  document.addEventListener('DOMContentLoaded', initSkills);
+</script>
