@@ -1,0 +1,69 @@
+---
+/**
+ * SkillCard Component
+ * Represents an individual skill with a logo, name and external link
+ */
+interface Props {
+	name: string;
+	logoPath?: string;
+	url?: string;
+	color?: string;
+}
+
+const {
+	name,
+	logoPath = "/icons/default-skill.svg",
+	url = "#",
+	color = "#000",
+} = Astro.props;
+---
+
+<a href={url} target="_blank" rel="noopener noreferrer" class="skill-card">
+  <div class="logo-wrapper">
+    <img src={logoPath} alt={`${name} logo`} class="skill-logo" loading="lazy" />
+  </div>
+  <span class="skill-name">{name}</span>
+</a>
+
+<style define:vars={{ skillColor: color }}>
+  .skill-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 0.75rem;
+    text-decoration: none;
+    color: var(--color-font);
+    transition: all 0.2s ease-in-out;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .skill-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--color-secondary);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .logo-wrapper {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .skill-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .skill-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: center;
+  }
+</style>

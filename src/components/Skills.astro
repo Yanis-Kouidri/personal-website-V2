@@ -1,11 +1,5 @@
 ---
 import { type Icon as IconType } from "@lucide/astro";
-
-/**
- * Skills Component
- * Displays technical skills categorized by theme with an interactive filter.
- * Uses mobile-first approach and follows the project's color palette.
- */
 import {
 	ChevronRight,
 	Code2,
@@ -15,12 +9,19 @@ import {
 	Server,
 	ShieldCheck,
 } from "lucide-astro";
+import SkillCard from "./SkillCard.astro";
+
+interface SkillItem {
+	name: string;
+	logoPath: string;
+	url: string;
+}
 
 interface SkillCategory {
 	id: string;
 	label: string;
 	icon: typeof IconType;
-	skills: string[];
+	skills: SkillItem[];
 }
 
 const skillCategories: SkillCategory[] = [
@@ -29,17 +30,61 @@ const skillCategories: SkillCategory[] = [
 		label: "Web",
 		icon: Globe,
 		skills: [
-			"JavaScript",
-			"TypeScript",
-			"React",
-			"Bun",
-			"NodeJS",
-			"Astro",
-			"HTML",
-			"CSS",
-			"Vite",
-			"Strapi",
-			"Figma",
+			{
+				name: "JavaScript",
+				logoPath: "/src/assets/skills/web/javascript.svg",
+				url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+			},
+			{
+				name: "TypeScript",
+				logoPath: "/src/assets/skills/web/typescript.svg",
+				url: "https://www.typescriptlang.org/",
+			},
+			{
+				name: "React",
+				logoPath: "/src/assets/skills/web/react.svg",
+				url: "https://react.dev/",
+			},
+			{
+				name: "Astro",
+				logoPath: "/src/assets/skills/web/astro.svg",
+				url: "https://astro.build/",
+			},
+			{
+				name: "Bun",
+				logoPath: "/src/assets/skills/web/bun.svg",
+				url: "https://bun.sh/",
+			},
+			{
+				name: "NodeJS",
+				logoPath: "/src/assets/skills/web/nodejs.svg",
+				url: "https://nodejs.org/",
+			},
+			{
+				name: "HTML5",
+				logoPath: "/src/assets/skills/web/html5.svg",
+				url: "https://developer.mozilla.org/en-US/docs/Web/HTML",
+			},
+			{
+				name: "CSS3",
+				logoPath: "/src/assets/skills/web/css3.svg",
+				url: "https://developer.mozilla.org/en-US/docs/Web/CSS",
+			},
+			{
+				name: "Vite",
+				logoPath: "/src/assets/skills/web/vite.svg",
+				url: "https://vitejs.dev/",
+			},
+			{
+				name: "Strapi",
+				logoPath: "/src/assets/skills/web/strapi.svg",
+				url: "https://strapi.io/",
+			},
+			{
+				name: "Figma",
+				logoPath: "/src/assets/skills/web/figma.svg",
+				url: "https://www.figma.com/",
+			},
 		],
 	},
 	{
@@ -47,66 +92,132 @@ const skillCategories: SkillCategory[] = [
 		label: "Programmation",
 		icon: Code2,
 		skills: [
-			"Ada",
-			"Python",
-			"Rust",
-			"C",
-			"C++",
-			"Java",
-			"PHP",
-			"OCaml",
-			"Bash",
+			{
+				name: "Ada",
+				logoPath: "/src/assets/skills/prog/ada.svg",
+				url: "https://www.adacore.com/about-ada",
+			},
+			{
+				name: "Python",
+				logoPath: "/src/assets/skills/prog/python.svg",
+				url: "https://www.python.org/",
+			},
+			{
+				name: "Rust",
+				logoPath: "/src/assets/skills/prog/rust.svg",
+				url: "https://www.rust-lang.org/",
+			},
+			{
+				name: "C",
+				logoPath: "/src/assets/skills/prog/c.svg",
+				url: "https://en.cppreference.com/w/c",
+			},
+			{
+				name: "Java",
+				logoPath: "/src/assets/skills/prog/java.svg",
+				url: "https://www.oracle.com/java/",
+			},
+			{
+				name: "Bash",
+				logoPath: "/src/assets/skills/prog/bash.svg",
+				url: "https://www.gnu.org/software/bash/",
+			},
 		],
 	},
 	{
-		id: "network",
+		id: "networking",
 		label: "Réseau",
 		icon: Network,
 		skills: [
-			"Switch",
-			"Routeur",
-			"Cisco",
-			"Frame Relay",
-			"TCP",
-			"UDP",
-			"X.25",
-			"ATM",
-			"Wireshark",
-			"HTTP",
-			"DNS",
-			"DHCP",
-			"MPLS",
-			"OSPF",
-			"BGP",
+			{
+				name: "Cisco",
+				logoPath: "/src/assets/skills/network/cisco.svg",
+				url: "https://www.cisco.com/",
+			},
+			{
+				name: "Wireshark",
+				logoPath: "/src/assets/skills/network/wireshark.svg",
+				url: "https://www.wireshark.org/",
+			},
+			{
+				name: "PFsense",
+				logoPath: "/src/assets/skills/network/pfsense.svg",
+				url: "https://www.pfsense.org/",
+			},
+			{
+				name: "OPNsense",
+				logoPath: "/src/assets/skills/network/opnsense.svg",
+				url: "https://opnsense.org/",
+			},
+			{
+				name: "Nginx",
+				logoPath: "/src/assets/skills/network/nginx.svg",
+				url: "https://nginx.org/",
+			},
 		],
 	},
 	{
-		id: "infra",
-		label: "Infra",
+		id: "infrastructure",
+		label: "Infrastructure",
 		icon: Server,
 		skills: [
-			"Docker",
-			"Kubernetes",
-			"Podman",
-			"Helm",
-			"Linux",
-			"Cert-manager",
-			"Envoy",
-			"AWS EC2",
-			"AWS Route 53",
+			{
+				name: "Kubernetes",
+				logoPath: "/src/assets/skills/infra/kubernetes.svg",
+				url: "https://kubernetes.io/",
+			},
+			{
+				name: "Proxmox",
+				logoPath: "/src/assets/skills/infra/proxmox.svg",
+				url: "https://www.proxmox.com/",
+			},
+			{
+				name: "VMware",
+				logoPath: "/src/assets/skills/infra/vmware.svg",
+				url: "https://www.vmware.com/",
+			},
+			{
+				name: "Debian",
+				logoPath: "/src/assets/skills/infra/debian.svg",
+				url: "https://www.debian.org/",
+			},
+			{
+				name: "TrueNAS",
+				logoPath: "/src/assets/skills/infra/truenas.svg",
+				url: "https://www.truenas.com/",
+			},
 		],
 	},
 	{
-		id: "cyber",
+		id: "security",
 		label: "Cyber",
 		icon: ShieldCheck,
 		skills: [
-			"Crowdsec",
-			"Cryptographie symétrique",
-			"Cryprographie asymétrique",
-			"Wireguard VPN",
-			"TOR",
-			"Firewall",
+			{
+				name: "Kali Linux",
+				logoPath: "/src/assets/skills/cyber/kali.svg",
+				url: "https://www.kali.org/",
+			},
+			{
+				name: "Burp Suite",
+				logoPath: "/src/assets/skills/cyber/burpsuite.svg",
+				url: "https://portswigger.net/burp",
+			},
+			{
+				name: "Metasploit",
+				logoPath: "/src/assets/skills/cyber/metasploit.svg",
+				url: "https://www.metasploit.com/",
+			},
+			{
+				name: "OWASP",
+				logoPath: "/src/assets/skills/cyber/owasp.svg",
+				url: "https://owasp.org/",
+			},
+			{
+				name: "Vault",
+				logoPath: "/src/assets/skills/cyber/vault.svg",
+				url: "https://www.hashicorp.com/products/vault",
+			},
 		],
 	},
 	{
@@ -114,19 +225,31 @@ const skillCategories: SkillCategory[] = [
 		label: "DevOps",
 		icon: InfinityLogo,
 		skills: [
-			"Git",
-			"Ansible",
-			"GitLab CI/CD",
-			"GitHub Actions",
-			"Dependabot",
-			"Renovate",
-			"Jenkins",
-			"Antora",
-			"Luigi",
-			"Argo Workflow",
-			"n8n",
-			"SonarQube",
-			"Mkdocs",
+			{
+				name: "Docker",
+				logoPath: "/src/assets/skills/devops/docker.svg",
+				url: "https://www.docker.com/",
+			},
+			{
+				name: "GitHub Actions",
+				logoPath: "/src/assets/skills/devops/github-actions.svg",
+				url: "https://github.com/features/actions",
+			},
+			{
+				name: "Git",
+				logoPath: "/src/assets/skills/devops/git.svg",
+				url: "https://git-scm.com/",
+			},
+			{
+				name: "Terraform",
+				logoPath: "/src/assets/skills/devops/terraform.svg",
+				url: "https://www.terraform.io/",
+			},
+			{
+				name: "Ansible",
+				logoPath: "/src/assets/skills/devops/ansible.svg",
+				url: "https://www.ansible.com/",
+			},
 		],
 	},
 ];
@@ -165,9 +288,11 @@ const skillCategories: SkillCategory[] = [
             <h3 class="panel-title">{category.label}</h3>
             <div class="tags-container">
               {category.skills.map((skill) => (
-                <span class="skill-tag">
-                  {skill}
-                </span>
+                <SkillCard 
+                              name={skill.name} 
+                              logoPath={skill.logoPath} 
+                              url={skill.url} 
+                            />
               ))}
             </div>
           </div>
