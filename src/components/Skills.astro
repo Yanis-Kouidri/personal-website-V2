@@ -5,20 +5,17 @@ import SkillCard from "./SkillCard.astro";
 ---
 
 <section id="skills" class="skills-section">
-  </section>
-
-<section id="skills" class="skills-section">
   <div class="container">
     <h2 class="section-title">Compétences</h2>
     
     <div class="skills-grid">
       <div class="categories-menu" role="tablist">
-        {skillCategories.map((category) => (
+        {skillCategories.map((category, index) => (
           <button 
-            class="category-btn" 
+            class={`category-btn ${index === 0 ? 'active' : ''}`} 
             data-category={category.id}
             role="tab"
-            aria-selected="false"
+            aria-selected={index === 0 ? "true" : "false"}
             aria-controls={`panel-${category.id}`}
           >
             <div class="btn-content">
@@ -31,34 +28,31 @@ import SkillCard from "./SkillCard.astro";
       </div>
 
       <div class="skills-display">
-        {skillCategories.map((category) => (
+        {skillCategories.map((category, index) => (
           <div 
             id={`panel-${category.id}`} 
-            class="skills-panel hidden" 
+            class={`skills-panel ${index === 0 ? '' : 'hidden'}`} 
             role="tabpanel"
           >
             <h3 class="panel-title">{category.label}</h3>
             <div class="tags-container">
               {category.skills.map((skill) => (
                 <SkillCard 
-                              name={skill.name} 
-                              logoPath={skill.logoPath} 
-                              url={skill.url} 
-                            />
+                  name={skill.name} 
+                  logoPath={skill.logoPath} 
+                  url={skill.url} 
+                />
               ))}
             </div>
           </div>
         ))}
-        
-        <div id="skills-placeholder" class="placeholder-msg">
-          <p>Sélectionnez une catégorie pour voir les détails</p>
-        </div>
       </div>
     </div>
   </div>
 </section>
 
 <style>
+  /* Styles remain the same as your original file */
   .skills-section {
     padding: 4rem 1.5rem;
     background-color: var(--color-background);
@@ -83,7 +77,6 @@ import SkillCard from "./SkillCard.astro";
     gap: 1.5rem;
   }
 
-  /* Categories Menu */
   .categories-menu {
     display: flex;
     flex-direction: column;
@@ -123,23 +116,14 @@ import SkillCard from "./SkillCard.astro";
     gap: 1rem;
   }
 
-  .category-icon {
-    opacity: 0.8;
-  }
-
   .active .category-icon {
     opacity: 1;
-  }
-
-  .chevron {
-    transition: transform 0.3s ease;
   }
 
   .active .chevron {
     transform: rotate(90deg);
   }
 
-  /* Skills Display */
   .skills-display {
     background: white;
     padding: 1.5rem;
@@ -147,7 +131,7 @@ import SkillCard from "./SkillCard.astro";
     min-height: 200px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: center;
   }
 
@@ -171,27 +155,6 @@ import SkillCard from "./SkillCard.astro";
     gap: 0.75rem;
   }
 
-  .skill-tag {
-    background-color: var(--color-background);
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    border: 1px solid rgba(0,0,0,0.05);
-    transition: all 0.2s ease;
-  }
-
-  .skill-tag:hover {
-    background-color: var(--color-secondary);
-    transform: scale(1.05);
-  }
-
-  .placeholder-msg {
-    color: #666;
-    font-style: italic;
-    text-align: center;
-  }
-
   .hidden {
     display: none;
   }
@@ -201,7 +164,6 @@ import SkillCard from "./SkillCard.astro";
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* Desktop layout (1024px+) */
   @media (min-width: 1024px) {
     .section-title {
       text-align: left;
@@ -219,10 +181,6 @@ import SkillCard from "./SkillCard.astro";
       padding: 2.5rem;
       min-height: 400px;
     }
-
-    .category-btn {
-      padding: 1.25rem 1.5rem;
-    }
   }
 </style>
 
@@ -233,7 +191,6 @@ import SkillCard from "./SkillCard.astro";
   const initSkills = (): void => {
     const buttons = document.querySelectorAll<HTMLButtonElement>('.category-btn');
     const panels = document.querySelectorAll<HTMLElement>('.skills-panel');
-    const placeholder = document.getElementById('skills-placeholder');
 
     const setActiveCategory = (categoryId: string): void => {
       // Update buttons
@@ -248,11 +205,6 @@ import SkillCard from "./SkillCard.astro";
         const isTarget = panel.id === `panel-${categoryId}`;
         panel.classList.toggle('hidden', !isTarget);
       });
-
-      // Hide placeholder
-      if (placeholder) {
-        placeholder.classList.add('hidden');
-      }
     };
 
     buttons.forEach(button => {
@@ -261,9 +213,6 @@ import SkillCard from "./SkillCard.astro";
         if (categoryId) setActiveCategory(categoryId);
       });
     });
-
-    // Optional: Auto-select first category on mobile if desired
-    // Or keep placeholder for clean initial state
   };
 
   // Run on page load
