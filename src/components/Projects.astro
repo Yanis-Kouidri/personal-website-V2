@@ -1,0 +1,51 @@
+---
+import AProject from "./AProject.astro";
+
+const projects = [
+	{
+		title: "Personal-website-v1",
+		description:
+			"Mon premier gros projet web utilisant la stack MERN (MongoDB, Express, React, Node.js).",
+		technologies: ["React", "Node.js", "MongoDB", "Express", "JWT"],
+		githubUrl: "https://github.com/yanis-kouidri/personal-website-v1",
+		date: "2024",
+		imagePath: "/src/assets/projects/screenshot-personal-website-v1.png",
+	},
+];
+---
+
+<section id="projects" class="projects-container">
+  <div class="container">
+    <h2 class="section-title">Projets</h2>
+    
+    <div class="projects-grid">
+      {projects.map((project) => (
+        <AProject {...project} />
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .projects-container {
+    background-color: var(--color-background);
+    padding: 4rem 1.5rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .projects-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+
+  @media (min-width: 1024px) {
+    .projects-container {
+      display: flex;
+      justify-content: flex-start;
+  }
+  }
+</style>
