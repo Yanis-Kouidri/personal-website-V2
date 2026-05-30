@@ -1,7 +1,7 @@
 ---
 /**
  * AProject Component
- * A generic card component to display individual portfolio projects.
+ * Clean version: Date moved to a dedicated meta-row above the title.
  */
 import { Github } from "lucide-astro";
 
@@ -29,12 +29,11 @@ const {
 <article class="project-card">
   <div class="image-container">
     <img src={imagePath} alt={imageAlt} class="project-image" />
-    <span class="project-date">{date}</span>
   </div>
 
   <div class="project-content">
-    <div class="project-header">
-      <h3 class="project-title">{title}</h3>
+    <div class="project-meta">
+      <span class="project-date">{date}</span>
       <a 
         href={githubUrl} 
         target="_blank" 
@@ -42,9 +41,11 @@ const {
         class="github-link"
         aria-label={`View ${title} source code on GitHub`}
       >
-        <Github size={24} />
+        <Github size={20} />
       </a>
     </div>
+
+    <h3 class="project-title">{title}</h3>
 
     <p class="project-description">{description}</p>
 
@@ -58,13 +59,14 @@ const {
 
 <style>
   .project-card {
-    background-color: white; /* Contrast with the page background */
+    background-color: white;
     border-radius: 1rem;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
     transition: transform 0.3s ease;
+    height: 100%;
   }
 
   .project-card:hover {
@@ -72,9 +74,9 @@ const {
   }
 
   .image-container {
-    position: relative;
     width: 100%;
     aspect-ratio: 16 / 9;
+    overflow: hidden;
   }
 
   .project-image {
@@ -83,70 +85,77 @@ const {
     object-fit: cover;
   }
 
-  .project-date {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background-color: var(--color-primary);
-    color: white;
-    padding: 0.25rem 0.75rem;
-    border-radius: 9999px;
-    font-size: 0.8rem;
-    font-weight: 600;
-  }
-
   .project-content {
-    padding: 1.5rem;
+    padding: 1.25rem;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
   }
 
-  .project-header {
+  .project-meta {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
   }
 
-  .project-title {
-    font-size: 1.25rem;
+  /* Fixed Project Date - No more absolute positioning */
+  .project-date {
+    font-size: 0.8rem;
     font-weight: 700;
-    color: var(--color-font);
-    margin: 0;
+    color: var(--color-primary);
+    background-color: var(--color-secondary); /* Using your chart color */
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
   }
 
   .github-link {
     color: var(--color-font);
-    transition: color 0.2s ease;
+    opacity: 0.6;
+    transition: opacity 0.2s ease, color 0.2s ease;
   }
 
   .github-link:hover {
+    opacity: 1;
     color: var(--color-primary);
   }
 
+  .project-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--color-font);
+    margin: 0 0 0.75rem 0;
+  }
+
   .project-description {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     line-height: 1.5;
     color: var(--color-font);
     opacity: 0.8;
     margin-bottom: 1.5rem;
+    /* Keeps cards uniform by limiting description lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .tech-stack {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
-    margin-top: auto;
+    margin-top: auto; /* Push to bottom */
   }
 
   .tech-tag {
     background-color: var(--color-background);
-    color: var(--color-primary);
-    font-size: 0.75rem;
+    color: var(--color-font);
+    font-size: 0.7rem;
     font-weight: 600;
-    padding: 0.2rem 0.6rem;
+    padding: 0.2rem 0.5rem;
     border-radius: 4px;
-    border: 1px solid var(--color-secondary);
+    border: 1px solid rgba(0, 0, 0, 0.05);
   }
 </style>
