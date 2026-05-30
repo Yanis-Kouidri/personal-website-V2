@@ -40,7 +40,7 @@ const sidebarDetails: ResearchDetail[] = [
   <div class="container">
     <header class="phd-header">
       <span class="period-badge">{period}</span>
-      <h2 class="main-title">{title}</h2>
+      <h2>{title}</h2>
       <div class="project-summary">
         <h3 class="project-id">{projectCode}</h3>
         <p class="project-subtitle">{subtitle}</p>
@@ -103,14 +103,6 @@ const sidebarDetails: ResearchDetail[] = [
     font-weight: 700;
     border-radius: 4px;
     margin-bottom: 0rem;
-  }
-
-  .main-title {
-    font-size: clamp(2.2rem, 8vw, 3.5rem);
-    font-weight: 900;
-    line-height: 1;
-    margin-bottom: 1.5rem;
-    color: var(--color-font);
   }
 
   .project-summary {

@@ -6,8 +6,8 @@ import SkillCard from "./SkillCard.astro";
 
 <section id="skills" class="skills-section">
   <div class="container">
-    <h2 class="section-title">Compétences</h2>
-    
+        <h2>Compétences</h2>
+
     <div class="skills-grid">
       <div class="categories-menu" role="tablist">
         {skillCategories.map((category, index) => (
@@ -57,13 +57,6 @@ import SkillCard from "./SkillCard.astro";
     padding: 4rem 1.5rem;
     background-color: var(--color-background);
     color: var(--color-font);
-  }
-
-  .section-title {
-    font-size: 2rem;
-    font-weight: 800;
-    margin-bottom: 2.5rem;
-    text-align: center;
   }
 
   .skills-grid {
@@ -160,10 +153,6 @@ import SkillCard from "./SkillCard.astro";
   }
 
   @media (min-width: 1024px) {
-    .section-title {
-      text-align: left;
-      font-size: 2.5rem;
-    }
 
     .skills-grid {
       display: grid;
