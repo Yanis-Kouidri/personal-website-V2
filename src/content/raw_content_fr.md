@@ -117,7 +117,7 @@ Mon premier gros projet web, c'est l'ancêtre de ce site. L'objectif était pour
 
 ### Personal-website-v2
 
-M'étant rendu compte que la V1 de mon site commençait à devenir inutilement complexe, j'ai décidé de repartir sur de nouvelles bases en créant la V2 de ce site web que vous consultez actuellement. Ce site web n'est composé que de HTML 5 et CSS 3 statiques construit à parti du Framework Astro. Cela a pour effet de rendre le site extrêmement léger et rapide. Tout le contenu du site est stocké dans des fichiers Markdown. C'était également l'occasion pour moi de tester et d'apprendre à utiliser le framework Astro, très adapté dans le cas d'un site centré sur le contenu. J'ai de plus migré de Node.js à Bun pour la gestion du runtime JS pendant le developpement.
+M'étant rendu compte que la V1 de mon site commençait à devenir inutilement complexe, j'ai décidé de repartir sur de nouvelles bases en créant la V2 de ce site web que vous consultez actuellement. Ce site web n'est composé que de HTML 5 et CSS 3 statiques construit à parti du Framework Astro. Cela a pour effet de rendre le site extrêmement léger et rapide. Tout le contenu du site est stocké dans des fichiers Markdown. C'était également l'occasion pour moi de tester et d'apprendre à utiliser le framework Astro, très adapté dans le cas d'un site centré sur le contenu. J'ai de plus migré de Node.js à Bun pour la gestion du runtime JS pendant le développement.
 
 ## Contact
 
