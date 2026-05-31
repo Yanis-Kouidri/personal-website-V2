@@ -1,0 +1,144 @@
+---
+/**
+ * Contacts Component
+ * Displays social links and professional contact points with a Mobile First approach.
+ * Adheres to the brand's color palette defined in global.css.
+ */
+import { Bitcoin, FileText, Github, Linkedin, Mail } from "lucide-astro";
+
+interface ContactLink {
+	href: string;
+	icon: any;
+	label: string;
+	color?: string;
+}
+
+const contactLinks: ContactLink[] = [
+	{
+		href: "https://linkedin.com/in/yanis-kouidri",
+		icon: Linkedin,
+		label: "LinkedIn",
+	},
+	{
+		href: "mailto:yanis.kouidri@neusta.fr",
+		icon: Mail,
+		label: "Email",
+	},
+	{
+		href: "/CV-Yanis-Kouidri-Fr.pdf",
+		icon: FileText,
+		label: "CV",
+	},
+	{
+		href: "https://github.com/Yanis-Kouidri",
+		icon: Github,
+		label: "GitHub",
+	},
+	{
+		href: "bitcoin:bc1ptj6z8a6h4aw6ne8vr5ju6ymdw3z48caaanyfh9ljtswrmjkkxfeqvhxf70",
+		icon: Bitcoin,
+		label: "Bitcoin",
+	},
+];
+
+const contactMessage: string =
+	"Restons en contact ! Retrouvez-moi sur ces plateformes pour échanger sur mes travaux de recherche ou mes projets.";
+---
+
+<section id="contact" class="contact-section">
+  <div class="container">
+    <h2>Contact</h2>
+    <p class="section-subtitle">{contactMessage}</p>
+    
+    <div class="contact-grid">
+      {
+        contactLinks.map((contact) => (
+          <a
+            href={contact.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="contact-card"
+            aria-label={contact.label}
+          >
+            <div class="icon-wrapper">
+              <contact.icon size={32} strokeWidth={1.5} />
+            </div>
+            <span class="contact-label">{contact.label}</span>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-section {
+    padding: 4rem 1.5rem;
+    background-color: var(--color-background);
+    display: flex;
+    justify-content: center;
+  }
+
+  .section-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-font);
+    opacity: 0.8;
+    margin-bottom: 3rem;
+  }
+
+  /* Grid: 1 column on mobile, 3+ on desktop */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .contact-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    background-color: white;
+    border-radius: 16px;
+    text-decoration: none;
+    color: var(--color-font);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  }
+
+  .icon-wrapper {
+    color: var(--color-primary);
+    margin-bottom: 0.75rem;
+    transition: transform 0.3s ease;
+  }
+
+  .contact-label {
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  /* Hover states */
+  .contact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border-color: var(--color-secondary);
+  }
+
+  .contact-card:hover .icon-wrapper {
+    transform: scale(1.1);
+    color: var(--color-accent);
+  }
+
+  /* Desktop adjustments */
+  @media (min-width: 768px) {
+    .contact-grid {
+      grid-template-columns: repeat(5, 1fr);
+    }
+    
+    .section-title {
+      font-size: 2.5rem;
+    }
+  }
+</style>
