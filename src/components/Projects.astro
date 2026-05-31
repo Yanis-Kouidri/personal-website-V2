@@ -5,8 +5,17 @@ const projects = [
 	{
 		title: "Personal-website-v1",
 		description:
-			"Mon premier gros projet web utilisant la stack MERN (MongoDB, Express, React, Node.js).",
-		technologies: ["React", "Node.js", "MongoDB", "Express", "JWT"],
+			"Mon premier gros projet web, c'est l'ancêtre de ce site. L'objectif était pour moi d'apprendre et de mettre en pratique le développement web full stack, j'ai alors choisi la stack MERN (MongoDB Express React Node.js). J'ai alors conçu du front end en React, le backend en Node.js avec Express, la communication entre les deux avec des API REST, le stockage des informations dans une base de données no-SQL MongoDB. J'ai également ajouté un système d'envoi de fichier avec multer et en implémentant un mécanisme CRUD (Create Read Update Delete). J'ai par ailleurs ajouté un système d'authentification et d'inscription en utilise les JSON web token et argon2id pour le hachage des mots de passe et leur stockage sécurisé en base de données. Pour le stockage du contenu du site, j'ai utilisé le CMS Strapi. Au cours de ce projet, j'ai beaucoup appris, cela dit, j'ai décidé de créer une nouvelle version du site beaucoup plus légère, car une infrastructure aussi lourde pour un simple portfolio est selon moi inadaptée.",
+		technologies: [
+			"React",
+			"Node.js",
+			"MongoDB",
+			"Express",
+			"JWT",
+			"JavaScript",
+			"Strapi",
+			"Multer",
+		],
 		githubUrl: "https://github.com/yanis-kouidri/personal-website-v1",
 		date: "2024",
 		imagePath: "/src/assets/projects/screenshot-personal-website-v1.png",
@@ -16,7 +25,7 @@ const projects = [
 
 <section id="projects" class="projects-container">
   <div class="container">
-    <h2 class="section-title">Projets</h2>
+    <h2 class="section-title">Mes projets</h2>
     
     <div class="projects-grid">
       {projects.map((project) => (
