@@ -1,0 +1,73 @@
+---
+/**
+ * Footer Component
+ * Static footer displaying copyright info and credits using theme variables
+ */
+const currentYear = 2026; // Defined statically as requested in the content file
+const authorName = "Yanis Kouidri";
+const footerDesc = `Merci de m'avoir lu jusqu'ici. Site écrit par ${authorName} grâce au Framework Astro.`;
+---
+
+<footer class="footer-container">
+  <div class="footer-content">
+    <p class="copyright">
+      &copy; {currentYear} - {authorName}
+    </p>
+    <p class="credits">
+      {footerDesc}
+    </p>
+  </div>
+</footer>
+
+<style>
+  .footer-container {
+    background-color: var(--color-footer);
+    border-top: 1px solid rgba(7, 11, 7, 0.1); /* Subtle divider using --color-font with opacity */
+    padding: 2rem 1.5rem;
+    width: 100%;
+  }
+
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+  }
+
+  .copyright {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-font);
+    margin: 0 0 0.5rem 0;
+  }
+
+  .credits {
+    font-size: 0.85rem;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--color-font);
+    opacity: 0.8; /* Slight fade for secondary text hierarchy */
+    margin: 0;
+  }
+
+  /* --- Desktop Breakpoint (1024px+) --- */
+  @media (min-width: 1024px) {
+    .footer-container {
+      padding: 3rem 2rem;
+    }
+
+    .footer-content {
+      /* Table layout fallback or simple block centering could work, 
+         using explicit block layout adjustments for clean structured output */
+      text-align: center;
+    }
+
+    .copyright {
+      font-size: 1rem;
+    }
+
+    .credits {
+      font-size: 0.9rem;
+    }
+  }
+</style>

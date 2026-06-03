@@ -124,4 +124,4 @@ M'étant rendu compte que la V1 de mon site commençait à devenir inutilement c
 ## Footer
 
 Copyright 2026 - Yanis Kouidri.
-Merci de m’avoir lu jusqu’ici. Site écrit par Yanis Kouidri grâce au Framework Astro. Ni le code de ce site ni le contenu n’ont été générés par IA.
+Merci de m’avoir lu jusqu’ici. Site écrit par Yanis Kouidri grâce au Framework Astro.
