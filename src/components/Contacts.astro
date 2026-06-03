@@ -1,4 +1,5 @@
 ---
+import type { AstroComponentFactory } from "astro/runtime/server/index.js";
 /**
  * Contacts Component
  * Displays social links and professional contact points with a Mobile First approach.
@@ -8,7 +9,7 @@ import { Bitcoin, FileText, Github, Linkedin, Mail } from "lucide-astro";
 
 interface ContactLink {
 	href: string;
-	icon: any;
+	icon: AstroComponentFactory;
 	label: string;
 	color?: string;
 }
