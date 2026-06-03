@@ -36,8 +36,8 @@ const contactLink = { href: "#contact", label: "Contact" };
       </a>
       
       <button id="menu-button" type="button" aria-label="Toggle menu" aria-expanded="false">
-        <Menu id="icon-menu" />
-        <X id="icon-close" class="hidden" />
+        <Menu id="icon-menu" class="nav-icon" />
+        <X id="icon-close" class="nav-icon hidden" />
       </button>
     </div>
   </nav>
@@ -52,13 +52,14 @@ const contactLink = { href: "#contact", label: "Contact" };
 <style>
   /* --- Base Navigation (Mobile First) --- */
   .nav-bar {
-    background-color: var(--color-footer);
+    background-color: var(--color-background);
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
     position: relative;
     z-index: 20;
+    border-bottom: 1px rgba(0, 0, 0, 0.12) solid;
   }
 
   #brand-name {
@@ -66,6 +67,11 @@ const contactLink = { href: "#contact", label: "Contact" };
     font-weight: 800;
     color: var(--color-font);
     text-decoration: none;
+    transition: color 0.2s ease-in-out;
+  }
+
+  #brand-name:hover {
+    color: var(--color-primary);
   }
 
   /* Hide desktop-specific elements by default */
@@ -80,6 +86,18 @@ const contactLink = { href: "#contact", label: "Contact" };
     cursor: pointer;
     color: var(--color-font);
     padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-icon {
+    transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+  }
+
+  #menu-button:hover .nav-icon {
+    color: var(--color-primary);
+    transform: scale(1.1);
   }
 
   /* --- Mobile Overlay Styles --- */
@@ -109,6 +127,12 @@ const contactLink = { href: "#contact", label: "Contact" };
     font-weight: 600;
     text-decoration: none;
     color: var(--color-font);
+    transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
+  }
+
+  .mobile-nav-link:hover {
+    color: var(--color-primary);
+    transform: translateY(-2px);
   }
 
   /* --- Desktop Breakpoint (1024px+) --- */
@@ -128,6 +152,38 @@ const contactLink = { href: "#contact", label: "Contact" };
       padding: 0;
     }
 
+    .nav-item {
+      text-decoration: none;
+      color: var(--color-font);
+      font-weight: 500;
+      position: relative;
+      padding: 0.25rem 0;
+      transition: color 0.25s ease-in-out;
+    }
+
+    /* Elegant sliding underline animation for desktop items */
+    .nav-item::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--color-primary);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.25s ease-in-out;
+    }
+
+    .nav-item:hover {
+      color: var(--color-primary);
+    }
+
+    .nav-item:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
     .contact-cta-desktop {
       display: inline-block;
       text-decoration: none;
@@ -136,17 +192,17 @@ const contactLink = { href: "#contact", label: "Contact" };
       padding: 0.6rem 1.5rem;
       border-radius: 50px;
       font-weight: 600;
-      transition: transform 0.2s ease;
+      transition: transform 0.2s ease-in-out, filter 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
     }
 
     .contact-cta-desktop:hover {
       transform: translateY(-2px);
+      filter: brightness(1.1);
+      box-shadow: 0 4px 12px rgba(0, 110, 26, 0.2); /* Soft shadow using --color-primary */
     }
 
-    .nav-item {
-      text-decoration: none;
-      color: var(--color-font);
-      font-weight: 500;
+    .contact-cta-desktop:active {
+      transform: translateY(0);
     }
 
     .nav-actions {
@@ -163,25 +219,43 @@ const contactLink = { href: "#contact", label: "Contact" };
 
 <script>
   /**
-   * Toggle mobile navigation overlay
+   * Setup interactive navigation behavior
    */
   const setupNavigation = (): void => {
-    const toggleBtn = document.getElementById('menu-button') as HTMLButtonElement | null;
-    const menuOverlay = document.getElementById('mobile-menu') as HTMLElement | null;
-    const openIcon = document.getElementById('icon-menu') as HTMLElement | null;
-    const closeIcon = document.getElementById('icon-close') as HTMLElement | null;
+    const toggleBtn = document.getElementById("menu-button") as HTMLButtonElement | null;
+    const menuOverlay = document.getElementById("mobile-menu") as HTMLElement | null;
+    const openIcon = document.getElementById("icon-menu") as HTMLElement | null;
+    const closeIcon = document.getElementById("icon-close") as HTMLElement | null;
 
     if (!toggleBtn || !menuOverlay || !openIcon || !closeIcon) return;
 
-    toggleBtn.addEventListener('click', () => {
-      const isExpanded = menuOverlay.classList.toggle('is-open');
-      toggleBtn.setAttribute('aria-expanded', isExpanded.toString());
+    // Toggle menu state
+    const toggleMenu = (isOpen: boolean): void => {
+      menuOverlay.classList.toggle("is-open", isOpen);
+      toggleBtn.setAttribute("aria-expanded", isOpen.toString());
       
-      openIcon.classList.toggle('hidden');
-      closeIcon.classList.toggle('hidden');
-      
-      // Disable body scroll when menu is open
-      document.body.style.overflow = isExpanded ? 'hidden' : '';
+      if (isOpen) {
+        openIcon.classList.add("hidden");
+        closeIcon.classList.remove("hidden");
+        document.body.style.overflow = "hidden";
+      } else {
+        openIcon.classList.remove("hidden");
+        closeIcon.classList.add("hidden");
+        document.body.style.overflow = "";
+      }
+    };
+
+    toggleBtn.addEventListener("click", () => {
+      const isExpanded = menuOverlay.classList.contains("is-open");
+      toggleMenu(!isExpanded);
+    });
+
+    // Close mobile menu gracefully when a link is clicked
+    const mobileLinks = menuOverlay.querySelectorAll(".mobile-nav-link");
+    mobileLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        toggleMenu(false);
+      });
     });
   };
 
