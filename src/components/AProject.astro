@@ -1,34 +1,24 @@
 ---
-/**
- * AProject Component
- * Clean version: Date moved to a dedicated meta-row above the title.
- */
+import type { CollectionEntry } from "astro:content";
+import { render } from "astro:content"; // <-- Nouveauté essentielle Astro v6
 import { Github } from "lucide-astro";
 
 interface Props {
-	title: string;
-	description: string;
-	technologies: string[];
-	githubUrl: string;
-	date: string;
-	imagePath: string;
-	imageAlt?: string;
+	// On définit le type strict attendu grâce aux types générés d'Astro
+	project: CollectionEntry<"projects">;
 }
 
-const {
-	title,
-	description,
-	technologies,
-	githubUrl,
-	date,
-	imagePath,
-	imageAlt = title,
-} = Astro.props;
----
+const { project } = Astro.props;
 
+// Les métadonnées du Frontmatter se trouvent dans project.data
+const { title, technologies, githubUrl, date, imagePath } = project.data;
+
+// On génère le composant HTML à partir du corps du Markdown
+const { Content } = await render(project);
+---
 <article class="project-card card card--hover">
   <div class="image-container">
-    <img src={imagePath} alt={imageAlt} class="img-cover project-image" />
+    <img src={imagePath} alt={title} class="img-cover project-image" />
   </div>
 
   <div class="project-content">
@@ -38,8 +28,8 @@ const {
         href={githubUrl} 
         target="_blank" 
         rel="noopener noreferrer" 
-        class="github-link"
-        aria-label={`View ${title} source code on GitHub`}
+        class="github-link" 
+        aria-label={`Voir le code source de ${title}`}
       >
         <Github size={20} />
       </a>
@@ -47,10 +37,13 @@ const {
 
     <h3 class="project-title">{title}</h3>
 
-    <p class="project-description">{description}</p>
+    {/* Le composant <Content /> affiche automatiquement la description formatée en Markdown */}
+    <div class="project-description">
+      <Content />
+    </div>
 
     <div class="tech-stack">
-      {technologies.map((tech) => (
+      {technologies.map((tech: string) => (
         <span class="tag tag--neutral">{tech}</span>
       ))}
     </div>
