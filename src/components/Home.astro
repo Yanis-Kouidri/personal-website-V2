@@ -46,7 +46,9 @@ const socialLinks = [
         ))}
       </div>
 
-      <a href="#phd" class="cta-button">En savoir plus</a>
+      <a href="#phd" class="cta-button">
+        En savoir plus
+      </a>
     </div>
 
     <div class="profile-image-container">
@@ -167,3 +169,15 @@ const socialLinks = [
   color: var(--color-primary); /* Ici il changera de couleur seulement au survol */
 }
 </style>
+
+<script>
+  const ctaButton = document.querySelector<HTMLAnchorElement>(".cta-button");
+
+  ctaButton?.addEventListener("click", (e) => {
+    e.preventDefault();
+    const target = document.getElementById("phd");
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+</script>
