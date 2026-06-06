@@ -36,10 +36,10 @@ const sidebarDetails: ResearchDetail[] = [
 ];
 ---
 
-<section id="phd" class="phd-section">
+<section id="phd" class="section phd-section">
   <div class="container">
     <header class="phd-header">
-      <span class="period-badge">{period}</span>
+      <span class="badge badge--accent period-badge">{period}</span>
       <h2>{title}</h2>
       <div class="project-summary">
         <h3 class="project-id">{projectCode}</h3>
@@ -85,24 +85,11 @@ const sidebarDetails: ResearchDetail[] = [
   /* MOBILE FIRST STYLES
   */
   .phd-section {
-    padding: 4rem 1.25rem;
-    background-color: var(--color-background);
     color: var(--color-font);
   }
 
   .phd-header {
     margin-bottom: 3rem;
-  }
-
-  .period-badge {
-    display: inline-block;
-    padding: 0.3rem 0.7rem;
-    background-color: var(--color-primary);
-    color: white;
-    font-size: 0.85rem;
-    font-weight: 700;
-    border-radius: 4px;
-    margin-bottom: 0rem;
   }
 
   .project-summary {
@@ -152,20 +139,6 @@ const sidebarDetails: ResearchDetail[] = [
     display: flex;
     flex-wrap: wrap;
     gap: 0.6rem;
-  }
-
-  .tag {
-    font-size: 0.8rem;
-    font-weight: 600;
-    padding: 0.4rem 0.75rem;
-    background-color: var(--color-secondary);
-    color: var(--color-primary);
-    border-radius: 6px;
-    transition: transform 0.2s ease;
-  }
-
-  .tag:hover {
-    transform: translateY(-2px);
   }
 
   /* Sidebar Card */

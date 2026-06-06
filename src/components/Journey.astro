@@ -108,7 +108,7 @@ const getIcon = (type: string) => {
 };
 ---
 
-<section id="journey" class="journey-section">
+<section id="journey" class="section journey-section">
   <div class="container">
     <h2>Mon Parcours</h2>
     
@@ -125,7 +125,7 @@ const getIcon = (type: string) => {
             </div>
             
             <div class="timeline-content">
-              <span class="period-badge">{item.period}</span>
+              <span class="badge badge--pill period-badge">{item.period}</span>
               <h3 class="job-title">{item.title}</h3>
               <p class="org-info">
                 <strong>{item.organization}</strong> <span class="location">| {item.location}</span>
@@ -149,11 +149,6 @@ const getIcon = (type: string) => {
 </section>
 
 <style>
-  .journey-section {
-    padding: 4rem 1.5rem;
-    background-color: var(--color-background);
-  }
-
   .timeline {
     display: flex;
     flex-direction: column;
@@ -205,13 +200,6 @@ const getIcon = (type: string) => {
   }
 
   .period-badge {
-    display: inline-block;
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--color-primary);
-    background: var(--color-secondary);
-    padding: 0.2rem 0.8rem;
-    border-radius: 50px;
     margin-bottom: 0.6rem;
   }
 

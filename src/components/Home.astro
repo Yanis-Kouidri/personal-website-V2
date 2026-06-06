@@ -40,19 +40,19 @@ const socialLinks = [
 
       <div class="social-links">
         {socialLinks.map((social) => (
-          <a href={social.href} target="_blank" rel="noopener noreferrer" aria-label={social.label} class="social-icon">
+          <a href={social.href} target="_blank" rel="noopener noreferrer" aria-label={social.label} class="link-icon">
             <social.icon size={32} strokeWidth={2.5} />
           </a>
         ))}
       </div>
 
-      <a href="#phd" class="cta-button">
+      <a href="#phd" class="btn-cta">
         En savoir plus
       </a>
     </div>
 
     <div class="profile-image-container">
-      <img src="src/assets/Yanis_Kouidri_home.jpg" alt="Yanis Kouidri" class="profile-image" />
+      <img src="src/assets/Yanis_Kouidri_home.jpg" alt="Yanis Kouidri" class="img-cover" />
     </div>
   </div>
 </section>
@@ -129,17 +129,6 @@ const socialLinks = [
     margin-bottom: 2.5rem;
   }
 
-  .cta-button {
-    display: inline-block;
-    background-color: var(--color-secondary);
-    color: var(--color-font);
-    padding: 1rem 2.5rem;
-    border-radius: 9999px;
-    font-weight: 700;
-    text-decoration: none;
-    transition: transform 0.2s ease;
-  }
-
   .profile-image-container {
     width: 250px;
     height: 250px;
@@ -148,30 +137,10 @@ const socialLinks = [
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
   }
 
-  .profile-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* [cite: 19] */
-  }
-
-  .social-icon, 
-.social-icon:visited, 
-.social-icon:active,
-.social-icon:link {
-  /* On force la couleur définie dans tes variables, peu importe l'état du lien */
-  color: var(--color-font); 
-  text-decoration: none;
-  outline: none;
-}
-
-.social-icon:hover {
-  transform: translateY(-3px);
-  color: var(--color-primary); /* Ici il changera de couleur seulement au survol */
-}
 </style>
 
 <script>
-  const ctaButton = document.querySelector<HTMLAnchorElement>(".cta-button");
+  const ctaButton = document.querySelector<HTMLAnchorElement>(".btn-cta");
 
   ctaButton?.addEventListener("click", (e) => {
     e.preventDefault();

@@ -4,7 +4,7 @@ import { skillCategories } from "../content/skills/skills";
 import SkillCard from "./SkillCard.astro";
 ---
 
-<section id="skills" class="skills-section">
+<section id="skills" class="section skills-section">
   <div class="container">
         <h2>Compétences</h2>
 
@@ -27,7 +27,7 @@ import SkillCard from "./SkillCard.astro";
         ))}
       </div>
 
-      <div class="skills-display">
+      <div class="skills-display card">
         {skillCategories.map((category, index) => (
           <div 
             id={`panel-${category.id}`} 
@@ -54,8 +54,6 @@ import SkillCard from "./SkillCard.astro";
 <style>
   /* Styles remain the same as your original file */
   .skills-section {
-    padding: 4rem 1.5rem;
-    background-color: var(--color-background);
     color: var(--color-font);
   }
 
@@ -113,11 +111,9 @@ import SkillCard from "./SkillCard.astro";
   }
 
   .skills-display {
-    background: white;
     padding: 1.5rem;
     border-radius: 16px;
     min-height: 200px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     display: flex;
     align-items: start;
     justify-content: center;
@@ -141,10 +137,6 @@ import SkillCard from "./SkillCard.astro";
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem;
-  }
-
-  .hidden {
-    display: none;
   }
 
   @keyframes fadeIn {
