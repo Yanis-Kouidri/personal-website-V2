@@ -1,19 +1,11 @@
 ---
-import type { CollectionEntry } from "astro:content";
-import { render } from "astro:content"; // <-- Nouveauté essentielle Astro v6
+import { render } from "astro:content";
 import { Github } from "lucide-astro";
-
-interface Props {
-	// On définit le type strict attendu grâce aux types générés d'Astro
-	project: CollectionEntry<"projects">;
-}
 
 const { project } = Astro.props;
 
-// Les métadonnées du Frontmatter se trouvent dans project.data
 const { title, technologies, githubUrl, date, imagePath } = project.data;
 
-// On génère le composant HTML à partir du corps du Markdown
 const { Content } = await render(project);
 ---
 <article class="project-card card card--hover">
@@ -37,7 +29,6 @@ const { Content } = await render(project);
 
     <h3 class="project-title">{title}</h3>
 
-    {/* Le composant <Content /> affiche automatiquement la description formatée en Markdown */}
     <div class="project-description">
       <Content />
     </div>
