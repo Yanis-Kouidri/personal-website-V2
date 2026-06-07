@@ -1,9 +1,7 @@
 ---
-/**
- * Home Component
- * Implementation of the hero section for mobile view
- */
+import { Image } from "astro:assets";
 import { BookMarked, Github, Linkedin, Mail } from "lucide-astro";
+import profileImage from "../assets/Yanis_Kouidri_home.jpg";
 
 // Social links configuration
 const socialLinks = [
@@ -52,7 +50,12 @@ const socialLinks = [
     </div>
 
     <div class="profile-image-container">
-      <img src="src/assets/Yanis_Kouidri_home.jpg" alt="Yanis Kouidri" class="img-cover" />
+      <Image 
+        src={profileImage} 
+        alt="Yanis Kouidri" 
+        class="img-cover" 
+        width={380} 
+        height={380}/>
     </div>
   </div>
 </section>

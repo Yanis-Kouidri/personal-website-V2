@@ -1,16 +1,32 @@
 ---
+import { Image } from "astro:assets";
 import { render } from "astro:content";
 import { Github } from "lucide-astro";
 
 const { project } = Astro.props;
-
 const { title, technologies, githubUrl, date, imagePath } = project.data;
-
 const { Content } = await render(project);
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+	"/src/assets/projects/*",
+);
+
+const imageGlob = images[imagePath];
+if (!imageGlob)
+	throw new Error(
+		`"${imagePath}" doesn't exist in the folder "src/assets/projects/"`,
+	);
 ---
+
 <article class="project-card card card--hover">
   <div class="image-container">
-    <img src={imagePath} alt={title} class="img-cover project-image" />
+    <Image 
+      src={imageGlob()} 
+      alt={title} 
+      width={1200}
+      height={675}
+      class="img-cover project-image" 
+    />
   </div>
 
   <div class="project-content">
@@ -55,6 +71,13 @@ const { Content } = await render(project);
     width: 100%;
     aspect-ratio: 16 / 9;
     overflow: hidden;
+  }
+
+
+  .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .project-image {
@@ -107,5 +130,4 @@ const { Content } = await render(project);
     gap: 0.5rem;
     margin-top: auto;
   }
-
 </style>
