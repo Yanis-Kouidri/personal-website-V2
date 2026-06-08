@@ -3,9 +3,13 @@
  * Footer Component
  * Static footer displaying copyright info and credits using theme variables
  */
-const currentYear = 2026; // Defined statically as requested in the content file
+import packageJson from "../../package.json";
+
+const currentYear = new Date().getFullYear();
 const authorName = "Yanis Kouidri";
 const footerDesc = `Merci de m'avoir lu jusqu'ici. Site écrit par ${authorName} grâce au Framework Astro.`;
+
+const currentVersion = packageJson.version;
 ---
 
 <footer class="footer-container">
@@ -15,6 +19,9 @@ const footerDesc = `Merci de m'avoir lu jusqu'ici. Site écrit par ${authorName}
     </p>
     <p class="credits">
       {footerDesc}
+    </p>
+    <p class="version-tag">
+      Version {currentVersion}
     </p>
   </div>
 </footer>
@@ -30,6 +37,25 @@ const footerDesc = `Merci de m'avoir lu jusqu'ici. Site écrit par ${authorName}
     margin: 0 auto;
     display: block;
     text-align: center;
+  }
+
+  .version-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-family: monospace;
+    /* Using a very light background derived from the font color for contrast */
+    background-color: rgba(7, 11, 7, 0.05);
+    color: var(--color-primary);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    margin-top: 1rem;
+    border: 1px solid rgba(0, 110, 26, 0.15);
+    transition: background-color 0.2s ease;
+  }
+
+  .version-tag:hover {
+    background-color: rgba(0, 110, 26, 0.01);
   }
 
   .copyright {
@@ -66,6 +92,11 @@ const footerDesc = `Merci de m'avoir lu jusqu'ici. Site écrit par ${authorName}
 
     .credits {
       font-size: 0.9rem;
+    }
+
+    .version-tag {
+      font-size: 0.8rem;
+      margin-top: 1.25rem;
     }
   }
 </style>
