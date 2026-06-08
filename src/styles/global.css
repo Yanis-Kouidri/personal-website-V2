@@ -14,6 +14,7 @@
 	--color-accent: #57ec5e;
 	--color-primary: #006e1a;
 	--color-secondary: #8ae68e;
+	--color-font-over-secondary: #004911;
 }
 
 .hidden {
@@ -63,7 +64,7 @@ h2 {
 
 .badge--pill {
 	font-size: 0.75rem;
-	color: var(--color-primary);
+	color: var(--color-font-over-secondary);
 	background-color: var(--color-secondary);
 	padding: 0.2rem 0.8rem;
 	border-radius: 50px;
@@ -79,7 +80,7 @@ h2 {
 
 .badge--date {
 	font-size: 0.8rem;
-	color: var(--color-primary);
+	color: var(--color-font-over-secondary);
 	background-color: var(--color-secondary);
 	padding: 0.2rem 0.6rem;
 	border-radius: 4px;
@@ -93,7 +94,7 @@ h2 {
 	font-weight: 600;
 	padding: 0.4rem 0.75rem;
 	background-color: var(--color-secondary);
-	color: var(--color-primary);
+	color: var(--color-font-over-secondary);
 	border-radius: 6px;
 	transition: transform 0.2s ease;
 }
