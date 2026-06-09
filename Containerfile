@@ -11,6 +11,8 @@ FROM docker.io/library/caddy:2.11.1-alpine as release
 
 COPY --from=build /usr/src/app/dist /usr/share/caddy
 COPY Caddyfile /etc/caddy/Caddyfile
+COPY --from=build /usr/src/app/csp_header.caddy /etc/caddy/csp_header.caddy
+
 
 USER 1000
 

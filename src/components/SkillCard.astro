@@ -10,12 +10,7 @@ interface Props {
 	color?: string;
 }
 
-const {
-	name,
-	logoPath = "/icons/default-skill.svg",
-	url = "#",
-	color = "#000",
-} = Astro.props;
+const { name, logoPath = "/icons/default-skill.svg", url = "#" } = Astro.props;
 ---
 
 <a href={url} target="_blank" rel="noopener noreferrer" class="skill-card card">
@@ -25,7 +20,7 @@ const {
   <span class="skill-name">{name}</span>
 </a>
 
-<style define:vars={{ skillColor: color }}>
+<style>
   .skill-card {
     display: flex;
     flex-direction: column;

@@ -17,10 +17,10 @@
 	}
 
 	header {
-		Content-Security-Policy "default-src 'none'; img-src 'self' data:; style-src 'self'; script-src 'self'; upgrade-insecure-requests; frame-ancestors 'none'; form-action 'none'; frame-src 'none'; media-src 'none' ; connect-src 'none' ; font-src 'self'"
-
 		X-Content-Type-Options "nosniff"
 		X-Frame-Options "DENY"
 		Referrer-Policy "strict-origin-when-cross-origin"
 	}
+
+	import ./csp_header.caddy
 }
