@@ -1,9 +1,35 @@
+/**
+ * @file astro-csp-hash.js
+ * @description Astro integration that automatically scans generated HTML files post-build,
+ * extracts inline JavaScript code, and generates corresponding SHA-256 hashes.
+ * It compiles these hashes into a dynamic Content Security Policy (CSP) header
+ * and outputs a ready-to-use configuration file for the Caddy web server.
+ * * @outputs {File} csp_header.caddy - Contains the formatted Caddy header directive with updated CSP rules.
+ */
+
 import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-export default function astroCspHash() {
+const DEFAULT_CSP_CONFIG = {
+	"default-src": "'none'",
+	"img-src": "'self' data:",
+	"style-src": "'self'",
+	"script-src": "'self'",
+	"upgrade-insecure-requests": "",
+	"frame-ancestors": "'none'",
+	"form-action": "'none'",
+	"frame-src": "'none'",
+	"media-src": "'none'",
+	"connect-src": "'none'",
+	"font-src": "'self'",
+	"base-uri": "'none'",
+};
+
+export default function astroCspHash(options = {}) {
+	const cspConfig = { ...DEFAULT_CSP_CONFIG, ...options };
+
 	return {
 		name: "astro-csp-hash",
 		hooks: {
@@ -11,7 +37,7 @@ export default function astroCspHash() {
 				const distDir = fileURLToPath(dir);
 				const hashes = new Set();
 
-				// Fonction récursive pour parcourir le dossier /dist et trouver les fichiers HTML
+				// Recursively traverses the build directory to find and process HTML files
 				function walkDir(currentPath) {
 					const files = fs.readdirSync(currentPath);
 					for (const file of files) {
@@ -22,14 +48,14 @@ export default function astroCspHash() {
 							walkDir(fullPath);
 						} else if (file.endsWith(".html")) {
 							const html = fs.readFileSync(fullPath, "utf8");
-							// Regex globale pour attraper le contenu des balises <script>
 							const scriptRegex = /<script\b[^>]*>([\s\S]*?)<\/script>/gi;
 
-							// Utilisation de matchAll pour plaire à Biome (évite l'assignation dans le while)
+							// Match inline scripts and generate SHA-256 hashes
 							const matches = html.matchAll(scriptRegex);
 							for (const match of matches) {
 								const scriptContent = match[1].trim();
-								// On ignore les scripts externes vides
+
+								// Skip external or empty script tags
 								if (scriptContent) {
 									const hash = crypto
 										.createHash("sha256")
@@ -42,13 +68,26 @@ export default function astroCspHash() {
 					}
 				}
 
-				// Lancement du scan
 				walkDir(distDir);
 
 				const hashList = Array.from(hashes).join(" ");
 
-				// Construction de la directive avec tes paramètres exacts
-				const caddyContent = `header Content-Security-Policy "default-src 'none'; img-src 'self' data:; style-src 'self'; script-src 'self' ${hashList}; upgrade-insecure-requests; frame-ancestors 'none'; form-action 'none'; frame-src 'none'; media-src 'none'; connect-src 'none'; font-src 'self'"\n`;
+				// Dynamically build the CSP string from the configuration object
+				const cspDirectives = Object.entries(cspConfig)
+					.map(([directive, value]) => {
+						// Append generated hashes specifically to the script-src directive
+						if (directive === "script-src" && hashList) {
+							return `${directive} ${value} ${hashList}`;
+						}
+						// Handle boolean directives that don't require a value (e.g., upgrade-insecure-requests)
+						if (!value) {
+							return directive;
+						}
+						return `${directive} ${value}`;
+					})
+					.join("; ");
+
+				const caddyContent = `header Content-Security-Policy "${cspDirectives}"\n`;
 
 				const outputPath = path.join(process.cwd(), "csp_header.caddy");
 				fs.writeFileSync(outputPath, caddyContent);
