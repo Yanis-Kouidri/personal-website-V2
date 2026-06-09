@@ -1,10 +1,11 @@
 // @ts-check
 
-import { shield } from "@kindspells/astro-shield";
 import { defineConfig } from "astro/config";
-import astroCspHash from "./astro-csp-hash.js";
+import astroCspHash from "./astro-csp-hash.js"; // Import de notre script
 
 // https://astro.build/config
 export default defineConfig({
-	integrations: [astroCspHash(), shield({})],
+	integrations: [
+		astroCspHash(), // Ajout de l'intégration ici
+	],
 });
