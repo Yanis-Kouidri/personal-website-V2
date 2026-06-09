@@ -9,5 +9,8 @@
 	"[astro]": {
 		"editor.defaultFormatter": "biomejs.biome"
 	},
-	"ltex.language": "auto"
+	"ltex.language": "auto",
+	"[caddyfile]": {
+		"editor.defaultFormatter": "matthewpi.caddyfile-support"
+	}
 }
