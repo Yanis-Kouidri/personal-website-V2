@@ -1,7 +1,7 @@
-import crypto from "crypto";
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
+import crypto from "node:crypto";
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 export default function astroCspHash() {
 	return {
@@ -22,15 +22,15 @@ export default function astroCspHash() {
 							walkDir(fullPath);
 						} else if (file.endsWith(".html")) {
 							const html = fs.readFileSync(fullPath, "utf8");
-							// Regex pour extraire le contenu des balises <script>
+							// Regex globale pour attraper le contenu des balises <script>
 							const scriptRegex = /<script\b[^>]*>([\s\S]*?)<\/script>/gi;
-							let match;
 
-							while ((match = scriptRegex.exec(html)) !== null) {
+							// Utilisation de matchAll pour plaire à Biome (évite l'assignation dans le while)
+							const matches = html.matchAll(scriptRegex);
+							for (const match of matches) {
 								const scriptContent = match[1].trim();
-								// On ignore les scripts externes (ceux qui ont un src="..." et pas de code inline)
+								// On ignore les scripts externes vides
 								if (scriptContent) {
-									// Calcul du hash SHA-256 requis par la CSP
 									const hash = crypto
 										.createHash("sha256")
 										.update(scriptContent)
@@ -42,17 +42,14 @@ export default function astroCspHash() {
 					}
 				}
 
-				// Lancement du scan du dossier de build
+				// Lancement du scan
 				walkDir(distDir);
 
-				// On convertit le Set de hashes en une chaîne de caractères séparée par des espaces
 				const hashList = Array.from(hashes).join(" ");
 
-				// Construction de la directive CSP avec tes paramètres exacts
-				// Les hashes sont injectés dynamiquement juste après 'self' dans script-src
+				// Construction de la directive avec tes paramètres exacts
 				const caddyContent = `header Content-Security-Policy "default-src 'none'; img-src 'self' data:; style-src 'self'; script-src 'self' ${hashList}; upgrade-insecure-requests; frame-ancestors 'none'; form-action 'none'; frame-src 'none'; media-src 'none'; connect-src 'none'; font-src 'self'"\n`;
 
-				// Écriture du fichier pour Caddy à la racine de ton projet Astro
 				const outputPath = path.join(process.cwd(), "csp_header.caddy");
 				fs.writeFileSync(outputPath, caddyContent);
 
