@@ -10,3 +10,8 @@ RUN bun run build
 FROM docker.io/library/caddy:2.11.1-alpine as release
 
 COPY --from=build /usr/src/app/dist /usr/share/caddy
+COPY Caddyfile /etc/caddy/Caddyfile
+
+USER 1000
+
+EXPOSE 8080
