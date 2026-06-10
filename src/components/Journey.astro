@@ -1,102 +1,16 @@
 ---
-/**
- * Journey Component
- * Vertical timeline with consistent left-aligned content.
- */
+import { getEntry } from "astro:content";
 import { Briefcase, Globe, GraduationCap } from "lucide-astro";
 
-interface JourneyItem {
-	title: string;
-	organization: string;
-	location: string;
-	period: string;
-	description?: string;
-	details?: string[];
-	type: "academic" | "professional" | "international";
-}
+// Fetch the single experience file from the journey collection
+const journeyEntry = await getEntry("journey", "journey");
+const journeyData = journeyEntry?.data?.items ?? [];
 
-const journeyData: JourneyItem[] = [
-	{
-		title: "Doctorat (Thèse CIFRE)",
-		organization: "IRIT & Neusta France",
-		location: "Toulouse, France",
-		period: "2026 - Present",
-		description:
-			"Sujet : Dorsales de communication éphémères pour la collecte de données dans les réseaux de capteurs sans fil (WSN).",
-		type: "academic",
-	},
-	{
-		title: "Chargé de développement logiciel (Rust)",
-		organization: "Thales Alenia Space",
-		location: "Toulouse, France",
-		period: "Mars 2025 - Sept. 2025",
-		description:
-			"Projet de fin d'étude : Développement d'une bibliothèque Rust pour le démultiplexage de données satellites.",
-		details: [
-			"Étude des recommandations du CCSDS pour les télécommunications.",
-			"Conception logicielle pour le traitement de flux de données complexes.",
-		],
-		type: "professional",
-	},
-	{
-		title: "Semestre Erasmus",
-		organization: "Université de Rome Tor Vergata",
-		location: "Italie",
-		period: "2024",
-		description:
-			"Échange international axé sur le secteur spatial et numérique.",
-		details: [
-			"Internet par satellite & Systèmes de navigation.",
-			"Cybersécurité & Cloud Computing.",
-		],
-		type: "international",
-	},
-	{
-		title: "Diplôme d'Ingénieur (Alternance)",
-		organization: "ENSEEIHT",
-		location: "Toulouse, France",
-		period: "2022 - 2025",
-		description:
-			"Filière Sciences du Numérique. Alternance chez Thales Alenia Space.",
-		details: [
-			"Cloud & DevOps : Kubernetes, Argo Workflow, Luigi.",
-			"Docs as Code : Antora et Jenkins.",
-			"Analyse comparative d'orchestrateurs de données.",
-		],
-		type: "academic",
-	},
-	{
-		title: "Développeur d'outils d'exploitation de données",
-		organization: "Thales Alenia Space",
-		location: "Cannes, France",
-		period: "Avril 2022 - Sept. 2022",
-		description:
-			"Stage de fin de DUT : Analyse de données binaires avioniques.",
-		details: [
-			"Python Data Science : NumPy, Pandas, Matplotlib (Bus CAN).",
-			"Réseaux : Conversion de captures PCAP.",
-		],
-		type: "professional",
-	},
-	{
-		title: "DUT Réseaux & Télécommunications",
-		organization: "IUT de Nice",
-		location: "Sophia-Antipolis, France",
-		period: "2020 - 2022",
-		description: "Télécoms, Réseaux et Informatique.",
-		type: "academic",
-	},
-	{
-		title: "Baccalauréat Scientifique",
-		organization: "Lycée Jules Ferry",
-		location: "Cannes, France",
-		period: "2020",
-		description: "Spécialité Mathématiques | Mention Très Bien.",
-		type: "academic",
-	},
-];
-
-const getIcon = (type: string) => {
+/**
+ * Maps the experience type to its corresponding Lucide icon component
+ * @param type - The type of journey item
+ */
+function getIcon(type: "academic" | "professional" | "international") {
 	switch (type) {
 		case "professional":
 			return Briefcase;
@@ -105,7 +19,7 @@ const getIcon = (type: string) => {
 		default:
 			return GraduationCap;
 	}
-};
+}
 ---
 
 <section id="journey" class="section journey-section">
@@ -114,8 +28,8 @@ const getIcon = (type: string) => {
     
     <div class="timeline">
       {journeyData.map((item) => {
-        const Icon = getIcon(item.type);
-        return (
+				const Icon = getIcon(item.type);
+				return (
           <div class="timeline-item">
             <div class="timeline-marker">
               <div class="timeline-icon">
@@ -142,8 +56,8 @@ const getIcon = (type: string) => {
               )}
             </div>
           </div>
-        );
-      })}
+				);
+			})}
     </div>
   </div>
 </section>
@@ -194,13 +108,14 @@ const getIcon = (type: string) => {
 
   /* --- Content Block --- */
   .timeline-content {
-    padding-bottom: 3rem; /* Space between items */
+    padding-bottom: 3rem;
     text-align: left !important;
     width: 100%;
   }
 
   .period-badge {
-    margin-bottom: 0.6rem;
+    margin-bottom: 2.5rem;
+    margin-top: 0.4rem
   }
 
   .job-title {
@@ -240,10 +155,4 @@ const getIcon = (type: string) => {
     margin-bottom: 0.4rem;
   }
 
-  /* Simple responsive adjustments */
-  @media (min-width: 1024px) {
-    .container {
-      padding-left: 2rem;
-    }
-  }
 </style>
