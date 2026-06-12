@@ -1,49 +1,28 @@
 ---
-import type { AstroComponentFactory } from "astro/runtime/server/index.js";
+import { getEntry } from "astro:content";
+import { Bitcoin, FileText, Github, Linkedin, Mail } from "lucide-astro";
+
 /**
  * Contacts Component
  * Displays social links and professional contact points with a Mobile First approach.
  * Adheres to the brand's color palette defined in global.css.
  */
-import { Bitcoin, FileText, Github, Linkedin, Mail } from "lucide-astro";
 
-interface ContactLink {
-	href: string;
-	icon: AstroComponentFactory;
-	label: string;
-	color?: string;
-}
+// Mapping from icon name strings to Lucide components
+const iconMap: Record<string, typeof Linkedin> = {
+	Linkedin,
+	Mail,
+	FileText,
+	Github,
+	Bitcoin,
+};
 
-const contactLinks: ContactLink[] = [
-	{
-		href: "https://linkedin.com/in/yanis-kouidri",
-		icon: Linkedin,
-		label: "LinkedIn",
-	},
-	{
-		href: "mailto:yanis.kouidri@neusta.fr",
-		icon: Mail,
-		label: "Email",
-	},
-	{
-		href: "/CV-Yanis-Kouidri-Fr.pdf",
-		icon: FileText,
-		label: "CV",
-	},
-	{
-		href: "https://github.com/Yanis-Kouidri",
-		icon: Github,
-		label: "GitHub",
-	},
-	{
-		href: "bitcoin:bc1ptj6z8a6h4aw6ne8vr5ju6ymdw3z48caaanyfh9ljtswrmjkkxfeqvhxf70",
-		icon: Bitcoin,
-		label: "Bitcoin",
-	},
-];
+// Fetch contact data from the content collection
+const contactEntry = await getEntry("contacts", "contacts");
+const contactData = contactEntry?.data;
 
-const contactMessage: string =
-	"Restons en contact ! Retrouvez-moi sur ces plateformes pour échanger sur mes travaux de recherche ou mes projets.";
+const contactMessage: string = contactData?.message ?? "";
+const contactLinks = contactData?.links ?? [];
 ---
 
 <section id="contact" class="section contact-section">
@@ -53,20 +32,23 @@ const contactMessage: string =
     
     <div class="contact-grid">
       {
-        contactLinks.map((contact) => (
-          <a
-            href={contact.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="contact-card card card--hover"
-            aria-label={contact.label}
-          >
-            <div class="icon-wrapper">
-              <contact.icon size={32} strokeWidth={1.5} />
-            </div>
-            <span class="contact-label">{contact.label}</span>
-          </a>
-        ))
+        contactLinks.map((contact) => {
+          const Icon = iconMap[contact.icon];
+          return (
+            <a
+              href={contact.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="contact-card card card--hover"
+              aria-label={contact.label}
+            >
+              <div class="icon-wrapper">
+                {Icon && <Icon size={32} strokeWidth={1.5} />}
+              </div>
+              <span class="contact-label">{contact.label}</span>
+            </a>
+          );
+        })
       }
     </div>
   </div>

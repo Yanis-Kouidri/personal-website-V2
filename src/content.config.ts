@@ -13,6 +13,20 @@ const projectsCollection = defineCollection({
 	}),
 });
 
+const contactsCollection = defineCollection({
+	loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/contacts" }),
+	schema: z.object({
+		message: z.string(),
+		links: z.array(
+			z.object({
+				href: z.string(),
+				icon: z.string(),
+				label: z.string(),
+			}),
+		),
+	}),
+});
+
 const journeyCollection = defineCollection({
 	loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/journey" }),
 	schema: z.object({
@@ -36,5 +50,6 @@ const journeyCollection = defineCollection({
 
 export const collections = {
 	projects: projectsCollection,
+	contacts: contactsCollection,
 	journey: journeyCollection,
 };
