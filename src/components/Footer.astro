@@ -1,15 +1,20 @@
 ---
 /**
  * Footer Component
- * Static footer displaying copyright info and credits using theme variables
+ * Displays footer information loaded from content collection (src/content/footer/)
+ * Data structure is validated at build time by the Zod schema in src/content.config.ts.
  */
+import { getCollection, render } from "astro:content";
 import packageJson from "../../package.json";
 
-const currentYear = new Date().getFullYear();
-const authorName = "Yanis Kouidri";
-const footerDesc = `Merci de m'avoir lu jusqu'ici. Site écrit par ${authorName} grâce au Framework Astro.`;
+const footerEntries = await getCollection("footer");
+const footerData = footerEntries[0].data;
+const { Content } = await render(footerEntries[0]);
 
+const currentYear = new Date().getFullYear();
 const currentVersion = packageJson.version;
+
+const authorName = footerData.authorName;
 ---
 
 <footer class="footer-container">
@@ -18,7 +23,7 @@ const currentVersion = packageJson.version;
       &copy; {currentYear} - {authorName}
     </p>
     <p class="credits">
-      {footerDesc}
+      <Content />
     </p>
     <p class="version-tag">
       Version {currentVersion}

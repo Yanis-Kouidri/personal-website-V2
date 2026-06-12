@@ -48,8 +48,16 @@ const journeyCollection = defineCollection({
 	}),
 });
 
+const footerCollection = defineCollection({
+	loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/footer" }),
+	schema: z.object({
+		authorName: z.string(),
+	}),
+});
+
 export const collections = {
 	projects: projectsCollection,
 	contacts: contactsCollection,
 	journey: journeyCollection,
+	footer: footerCollection,
 };
