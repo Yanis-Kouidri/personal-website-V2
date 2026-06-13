@@ -48,6 +48,24 @@ const journeyCollection = defineCollection({
 	}),
 });
 
+const homeCollection = defineCollection({
+	loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/home" }),
+	schema: z.object({
+		title: z.string(),
+		subtitle: z.string(),
+		ctaLabel: z.string(),
+		ctaHref: z.string(),
+		imageAlt: z.string(),
+		socialLinks: z.array(
+			z.object({
+				href: z.string(),
+				icon: z.string(),
+				label: z.string(),
+			}),
+		),
+	}),
+});
+
 const headerCollection = defineCollection({
 	loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/header" }),
 	schema: z.object({
@@ -78,4 +96,5 @@ export const collections = {
 	journey: journeyCollection,
 	footer: footerCollection,
 	header: headerCollection,
+	home: homeCollection,
 };

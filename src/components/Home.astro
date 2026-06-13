@@ -1,58 +1,58 @@
 ---
 import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
 import { BookMarked, Github, Linkedin, Mail } from "lucide-astro";
 import profileImage from "../assets/Yanis_Kouidri_home.jpg";
 
-// Social links configuration
-const socialLinks = [
-	{
-		href: "https://yanis-kouidri.github.io/personal-doc/",
-		icon: BookMarked,
-		label: "Docs",
-	},
-	{
-		href: "https://linkedin.com/in/yanis-kouidri",
-		icon: Linkedin,
-		label: "LinkedIn",
-	},
-	{
-		href: "mailto:yanis.kouidri@neusta.fr",
-		icon: Mail,
-		label: "Email",
-	},
-	{
-		href: "https://github.com/Yanis-Kouidri",
-		icon: Github,
-		label: "GitHub",
-	},
-];
+type LucideIcon = typeof BookMarked;
+/**
+ * Mapping between icon names (from content frontmatter) and Lucide components
+ */
+const iconMap: Record<string, LucideIcon> = {
+	BookMarked,
+	Github,
+	Linkedin,
+	Mail,
+};
+
+/**
+ * Load hero data from the home content collection
+ * (src/content/home/hero.md)
+ */
+const homeEntries = await getCollection("home");
+const homeData = homeEntries[0].data;
+
+const { title, subtitle, ctaLabel, ctaHref, imageAlt, socialLinks } = homeData;
 ---
 
 <section id="home" class="hero-container">
   <div class="content-wrapper">
     <div class="text-content">
-      <h1 class="name-title">Yanis Kouidri</h1>
+      <h1 class="name-title">{title}</h1>
       <p class="description">
-        Doctorant en première année de thèse CIFRE entre l'IRIT et Neusta
+        {subtitle}
       </p>
 
       <div class="social-links">
-        {socialLinks.map((social) => (
-          <a href={social.href} target="_blank" rel="noopener noreferrer" aria-label={social.label} class="link-icon">
-            <social.icon size={32} strokeWidth={2.5} />
-          </a>
-        ))}
+        {socialLinks.map((social) => {
+          const IconComponent = iconMap[social.icon];
+          return (
+            <a href={social.href} target="_blank" rel="noopener noreferrer" aria-label={social.label} class="link-icon">
+              {IconComponent && <IconComponent size={32} strokeWidth={2.5} />}
+            </a>
+          );
+        })}
       </div>
 
-      <a href="#phd" class="btn-cta">
-        En savoir plus
+      <a href={ctaHref} class="btn-cta">
+        {ctaLabel}
       </a>
     </div>
 
     <div class="profile-image-container">
       <Image 
         src={profileImage} 
-        alt="Yanis Kouidri" 
+        alt={imageAlt}
         class="img-cover" 
         width={380} 
         height={380}/>
