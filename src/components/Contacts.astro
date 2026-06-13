@@ -2,13 +2,8 @@
 import { getEntry } from "astro:content";
 import { Bitcoin, FileText, Github, Linkedin, Mail } from "lucide-astro";
 
-/**
- * Contacts Component
- * Displays social links and professional contact points with a Mobile First approach.
- * Adheres to the brand's color palette defined in global.css.
- */
+/** Display social links and contact points from content collection */
 
-// Mapping from icon name strings to Lucide components
 const iconMap: Record<string, typeof Linkedin> = {
   Linkedin,
   Mail,
@@ -17,7 +12,6 @@ const iconMap: Record<string, typeof Linkedin> = {
   Bitcoin,
 };
 
-// Fetch contact data from the content collection
 const contactEntry = await getEntry("contacts", "contacts");
 const contactData = contactEntry?.data;
 
@@ -60,7 +54,6 @@ const contactLinks = contactData?.links ?? [];
     justify-content: center;
   }
 
-  /* Grid: 1 column on mobile, 3+ on desktop */
   .contact-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

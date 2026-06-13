@@ -98,23 +98,22 @@ const { title, subtitle, ctaLabel, ctaHref, imageAlt, socialLinks } = homeData;
   @media (min-width: 1024px) {
     .content-wrapper {
       flex-direction: row;
-      justify-content: center; /* Changement : on centre le groupe (texte + image) */
+      justify-content: center;
       text-align: left;
 
-      /* AJUSTEMENTS POUR RAPPROCHER LE CONTENU */
-      gap: 8rem; /* Espace fixe entre le texte et l'image */
-      max-width: 1000px; /* On réduit la largeur maximale pour resserrer l'ensemble */
-      margin: 0 auto; /* On centre le conteneur dans la page */
-      padding: 0 10% 6rem 10%; /* Ajout de marge interne à gauche et à droite */
+      gap: 8rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 10% 6rem 10%;
     }
 
     .text-content {
       align-items: flex-start;
-      flex: 0 1 auto; /* Le texte ne prend que la place dont il a besoin */
+      flex: 0 1 auto;
     }
 
     .profile-image-container {
-      flex-shrink: 0; /* Empêche l'image de rétrécir */
+      flex-shrink: 0;
       width: 380px;
       height: 380px;
     }

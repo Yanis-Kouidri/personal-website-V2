@@ -65,7 +65,6 @@ const sectionTitle = skillsData.title;
 </section>
 
 <style>
-  /* Styles remain the same as your original file */
   .skills-section {
     color: var(--color-font);
   }
@@ -179,23 +178,19 @@ const sectionTitle = skillsData.title;
 </style>
 
 <script>
-  /**
-   * Logic to handle skill category switching
-   */
+  /** Handle skill category switching */
   const initSkills = (): void => {
     const buttons =
       document.querySelectorAll<HTMLButtonElement>(".category-btn");
     const panels = document.querySelectorAll<HTMLElement>(".skills-panel");
 
     const setActiveCategory = (categoryId: string): void => {
-      // Update buttons
       buttons.forEach((btn) => {
         const isActive = btn.dataset.category === categoryId;
         btn.classList.toggle("active", isActive);
         btn.setAttribute("aria-selected", isActive.toString());
       });
 
-      // Update panels
       panels.forEach((panel) => {
         const isTarget = panel.id === `panel-${categoryId}`;
         panel.classList.toggle("hidden", !isTarget);
@@ -210,6 +205,5 @@ const sectionTitle = skillsData.title;
     });
   };
 
-  // Run on page load
   document.addEventListener("DOMContentLoaded", initSkills);
 </script>
