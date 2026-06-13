@@ -45,7 +45,9 @@ const { title, subtitle, ctaLabel, ctaHref, imageAlt, socialLinks } = homeData;
                 aria-label={social.label}
                 class="link-icon"
               >
-                {IconComponent && <IconComponent size={32} strokeWidth={2.5} />}
+                {IconComponent && (
+                  <IconComponent size={32} stroke-width="2.5" />
+                )}
               </a>
             );
           })
