@@ -9,14 +9,14 @@ const phdEntries = await getCollection("phd");
 const phdData = phdEntries[0].data;
 
 const {
-	title,
-	projectCode,
-	subtitle,
-	period,
-	description,
-	collaborationText,
-	keywords,
-	sidebarDetails,
+  title,
+  projectCode,
+  subtitle,
+  period,
+  description,
+  collaborationText,
+  keywords,
+  sidebarDetails,
 } = phdData;
 ---
 
@@ -37,25 +37,25 @@ const {
         <p class="description-text">
           {description}
         </p>
-        
+
         <div class="tags-group">
-          {keywords.map((tag) => (
-            <span class="tag">{tag}</span>
-          ))}
+          {keywords.map((tag) => <span class="tag">{tag}</span>)}
         </div>
       </div>
 
       <aside class="details-column">
         <div class="info-card">
           <p class="collaboration-text" set:html={collaborationText} />
-          
+
           <div class="details-grid">
-            {sidebarDetails.map((item) => (
-              <div class="detail-entry">
-                <span class="detail-label">{item.label}</span>
-                <span class="detail-value">{item.value}</span>
-              </div>
-            ))}
+            {
+              sidebarDetails.map((item) => (
+                <div class="detail-entry">
+                  <span class="detail-label">{item.label}</span>
+                  <span class="detail-value">{item.value}</span>
+                </div>
+              ))
+            }
           </div>
         </div>
       </aside>

@@ -75,7 +75,7 @@ Approfondissement des thématiques du secteur spatial et numérique :
 
 ### Diplôme d'Ingénieur ENSEEIHT (en alternance)
 
-Filière : Sciences du Numérique 2022 - 2025 *Toulouse, France*
+Filière : Sciences du Numérique 2022 - 2025 _Toulouse, France_
 
 Alternance Thales Alenia space Toulouse :
 
@@ -88,7 +88,7 @@ Spécialisation dans l'orchestration de traitements algorithmiques et les archit
 ### Stage de fin de DUT - Thales Alenia Space
 
 Développeur d'outils d'exploitation de données | Avr. 2022 - Sept. 2022
-*Cannes, France*
+_Cannes, France_
 
 Analyse et traitement des données binaires issues des tests avioniques.
 

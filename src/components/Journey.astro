@@ -11,53 +11,60 @@ const journeyData = journeyEntry?.data?.items ?? [];
  * @param type - The type of journey item
  */
 function getIcon(type: "academic" | "professional" | "international") {
-	switch (type) {
-		case "professional":
-			return Briefcase;
-		case "international":
-			return Globe;
-		default:
-			return GraduationCap;
-	}
+  switch (type) {
+    case "professional":
+      return Briefcase;
+    case "international":
+      return Globe;
+    default:
+      return GraduationCap;
+  }
 }
 ---
 
 <section id="journey" class="section journey-section">
   <div class="container">
     <h2>Mon Parcours</h2>
-    
+
     <div class="timeline">
-      {journeyData.map((item) => {
-				const Icon = getIcon(item.type);
-				return (
-          <div class="timeline-item">
-            <div class="timeline-marker">
-              <div class="timeline-icon">
-                <Icon size={18} />
+      {
+        journeyData.map((item) => {
+          const Icon = getIcon(item.type);
+          return (
+            <div class="timeline-item">
+              <div class="timeline-marker">
+                <div class="timeline-icon">
+                  <Icon size={18} />
+                </div>
+                <div class="timeline-line" />
               </div>
-              <div class="timeline-line"></div>
+
+              <div class="timeline-content">
+                <span class="badge badge--pill period-badge">
+                  {item.period}
+                </span>
+                <h3 class="job-title">{item.title}</h3>
+                <p class="org-info">
+                  <strong>{item.organization}</strong>{" "}
+                  <span class="location">| {item.location}</span>
+                </p>
+
+                {item.description && (
+                  <p class="description">{item.description}</p>
+                )}
+
+                {item.details && (
+                  <ul class="details-list">
+                    {item.details.map((detail) => (
+                      <li>{detail}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
             </div>
-            
-            <div class="timeline-content">
-              <span class="badge badge--pill period-badge">{item.period}</span>
-              <h3 class="job-title">{item.title}</h3>
-              <p class="org-info">
-                <strong>{item.organization}</strong> <span class="location">| {item.location}</span>
-              </p>
-              
-              {item.description && <p class="description">{item.description}</p>}
-              
-              {item.details && (
-                <ul class="details-list">
-                  {item.details.map((detail) => (
-                    <li>{detail}</li>
-                  ))}
-                </ul>
-              )}
-            </div>
-          </div>
-				);
-			})}
+          );
+        })
+      }
     </div>
   </div>
 </section>
@@ -115,7 +122,7 @@ function getIcon(type: "academic" | "professional" | "international") {
 
   .period-badge {
     margin-bottom: 2.5rem;
-    margin-top: 0.4rem
+    margin-top: 0.4rem;
   }
 
   .job-title {
@@ -154,5 +161,4 @@ function getIcon(type: "academic" | "professional" | "international") {
   .details-list li {
     margin-bottom: 0.4rem;
   }
-
 </style>

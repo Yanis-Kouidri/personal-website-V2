@@ -4,22 +4,22 @@ Tu es un expert en développement web spécialisé dans Astro, TypeScript et les
 
 ## 🛠 Stack Technique et Écosystème
 
-* **Framework :** Astro (version 6.x, mode statique `output: 'static'`).
-* **Gestionnaire de paquets & Runtime :** Bun (`bun run`, `bun add`, etc.). **Ne jamais utiliser npm, yarn ou pnpm.**
-* **Langage :** TypeScript strict uniquement. Aucun fichier `.js`.
-* **Linter & Formateur :** Biome. Après chaque modification ou création de fichier, tu dois t'assurer que le code respecte les règles de Biome.
-* **Serveur de production :** Caddy (le site est purement statique, pas de SSR).
+- **Framework :** Astro (version 6.x, mode statique `output: 'static'`).
+- **Gestionnaire de paquets & Runtime :** Bun (`bun run`, `bun add`, etc.). **Ne jamais utiliser npm, yarn ou pnpm.**
+- **Langage :** TypeScript strict uniquement. Aucun fichier `.js`.
+- **Formateur :** Prettier. Après chaque modification ou création de fichier, tu dois t'assurer que le code respecte les règles de Prettier.
+- **Serveur de production :** Caddy (le site est purement statique, pas de SSR).
 
 ## 📂 Architecture des Contenus (Pas de CMS)
 
-* Tout le contenu textuel et les articles/projets du portfolio sont gérés via des fichiers Markdown (`.md`) situés exclusivement dans le dossier `src/content/`.
-* Tu dois utiliser les **Content Collections** d'Astro pour requêter et afficher ces contenus.
-* Si tu ajoutes ou modifies un type de contenu, vérifie ou mets à jour le schéma de validation dans `src/content/config.ts`.
+- Tout le contenu textuel et les articles/projets du portfolio sont gérés via des fichiers Markdown (`.md`) situés exclusivement dans le dossier `src/content/`.
+- Tu dois utiliser les **Content Collections** d'Astro pour requêter et afficher ces contenus.
+- Si tu ajoutes ou modifies un type de contenu, vérifie ou mets à jour le schéma de validation dans `src/content/config.ts`.
 
 ## 🤖 Règles de Comportement pour l'Agent (Modèle Gratuit Optimisé)
 
 1. **Analyse avant action :** Avant de modifier un fichier existant, lis-le entièrement pour comprendre son contexte et ne pas casser de logique existante.
 2. **Mode Planification d'abord :** Pour les tâches complexes, propose d'abord ton plan d'action dans le chat et attends ma validation avant de toucher au code ou de lancer des commandes.
 3. **Qualité du code :** Écris un code propre, modulaire et documenté en TypeScript. Utilise les composants Astro (`.astro`) pour l'interface.
-4. **Gestion des erreurs Biome :** Si tu installes une extension ou écris du code, lance `bun biome check --write` sur les fichiers modifiés pour garantir la conformité avant de finaliser la tâche.
+4. **Formatage Prettier :** Si tu installes une extension ou écris du code, lance `bun run format:fix` sur les fichiers modifiés pour garantir la conformité avant de finaliser la tâche.
 5. **Économie de tokens :** Reste concis dans tes explications textuelles. Concentre-toi sur l'efficacité du code et le respect de la tâche demandée.

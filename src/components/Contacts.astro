@@ -10,11 +10,11 @@ import { Bitcoin, FileText, Github, Linkedin, Mail } from "lucide-astro";
 
 // Mapping from icon name strings to Lucide components
 const iconMap: Record<string, typeof Linkedin> = {
-	Linkedin,
-	Mail,
-	FileText,
-	Github,
-	Bitcoin,
+  Linkedin,
+  Mail,
+  FileText,
+  Github,
+  Bitcoin,
 };
 
 // Fetch contact data from the content collection
@@ -29,7 +29,7 @@ const contactLinks = contactData?.links ?? [];
   <div class="container">
     <h2>Contact</h2>
     <p class="section-subtitle">{contactMessage}</p>
-    
+
     <div class="contact-grid">
       {
         contactLinks.map((contact) => {
@@ -105,13 +105,13 @@ const contactLinks = contactData?.links ?? [];
     .contact-grid {
       grid-template-columns: repeat(5, 1fr);
     }
-    
+
     .section-title {
       font-size: 2.5rem;
     }
 
     .contact-section {
-          padding: 10rem 1.5rem 20rem 1.5rem;
+      padding: 10rem 1.5rem 20rem 1.5rem;
     }
   }
 </style>

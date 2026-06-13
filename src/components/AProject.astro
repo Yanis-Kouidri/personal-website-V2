@@ -8,35 +8,35 @@ const { title, technologies, githubUrl, date, imagePath } = project.data;
 const { Content } = await render(project);
 
 const images = import.meta.glob<{ default: ImageMetadata }>(
-	"/src/assets/projects/*",
+  "/src/assets/projects/*",
 );
 
 const imageGlob = images[imagePath];
 if (!imageGlob)
-	throw new Error(
-		`"${imagePath}" doesn't exist in the folder "src/assets/projects/"`,
-	);
+  throw new Error(
+    `"${imagePath}" doesn't exist in the folder "src/assets/projects/"`,
+  );
 ---
 
 <article class="project-card card card--hover">
   <div class="image-container">
-    <Image 
-      src={imageGlob()} 
-      alt={title} 
+    <Image
+      src={imageGlob()}
+      alt={title}
       width={1200}
       height={675}
-      class="img-cover project-image" 
+      class="img-cover project-image"
     />
   </div>
 
   <div class="project-content">
     <div class="project-meta">
       <span class="badge badge--date">{date}</span>
-      <a 
-        href={githubUrl} 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        class="github-link" 
+      <a
+        href={githubUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="github-link"
         aria-label={`Voir le code source de ${title}`}
       >
         <Github size={20} />
@@ -50,9 +50,11 @@ if (!imageGlob)
     </div>
 
     <div class="tech-stack">
-      {technologies.map((tech: string) => (
-        <span class="tag tag--neutral">{tech}</span>
-      ))}
+      {
+        technologies.map((tech: string) => (
+          <span class="tag tag--neutral">{tech}</span>
+        ))
+      }
     </div>
   </div>
 </article>
@@ -72,7 +74,6 @@ if (!imageGlob)
     aspect-ratio: 16 / 9;
     overflow: hidden;
   }
-
 
   .image-container img {
     width: 100%;
@@ -101,7 +102,9 @@ if (!imageGlob)
   .github-link {
     color: var(--color-font);
     opacity: 0.6;
-    transition: opacity 0.2s ease, color 0.2s ease;
+    transition:
+      opacity 0.2s ease,
+      color 0.2s ease;
   }
 
   .github-link:hover {

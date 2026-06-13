@@ -5,35 +5,35 @@ import Header from "../components/Header.astro";
 
 const title = "Yanis Kouidri - Doctorant en informatique";
 const description =
-	"Portfolio de Yanis Kouidri, doctorant en première année de thèse CIFRE entre l'IRIT et Neusta. Spécialiste IoT, WSN et LoRa.";
+  "Portfolio de Yanis Kouidri, doctorant en première année de thèse CIFRE entre l'IRIT et Neusta. Spécialiste IoT, WSN et LoRa.";
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-		<meta name="generator" content={Astro.generator} />
-		<meta name="description" content={description} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<Header/>
-		<main>
-			<slot />
-		</main>
-		<Footer/>
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
 </html>
 
 <style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
 </style>

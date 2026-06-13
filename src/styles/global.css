@@ -1,190 +1,190 @@
 @font-face {
-	font-family: "Inter Custom";
-	src: url("/fonts/InterVariable.woff2") format("woff2-variations");
-	font-weight: 100 900;
-	font-style: normal;
-	font-display: swap;
+  font-family: "Inter Custom";
+  src: url("/fonts/InterVariable.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
 }
 
 :root {
-	font-family: "Inter Custom", system-ui, sans-serif;
-	--color-background: #f2f4f3;
-	--color-footer: #e4e4e4;
-	--color-font: #070b07;
-	--color-accent: #57ec5e;
-	--color-primary: #006e1a;
-	--color-secondary: #8ae68e;
-	--color-font-over-secondary: #004911;
+  font-family: "Inter Custom", system-ui, sans-serif;
+  --color-background: #f2f4f3;
+  --color-footer: #e4e4e4;
+  --color-font: #070b07;
+  --color-accent: #57ec5e;
+  --color-primary: #006e1a;
+  --color-secondary: #8ae68e;
+  --color-font-over-secondary: #004911;
 }
 
 .hidden {
-	display: none;
+  display: none;
 }
 
 .container {
-	max-width: 1000px;
-	margin: 0 auto;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 h2 {
-	font-size: 2rem;
-	font-weight: 800;
-	margin-bottom: 2.5rem;
-	text-align: center;
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 2.5rem;
+  text-align: center;
 }
 
 /* === Reusable section layout === */
 .section {
-	padding: 4rem 1.5rem;
-	background-color: var(--color-background);
+  padding: 4rem 1.5rem;
+  background-color: var(--color-background);
 }
 
 /* === Card base === */
 .card {
-	background-color: white;
-	border: 1px solid rgba(0, 0, 0, 0.05);
-	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
 .card--hover {
-	transition:
-		transform 0.3s ease,
-		box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .card--hover:hover {
-	transform: translateY(-5px);
+  transform: translateY(-5px);
 }
 
 /* === Badges === */
 .badge {
-	display: inline-block;
-	font-weight: 700;
+  display: inline-block;
+  font-weight: 700;
 }
 
 .badge--pill {
-	font-size: 0.75rem;
-	color: var(--color-font-over-secondary);
-	background-color: var(--color-secondary);
-	padding: 0.2rem 0.8rem;
-	border-radius: 50px;
+  font-size: 0.75rem;
+  color: var(--color-font-over-secondary);
+  background-color: var(--color-secondary);
+  padding: 0.2rem 0.8rem;
+  border-radius: 50px;
 }
 
 .badge--accent {
-	font-size: 0.85rem;
-	color: white;
-	background-color: var(--color-primary);
-	padding: 0.3rem 0.7rem;
-	border-radius: 4px;
+  font-size: 0.85rem;
+  color: white;
+  background-color: var(--color-primary);
+  padding: 0.3rem 0.7rem;
+  border-radius: 4px;
 }
 
 .badge--date {
-	font-size: 0.8rem;
-	color: var(--color-font-over-secondary);
-	background-color: var(--color-secondary);
-	padding: 0.2rem 0.6rem;
-	border-radius: 4px;
-	text-transform: uppercase;
-	letter-spacing: 0.025em;
+  font-size: 0.8rem;
+  color: var(--color-font-over-secondary);
+  background-color: var(--color-secondary);
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
 }
 
 /* === Tags === */
 .tag {
-	font-size: 0.8rem;
-	font-weight: 600;
-	padding: 0.4rem 0.75rem;
-	background-color: var(--color-secondary);
-	color: var(--color-font-over-secondary);
-	border-radius: 6px;
-	transition: transform 0.2s ease;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.4rem 0.75rem;
+  background-color: var(--color-secondary);
+  color: var(--color-font-over-secondary);
+  border-radius: 6px;
+  transition: transform 0.2s ease;
 }
 
 .tag:hover {
-	transform: translateY(-2px);
+  transform: translateY(-2px);
 }
 
 .tag--neutral {
-	background-color: var(--color-background);
-	color: var(--color-font);
-	font-size: 0.7rem;
-	padding: 0.2rem 0.5rem;
-	border-radius: 4px;
-	border: 1px solid rgba(0, 0, 0, 0.05);
+  background-color: var(--color-background);
+  color: var(--color-font);
+  font-size: 0.7rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .tag--neutral:hover {
-	transform: none;
+  transform: none;
 }
 
 /* === Typography === */
 .section-subtitle {
-	font-size: 1.1rem;
-	color: var(--color-font);
-	opacity: 0.8;
-	margin-bottom: 3rem;
+  font-size: 1.1rem;
+  color: var(--color-font);
+  opacity: 0.8;
+  margin-bottom: 3rem;
 }
 
 /* === Buttons === */
 .btn-cta {
-	display: inline-block;
-	background-color: var(--color-secondary);
-	color: var(--color-font);
-	padding: 1rem 2.5rem;
-	border-radius: 9999px;
-	font-weight: 700;
-	text-decoration: none;
-	transition: transform 0.2s ease;
+  display: inline-block;
+  background-color: var(--color-secondary);
+  color: var(--color-font);
+  padding: 1rem 2.5rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.2s ease;
 }
 
 /* === Links === */
 a {
-	color: var(--color-primary);
-	text-decoration: none;
-	font-weight: 500;
-	border-bottom: 2px solid transparent;
-	transition:
-		border-color 0.2s ease,
-		color 0.2s ease;
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 2px solid transparent;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease;
 }
 
 a:hover {
-	color: var(--color-font-over-secondary);
-	border-bottom-color: var(--color-accent);
+  color: var(--color-font-over-secondary);
+  border-bottom-color: var(--color-accent);
 }
 
 a:focus-visible {
-	outline: 2px solid var(--color-accent);
-	outline-offset: 2px;
-	border-radius: 2px;
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
 }
 
 .link-icon {
-	color: var(--color-font);
-	text-decoration: none;
-	outline: none;
-	transition:
-		transform 0.2s ease,
-		color 0.2s ease;
+  color: var(--color-font);
+  text-decoration: none;
+  outline: none;
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease;
 }
 
 .link-icon:hover {
-	transform: translateY(-3px);
-	color: var(--color-primary);
+  transform: translateY(-3px);
+  color: var(--color-primary);
 }
 
 /* === Images === */
 .img-cover {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 @media (min-width: 1024px) {
-	h2 {
-		text-align: left;
-		font-size: 2.5rem;
-	}
-	.container {
-		width: 1000px;
-	}
+  h2 {
+    text-align: left;
+    font-size: 2.5rem;
+  }
+  .container {
+    width: 1000px;
+  }
 }

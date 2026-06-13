@@ -9,10 +9,10 @@ type LucideIcon = typeof BookMarked;
  * Mapping between icon names (from content frontmatter) and Lucide components
  */
 const iconMap: Record<string, LucideIcon> = {
-	BookMarked,
-	Github,
-	Linkedin,
-	Mail,
+  BookMarked,
+  Github,
+  Linkedin,
+  Mail,
 };
 
 /**
@@ -34,14 +34,22 @@ const { title, subtitle, ctaLabel, ctaHref, imageAlt, socialLinks } = homeData;
       </p>
 
       <div class="social-links">
-        {socialLinks.map((social) => {
-          const IconComponent = iconMap[social.icon];
-          return (
-            <a href={social.href} target="_blank" rel="noopener noreferrer" aria-label={social.label} class="link-icon">
-              {IconComponent && <IconComponent size={32} strokeWidth={2.5} />}
-            </a>
-          );
-        })}
+        {
+          socialLinks.map((social) => {
+            const IconComponent = iconMap[social.icon];
+            return (
+              <a
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.label}
+                class="link-icon"
+              >
+                {IconComponent && <IconComponent size={32} strokeWidth={2.5} />}
+              </a>
+            );
+          })
+        }
       </div>
 
       <a href={ctaHref} class="btn-cta">
@@ -50,12 +58,13 @@ const { title, subtitle, ctaLabel, ctaHref, imageAlt, socialLinks } = homeData;
     </div>
 
     <div class="profile-image-container">
-      <Image 
-        src={profileImage} 
+      <Image
+        src={profileImage}
         alt={imageAlt}
-        class="img-cover" 
-        width={380} 
-        height={380}/>
+        class="img-cover"
+        width={380}
+        height={380}
+      />
     </div>
   </div>
 </section>
@@ -70,14 +79,14 @@ const { title, subtitle, ctaLabel, ctaHref, imageAlt, socialLinks } = homeData;
     padding: 2rem 1.5rem;
   }
 
-.content-wrapper {
+  .content-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     gap: 3rem;
     width: 100%;
-    max-width: 1200px; 
+    max-width: 1200px;
   }
 
   .text-content {
@@ -86,27 +95,26 @@ const { title, subtitle, ctaLabel, ctaHref, imageAlt, socialLinks } = homeData;
     align-items: center;
   }
 
-
   @media (min-width: 1024px) {
     .content-wrapper {
       flex-direction: row;
       justify-content: center; /* Changement : on centre le groupe (texte + image) */
       text-align: left;
-      
+
       /* AJUSTEMENTS POUR RAPPROCHER LE CONTENU */
-      gap: 8rem;          /* Espace fixe entre le texte et l'image */
-      max-width: 1000px;  /* On réduit la largeur maximale pour resserrer l'ensemble */
-      margin: 0 auto;     /* On centre le conteneur dans la page */
-      padding: 0 10% 6rem 10%;     /* Ajout de marge interne à gauche et à droite */
+      gap: 8rem; /* Espace fixe entre le texte et l'image */
+      max-width: 1000px; /* On réduit la largeur maximale pour resserrer l'ensemble */
+      margin: 0 auto; /* On centre le conteneur dans la page */
+      padding: 0 10% 6rem 10%; /* Ajout de marge interne à gauche et à droite */
     }
 
     .text-content {
       align-items: flex-start;
-      flex: 0 1 auto;     /* Le texte ne prend que la place dont il a besoin */
+      flex: 0 1 auto; /* Le texte ne prend que la place dont il a besoin */
     }
 
     .profile-image-container {
-      flex-shrink: 0;     /* Empêche l'image de rétrécir */
+      flex-shrink: 0; /* Empêche l'image de rétrécir */
       width: 380px;
       height: 380px;
     }
@@ -139,7 +147,6 @@ const { title, subtitle, ctaLabel, ctaHref, imageAlt, socialLinks } = homeData;
     overflow: hidden;
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
   }
-
 </style>
 
 <script>

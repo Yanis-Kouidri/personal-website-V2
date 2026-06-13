@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      
+
       # Setup Node.js 24 just to satisfy Astro 6 verification
       - name: Setup Node.js
         uses: actions/setup-node@v6
@@ -23,12 +23,12 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
-      - name: Lint and format with Biome
+      - name: Check formatting with Prettier
         run: bun run check
 
       - name: Check Typescript
         run: bun run typecheck
-  
+
   prepare:
     name: Prepare metadata
     runs-on: ubuntu-latest
@@ -48,7 +48,7 @@ jobs:
         run: |
           OWNER_LC=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
           REPO_NAME_LC=$(echo "${{ github.event.repository.name }}" | tr '[:upper:]' '[:lower:]')
-          echo "name=ghcr.io/$OWNER_LC/$REPO_NAME_LC" >> "$GITHUB_OUTPUT"      
+          echo "name=ghcr.io/$OWNER_LC/$REPO_NAME_LC" >> "$GITHUB_OUTPUT"
 
   build-and-push:
     name: Build and push Podman image
@@ -68,7 +68,7 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      
+
       - name: Build podman image
         id: build-image
         uses: redhat-actions/buildah-build@v2

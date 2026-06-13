@@ -1,6 +1,16 @@
 ---
 title: "Personal-website-v1"
-technologies: ["React", "Node.js", "MongoDB", "Express", "JWT", "JavaScript", "Strapi", "Multer"]
+technologies:
+  [
+    "React",
+    "Node.js",
+    "MongoDB",
+    "Express",
+    "JWT",
+    "JavaScript",
+    "Strapi",
+    "Multer",
+  ]
 githubUrl: "https://github.com/yanis-kouidri/personal-website-v1"
 date: "2024"
 imagePath: "/src/assets/projects/screenshot-personal-website-v1.png"
@@ -14,4 +24,4 @@ J'ai conçu :
 - Le back-end en **Node.js** avec Express
 - Le stockage dans une base de données **MongoDB**
 
-J'ai également ajouté un système d'envoi de fichier avec *multer* et un mécanisme **CRUD**. Au cours de ce projet, j'ai beaucoup appris !
+J'ai également ajouté un système d'envoi de fichier avec _multer_ et un mécanisme **CRUD**. Au cours de ce projet, j'ai beaucoup appris !

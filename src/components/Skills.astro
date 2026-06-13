@@ -15,46 +15,50 @@ const sectionTitle = skillsData.title;
 
 <section id="skills" class="section skills-section">
   <div class="container">
-        <h2>{sectionTitle}</h2>
+    <h2>{sectionTitle}</h2>
 
     <div class="skills-grid">
       <div class="categories-menu" role="tablist">
-        {skillCategories.map((category, index) => (
-          <button 
-            class={`category-btn ${index === 0 ? 'active' : ''}`} 
-            data-category={category.id}
-            role="tab"
-            aria-selected={index === 0 ? "true" : "false"}
-            aria-controls={`panel-${category.id}`}
-          >
-            <div class="btn-content">
-              <category.icon size={20} class="category-icon" />
-              <span>{category.label}</span>
-            </div>
-            <ChevronRight size={16} class="chevron" />
-          </button>
-        ))}
+        {
+          skillCategories.map((category, index) => (
+            <button
+              class={`category-btn ${index === 0 ? "active" : ""}`}
+              data-category={category.id}
+              role="tab"
+              aria-selected={index === 0 ? "true" : "false"}
+              aria-controls={`panel-${category.id}`}
+            >
+              <div class="btn-content">
+                <category.icon size={20} class="category-icon" />
+                <span>{category.label}</span>
+              </div>
+              <ChevronRight size={16} class="chevron" />
+            </button>
+          ))
+        }
       </div>
 
       <div class="skills-display card">
-        {skillCategories.map((category, index) => (
-          <div 
-            id={`panel-${category.id}`} 
-            class={`skills-panel ${index === 0 ? '' : 'hidden'}`} 
-            role="tabpanel"
-          >
-            <h3 class="panel-title">{category.label}</h3>
-            <div class="tags-container">
-              {category.skills.map((skill) => (
-                <SkillCard 
-                  name={skill.name} 
-                  logoPath={skill.logoPath} 
-                  url={skill.url} 
-                />
-              ))}
+        {
+          skillCategories.map((category, index) => (
+            <div
+              id={`panel-${category.id}`}
+              class={`skills-panel ${index === 0 ? "" : "hidden"}`}
+              role="tabpanel"
+            >
+              <h3 class="panel-title">{category.label}</h3>
+              <div class="tags-container">
+                {category.skills.map((skill) => (
+                  <SkillCard
+                    name={skill.name}
+                    logoPath={skill.logoPath}
+                    url={skill.url}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
     </div>
   </div>
@@ -88,7 +92,7 @@ const sectionTitle = skillsData.title;
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.2s ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     color: var(--color-font);
     font-weight: 600;
     text-align: left;
@@ -149,12 +153,17 @@ const sectionTitle = skillsData.title;
   }
 
   @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   @media (min-width: 1024px) {
-
     .skills-grid {
       display: grid;
       grid-template-columns: 300px 1fr;
@@ -174,26 +183,27 @@ const sectionTitle = skillsData.title;
    * Logic to handle skill category switching
    */
   const initSkills = (): void => {
-    const buttons = document.querySelectorAll<HTMLButtonElement>('.category-btn');
-    const panels = document.querySelectorAll<HTMLElement>('.skills-panel');
+    const buttons =
+      document.querySelectorAll<HTMLButtonElement>(".category-btn");
+    const panels = document.querySelectorAll<HTMLElement>(".skills-panel");
 
     const setActiveCategory = (categoryId: string): void => {
       // Update buttons
-      buttons.forEach(btn => {
+      buttons.forEach((btn) => {
         const isActive = btn.dataset.category === categoryId;
-        btn.classList.toggle('active', isActive);
-        btn.setAttribute('aria-selected', isActive.toString());
+        btn.classList.toggle("active", isActive);
+        btn.setAttribute("aria-selected", isActive.toString());
       });
 
       // Update panels
-      panels.forEach(panel => {
+      panels.forEach((panel) => {
         const isTarget = panel.id === `panel-${categoryId}`;
-        panel.classList.toggle('hidden', !isTarget);
+        panel.classList.toggle("hidden", !isTarget);
       });
     };
 
-    buttons.forEach(button => {
-      button.addEventListener('click', () => {
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
         const categoryId = button.dataset.category;
         if (categoryId) setActiveCategory(categoryId);
       });
@@ -201,5 +211,5 @@ const sectionTitle = skillsData.title;
   };
 
   // Run on page load
-  document.addEventListener('DOMContentLoaded', initSkills);
+  document.addEventListener("DOMContentLoaded", initSkills);
 </script>

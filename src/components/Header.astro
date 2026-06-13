@@ -21,17 +21,28 @@ const brandName = headerData.brandName;
     </div>
 
     <ul class="nav-menu-desktop">
-      {mainLinks.map((link) => (
-        <li><a href={link.href} class="nav-item">{link.label}</a></li>
-      ))}
+      {
+        mainLinks.map((link) => (
+          <li>
+            <a href={link.href} class="nav-item">
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
     </ul>
 
     <div class="nav-actions">
       <a href={contactLink.href} class="contact-cta-desktop">
         {contactLink.label}
       </a>
-      
-      <button id="menu-button" type="button" aria-label="Toggle menu" aria-expanded="false">
+
+      <button
+        id="menu-button"
+        type="button"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+      >
         <Menu id="icon-menu" class="nav-icon" />
         <X id="icon-close" class="nav-icon hidden" />
       </button>
@@ -39,9 +50,13 @@ const brandName = headerData.brandName;
   </nav>
 
   <div id="mobile-menu" class="mobile-menu-overlay">
-    {[...mainLinks, contactLink].map((link) => (
-      <a href={link.href} class="mobile-nav-link">{link.label}</a>
-    ))}
+    {
+      [...mainLinks, contactLink].map((link) => (
+        <a href={link.href} class="mobile-nav-link">
+          {link.label}
+        </a>
+      ))
+    }
   </div>
 </header>
 
@@ -71,7 +86,7 @@ const brandName = headerData.brandName;
   }
 
   /* Hide desktop-specific elements by default */
-  .nav-menu-desktop, 
+  .nav-menu-desktop,
   .contact-cta-desktop {
     display: none;
   }
@@ -88,7 +103,9 @@ const brandName = headerData.brandName;
   }
 
   .nav-icon {
-    transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+    transition:
+      transform 0.2s ease-in-out,
+      color 0.2s ease-in-out;
   }
 
   #menu-button:hover .nav-icon {
@@ -123,7 +140,9 @@ const brandName = headerData.brandName;
     font-weight: 600;
     text-decoration: none;
     color: var(--color-font);
-    transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
+    transition:
+      color 0.2s ease-in-out,
+      transform 0.2s ease-in-out;
   }
 
   .mobile-nav-link:hover {
@@ -189,7 +208,10 @@ const brandName = headerData.brandName;
       padding: 0.6rem 1.5rem;
       border-radius: 50px;
       font-weight: 600;
-      transition: transform 0.2s ease-in-out, filter 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+      transition:
+        transform 0.2s ease-in-out,
+        filter 0.2s ease-in-out,
+        box-shadow 0.2s ease-in-out;
     }
 
     .contact-cta-desktop:hover {
@@ -208,7 +230,7 @@ const brandName = headerData.brandName;
     }
 
     /* Hide mobile-only elements */
-    #menu-button, 
+    #menu-button,
     .mobile-menu-overlay {
       display: none;
     }
@@ -220,10 +242,16 @@ const brandName = headerData.brandName;
    * Setup interactive navigation behavior
    */
   const setupNavigation = (): void => {
-    const toggleBtn = document.getElementById("menu-button") as HTMLButtonElement | null;
-    const menuOverlay = document.getElementById("mobile-menu") as HTMLElement | null;
+    const toggleBtn = document.getElementById(
+      "menu-button",
+    ) as HTMLButtonElement | null;
+    const menuOverlay = document.getElementById(
+      "mobile-menu",
+    ) as HTMLElement | null;
     const openIcon = document.getElementById("icon-menu") as HTMLElement | null;
-    const closeIcon = document.getElementById("icon-close") as HTMLElement | null;
+    const closeIcon = document.getElementById(
+      "icon-close",
+    ) as HTMLElement | null;
 
     if (!toggleBtn || !menuOverlay || !openIcon || !closeIcon) return;
 
@@ -231,7 +259,7 @@ const brandName = headerData.brandName;
     const toggleMenu = (isOpen: boolean): void => {
       menuOverlay.classList.toggle("is-open", isOpen);
       toggleBtn.setAttribute("aria-expanded", isOpen.toString());
-      
+
       if (isOpen) {
         openIcon.classList.add("hidden");
         closeIcon.classList.remove("hidden");
