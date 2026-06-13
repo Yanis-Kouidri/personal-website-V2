@@ -28,10 +28,10 @@ const sectionTitle = skillsData.title;
               aria-selected={index === 0 ? "true" : "false"}
               aria-controls={`panel-${category.id}`}
             >
-              <div class="btn-content">
+              <span class="btn-content">
                 <category.icon size={20} class="category-icon" />
                 <span>{category.label}</span>
-              </div>
+              </span>
               <ChevronRight size={16} class="chevron" />
             </button>
           ))
