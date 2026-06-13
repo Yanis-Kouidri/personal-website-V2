@@ -1,39 +1,23 @@
 ---
-interface ResearchDetail {
-	label: string;
-	value: string;
-}
+import { getCollection } from "astro:content";
 
-// Content data
-const title = "Mon doctorat";
-const projectCode = "DMX : Data Mule eXpress";
-const subtitle =
-	"Dorsales de communication éphémères pour la collecte de données dans les réseaux de capteurs sans fil";
-const period = "2026 — 2029";
+/**
+ * Load PhD data from the phd content collection
+ * (src/content/phd/phd.md)
+ */
+const phdEntries = await getCollection("phd");
+const phdData = phdEntries[0].data;
 
-const description = `Ma thèse porte sur l'optimisation de la collecte de données dans l'Internet des Objets (IoT). Au sein du projet DMX, je développe des architectures réseaux éphémères capables de s'adapter aux mouvements de collecteurs mobiles (comme des drones ou des véhicules). En combinant des techniques de calculs de bord (edge computing) et de communications opportunistes, mon objectif est de rendre les réseaux de capteurs plus intelligents, plus efficaces et plus économes en énergie, même dans des environnements complexes.`;
-
-const keywords: string[] = [
-	"WSN",
-	"UAV",
-	"Edge computing",
-	"Routage opportuniste",
-	"DTN",
-	"Multi-RAT",
-	"AoI",
-	"IoT",
-	"Data mule",
-	"NTN",
-	"5G",
-	"6G",
-];
-
-const sidebarDetails: ResearchDetail[] = [
-	{ label: "Cadre", value: "Thèse CIFRE" },
-	{ label: "Partenaires", value: "IRIT & Neusta France" },
-	{ label: "Lieu", value: "Toulouse, France" },
-	{ label: "Statut", value: "En cours" },
-];
+const {
+	title,
+	projectCode,
+	subtitle,
+	period,
+	description,
+	collaborationText,
+	keywords,
+	sidebarDetails,
+} = phdData;
 ---
 
 <section id="phd" class="section phd-section">
@@ -63,9 +47,7 @@ const sidebarDetails: ResearchDetail[] = [
 
       <aside class="details-column">
         <div class="info-card">
-          <p class="collaboration-text">
-            Thèse <strong>CIFRE</strong> menée en collaboration entre l'<strong>IRIT</strong> et <strong>Neusta France</strong> à Toulouse.
-          </p>
+          <p class="collaboration-text" set:html={collaborationText} />
           
           <div class="details-grid">
             {sidebarDetails.map((item) => (
@@ -157,7 +139,7 @@ const sidebarDetails: ResearchDetail[] = [
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 
-  .collaboration-text strong {
+  .collaboration-text :global(strong) {
     color: var(--color-accent);
   }
 
