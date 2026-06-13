@@ -67,6 +67,13 @@ const phdCollection = defineCollection({
 	}),
 });
 
+const skillsCollection = defineCollection({
+	loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/skills" }),
+	schema: z.object({
+		title: z.string(),
+	}),
+});
+
 const homeCollection = defineCollection({
 	loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/home" }),
 	schema: z.object({
@@ -117,4 +124,5 @@ export const collections = {
 	header: headerCollection,
 	home: homeCollection,
 	phd: phdCollection,
+	skills: skillsCollection,
 };

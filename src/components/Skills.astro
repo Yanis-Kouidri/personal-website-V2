@@ -1,12 +1,21 @@
 ---
+import { getCollection } from "astro:content";
 import { ChevronRight } from "lucide-astro";
 import { skillCategories } from "../content/skills/skills";
 import SkillCard from "./SkillCard.astro";
+
+/**
+ * Load skills section title from the skills content collection
+ * (src/content/skills/skills.md)
+ */
+const skillsEntries = await getCollection("skills");
+const skillsData = skillsEntries[0].data;
+const sectionTitle = skillsData.title;
 ---
 
 <section id="skills" class="section skills-section">
   <div class="container">
-        <h2>Compétences</h2>
+        <h2>{sectionTitle}</h2>
 
     <div class="skills-grid">
       <div class="categories-menu" role="tablist">
