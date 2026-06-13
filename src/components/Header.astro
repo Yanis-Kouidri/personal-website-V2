@@ -1,27 +1,23 @@
 ---
+import { getCollection } from "astro:content";
 import { Menu, X } from "lucide-astro";
 
 /**
- * Main navigation links for the center area
+ * Load navigation data from the header content collection
+ * (src/content/header/header.md)
  */
-const mainLinks = [
-	{ href: "#home", label: "Accueil" },
-	{ href: "#phd", label: "Doctorat" },
-	{ href: "#journey", label: "Parcours" },
-	{ href: "#skills", label: "Compétences" },
-	{ href: "#projects", label: "Projets" },
-];
+const headerEntries = await getCollection("header");
+const headerData = headerEntries[0].data;
 
-/**
- * Separate contact link for the right side
- */
-const contactLink = { href: "#contact", label: "Contact" };
+const mainLinks = headerData.navLinks;
+const contactLink = headerData.contactLink;
+const brandName = headerData.brandName;
 ---
 
 <header>
   <nav class="nav-bar">
     <div class="nav-identity">
-      <a id="brand-name" href="/">Yanis Kouidri</a>
+      <a id="brand-name" href="/">{brandName}</a>
     </div>
 
     <ul class="nav-menu-desktop">
