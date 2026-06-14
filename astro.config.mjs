@@ -1,11 +1,12 @@
 // @ts-check
 
 import { defineConfig } from "astro/config";
-import astroCspHash from "./astro-csp-hash.js"; // Import de notre script
+import astroCspHash from "./astro-csp-hash.js";
+
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [
-    astroCspHash(), // Ajout de l'intégration ici
-  ],
+  site: "https://www.kouidri.fr",
+  integrations: [astroCspHash(), sitemap()],
 });
