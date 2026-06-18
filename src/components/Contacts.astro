@@ -1,5 +1,5 @@
 ---
-import { getEntry } from "astro:content";
+import { getCollection } from "astro:content";
 import { Bitcoin, FileText, Github, Linkedin, Mail } from "lucide-astro";
 
 /** Display social links and contact points from content collection */
@@ -12,8 +12,11 @@ const iconMap: Record<string, typeof Linkedin> = {
   Bitcoin,
 };
 
-const contactEntry = await getEntry("contacts", "contacts");
-const contactData = contactEntry?.data;
+const currentLocale = Astro.currentLocale ?? "fr";
+const contactEntries = await getCollection("contacts", (entry) => {
+  return entry.data.locale === currentLocale;
+});
+const contactData = contactEntries[0]?.data;
 
 const contactMessage: string = contactData?.message ?? "";
 const contactLinks = contactData?.links ?? [];

@@ -2,11 +2,10 @@
 import { getCollection } from "astro:content";
 import { Menu, X } from "lucide-astro";
 
-/**
- * Load navigation data from the header content collection
- * (src/content/header/header.md)
- */
-const headerEntries = await getCollection("header");
+const currentLocale = Astro.currentLocale ?? "fr";
+const headerEntries = await getCollection("header", (entry) => {
+  return entry.data.locale === currentLocale;
+});
 const headerData = headerEntries[0].data;
 
 const mainLinks = headerData.navLinks;

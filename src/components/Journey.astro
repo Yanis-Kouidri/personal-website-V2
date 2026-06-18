@@ -1,10 +1,12 @@
 ---
-import { getEntry } from "astro:content";
+import { getCollection } from "astro:content";
 import { Briefcase, Globe, GraduationCap } from "lucide-astro";
 
-// Fetch the single experience file from the journey collection
-const journeyEntry = await getEntry("journey", "journey");
-const journeyData = journeyEntry?.data?.items ?? [];
+const currentLocale = Astro.currentLocale ?? "fr";
+const journeyEntries = await getCollection("journey", (entry) => {
+  return entry.data.locale === currentLocale;
+});
+const journeyData = journeyEntries[0]?.data?.items ?? [];
 
 /**
  * Maps the experience type to its corresponding Lucide icon component

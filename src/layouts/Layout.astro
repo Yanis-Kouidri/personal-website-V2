@@ -3,13 +3,21 @@ import "../styles/global.css";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 
-const title = "Yanis Kouidri - Doctorant en informatique";
+const currentLocale = Astro.currentLocale ?? "fr";
+const htmlLang = currentLocale === "fr" ? "fr" : "en";
+
+const title =
+  currentLocale === "fr"
+    ? "Yanis Kouidri - Doctorant en informatique"
+    : "Yanis Kouidri - PhD student in computer science";
 const description =
-  "Portfolio de Yanis Kouidri, doctorant en première année de thèse CIFRE entre l'IRIT et Neusta. Spécialiste IoT, WSN et LoRa.";
+  currentLocale === "fr"
+    ? "Portfolio de Yanis Kouidri, doctorant en première année de thèse CIFRE entre l'IRIT et Neusta. Spécialiste IoT, WSN et LoRa."
+    : "Portfolio of Yanis Kouidri, first-year PhD candidate in a CIFRE thesis between IRIT and Neusta. Specialist in IoT, WSN and LoRa.";
 ---
 
 <!doctype html>
-<html lang="fr">
+<html lang={htmlLang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />

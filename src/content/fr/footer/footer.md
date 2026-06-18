@@ -1,4 +1,5 @@
 ---
+locale: "fr"
 authorName: "Yanis Kouidri"
 ---
 

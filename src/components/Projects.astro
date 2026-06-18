@@ -2,7 +2,10 @@
 import { getCollection } from "astro:content";
 import AProject from "./AProject.astro";
 
-const projectEntries = await getCollection("projects");
+const currentLocale = Astro.currentLocale ?? "fr";
+const projectEntries = await getCollection("projects", (entry) => {
+  return entry.data.locale === currentLocale;
+});
 
 const sortedProjects = projectEntries.sort(
   (a, b) => Number(b.data.date) - Number(a.data.date),

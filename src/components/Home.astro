@@ -15,11 +15,10 @@ const iconMap: Record<string, LucideIcon> = {
   Mail,
 };
 
-/**
- * Load hero data from the home content collection
- * (src/content/home/hero.md)
- */
-const homeEntries = await getCollection("home");
+const currentLocale = Astro.currentLocale ?? "fr";
+const homeEntries = await getCollection("home", (entry) => {
+  return entry.data.locale === currentLocale;
+});
 const homeData = homeEntries[0].data;
 
 const { title, subtitle, ctaLabel, ctaHref, imageAlt, socialLinks } = homeData;

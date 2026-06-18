@@ -1,4 +1,5 @@
 ---
+locale: "en"
 title: "Yanis Kouidri"
 subtitle: "First-year PhD candidate in a CIFRE thesis between IRIT and Neusta"
 ctaLabel: "Learn more"

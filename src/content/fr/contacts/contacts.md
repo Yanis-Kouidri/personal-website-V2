@@ -1,4 +1,5 @@
 ---
+locale: "fr"
 message: "Restons en contact ! Retrouvez-moi sur ces plateformes pour échanger sur mes travaux de recherche ou mes projets."
 links:
   - href: "https://linkedin.com/in/yanis-kouidri"

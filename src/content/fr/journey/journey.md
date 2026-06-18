@@ -1,4 +1,5 @@
 ---
+locale: "fr"
 title: "Mon Parcours"
 items:
   - title: "Doctorat (Thèse CIFRE)"

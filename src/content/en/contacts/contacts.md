@@ -1,4 +1,5 @@
 ---
+locale: "en"
 message: "Let's stay in touch! Find me on these platforms to discuss my research work or projects."
 links:
   - href: "https://linkedin.com/in/yanis-kouidri"

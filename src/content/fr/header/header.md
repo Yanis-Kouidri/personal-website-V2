@@ -1,4 +1,5 @@
 ---
+locale: "fr"
 brandName: "Yanis Kouidri"
 navLinks:
   - href: "#home"

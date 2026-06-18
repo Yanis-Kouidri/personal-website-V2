@@ -1,4 +1,5 @@
 ---
+locale: "fr"
 title: "Yanis Kouidri"
 subtitle: "Doctorant en première année de thèse CIFRE entre l'IRIT et Neusta"
 ctaLabel: "En savoir plus"

@@ -1,4 +1,5 @@
 ---
+locale: "fr"
 title: "Mon doctorat"
 projectCode: "DMX : Data Mule eXpress"
 subtitle: "Dorsales de communication éphémères pour la collecte de données dans les réseaux de capteurs sans fil"

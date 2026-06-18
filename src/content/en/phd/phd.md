@@ -1,4 +1,5 @@
 ---
+locale: "en"
 title: "My PhD"
 projectCode: "DMX : Data Mule eXpress"
 subtitle: "Ephemeral communication backbones for data collection in wireless sensor networks"

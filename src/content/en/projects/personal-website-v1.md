@@ -1,4 +1,5 @@
 ---
+locale: "en"
 title: "Personal-website-v1"
 technologies:
   [

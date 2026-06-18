@@ -3,8 +3,12 @@ import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 
 const projectsCollection = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/fr/projects" }),
+  loader: glob({
+    pattern: "{fr,en}/projects/**/[^_]*.md",
+    base: "./src/content",
+  }),
   schema: z.object({
+    locale: z.string(),
     title: z.string(),
     technologies: z.array(z.string()),
     githubUrl: z.url(),
@@ -14,8 +18,12 @@ const projectsCollection = defineCollection({
 });
 
 const contactsCollection = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/fr/contacts" }),
+  loader: glob({
+    pattern: "{fr,en}/contacts/**/[^_]*.md",
+    base: "./src/content",
+  }),
   schema: z.object({
+    locale: z.string(),
     message: z.string(),
     links: z.array(
       z.object({
@@ -28,10 +36,13 @@ const contactsCollection = defineCollection({
 });
 
 const journeyCollection = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/fr/journey" }),
+  loader: glob({
+    pattern: "{fr,en}/journey/**/[^_]*.md",
+    base: "./src/content",
+  }),
   schema: z.object({
+    locale: z.string(),
     title: z.string(),
-    // Validation of the array directly via frontmatter attributes
     items: z
       .array(
         z.object({
@@ -49,8 +60,9 @@ const journeyCollection = defineCollection({
 });
 
 const phdCollection = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/fr/phd" }),
+  loader: glob({ pattern: "{fr,en}/phd/**/[^_]*.md", base: "./src/content" }),
   schema: z.object({
+    locale: z.string(),
     title: z.string(),
     projectCode: z.string(),
     subtitle: z.string(),
@@ -68,15 +80,20 @@ const phdCollection = defineCollection({
 });
 
 const skillsCollection = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/fr/skills" }),
+  loader: glob({
+    pattern: "{fr,en}/skills/**/[^_]*.md",
+    base: "./src/content",
+  }),
   schema: z.object({
+    locale: z.string(),
     title: z.string(),
   }),
 });
 
 const homeCollection = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/fr/home" }),
+  loader: glob({ pattern: "{fr,en}/home/**/[^_]*.md", base: "./src/content" }),
   schema: z.object({
+    locale: z.string(),
     title: z.string(),
     subtitle: z.string(),
     ctaLabel: z.string(),
@@ -93,8 +110,12 @@ const homeCollection = defineCollection({
 });
 
 const headerCollection = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/fr/header" }),
+  loader: glob({
+    pattern: "{fr,en}/header/**/[^_]*.md",
+    base: "./src/content",
+  }),
   schema: z.object({
+    locale: z.string(),
     brandName: z.string(),
     navLinks: z.array(
       z.object({
@@ -110,8 +131,12 @@ const headerCollection = defineCollection({
 });
 
 const footerCollection = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/fr/footer" }),
+  loader: glob({
+    pattern: "{fr,en}/footer/**/[^_]*.md",
+    base: "./src/content",
+  }),
   schema: z.object({
+    locale: z.string(),
     authorName: z.string(),
   }),
 });

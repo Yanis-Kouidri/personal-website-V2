@@ -1,11 +1,10 @@
 ---
 import { getCollection } from "astro:content";
 
-/**
- * Load PhD data from the phd content collection
- * (src/content/phd/phd.md)
- */
-const phdEntries = await getCollection("phd");
+const currentLocale = Astro.currentLocale ?? "fr";
+const phdEntries = await getCollection("phd", (entry) => {
+  return entry.data.locale === currentLocale;
+});
 const phdData = phdEntries[0].data;
 
 const {
