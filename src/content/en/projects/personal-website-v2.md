@@ -1,5 +1,6 @@
 ---
 locale: "en"
+sectionTitle: "My Projects"
 title: "Personal-website-v2"
 date: "2026"
 imagePath: "/src/assets/projects/screenshot-personal-website-v2.png"

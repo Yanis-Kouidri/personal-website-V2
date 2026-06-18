@@ -9,7 +9,7 @@ const skillsEntries = await getCollection("skills", (entry) => {
   return entry.data.locale === currentLocale;
 });
 const skillsData = skillsEntries[0].data;
-const sectionTitle = skillsData.title;
+const sectionTitle = skillsData.sectionTitle;
 ---
 
 <section id="skills" class="section skills-section">

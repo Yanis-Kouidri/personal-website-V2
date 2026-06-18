@@ -1,5 +1,6 @@
 ---
 locale: "en"
+sectionTitle: "My Journey"
 title: "My Journey"
 items:
   - title: "PhD (CIFRE Thesis)"

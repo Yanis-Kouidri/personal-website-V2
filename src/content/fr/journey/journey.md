@@ -1,5 +1,6 @@
 ---
 locale: "fr"
+sectionTitle: "Mon Parcours"
 title: "Mon Parcours"
 items:
   - title: "Doctorat (Thèse CIFRE)"

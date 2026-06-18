@@ -6,7 +6,10 @@ const currentLocale = Astro.currentLocale ?? "fr";
 const journeyEntries = await getCollection("journey", (entry) => {
   return entry.data.locale === currentLocale;
 });
-const journeyData = journeyEntries[0]?.data?.items ?? [];
+const journeyEntry = journeyEntries[0];
+const journeyData = journeyEntry?.data;
+const sectionTitle = journeyData?.sectionTitle ?? "";
+const items = journeyData?.items ?? [];
 
 /**
  * Maps the experience type to its corresponding Lucide icon component
@@ -26,11 +29,11 @@ function getIcon(type: "academic" | "professional" | "international") {
 
 <section id="journey" class="section journey-section">
   <div class="container">
-    <h2>Mon Parcours</h2>
+    <h2>{sectionTitle}</h2>
 
     <div class="timeline">
       {
-        journeyData.map((item) => {
+        items.map((item) => {
           const Icon = getIcon(item.type);
           return (
             <div class="timeline-item">

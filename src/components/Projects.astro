@@ -10,11 +10,13 @@ const projectEntries = await getCollection("projects", (entry) => {
 const sortedProjects = projectEntries.sort(
   (a, b) => Number(b.data.date) - Number(a.data.date),
 );
+
+const sectionTitle = projectEntries[0]?.data?.sectionTitle ?? "";
 ---
 
 <section id="projects" class="section projects-container">
   <div class="container">
-    <h2 class="section-title">Mes projets</h2>
+    <h2 class="section-title">{sectionTitle}</h2>
 
     <div class="projects-grid">
       {sortedProjects.map((project) => <AProject project={project} />)}

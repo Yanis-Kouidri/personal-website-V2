@@ -9,6 +9,7 @@ const projectsCollection = defineCollection({
   }),
   schema: z.object({
     locale: z.string(),
+    sectionTitle: z.string(),
     title: z.string(),
     technologies: z.array(z.string()),
     githubUrl: z.url(),
@@ -42,6 +43,7 @@ const journeyCollection = defineCollection({
   }),
   schema: z.object({
     locale: z.string(),
+    sectionTitle: z.string(),
     title: z.string(),
     items: z
       .array(
@@ -86,6 +88,7 @@ const skillsCollection = defineCollection({
   }),
   schema: z.object({
     locale: z.string(),
+    sectionTitle: z.string(),
     title: z.string(),
   }),
 });

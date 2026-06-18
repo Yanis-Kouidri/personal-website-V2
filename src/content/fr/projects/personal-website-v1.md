@@ -1,5 +1,6 @@
 ---
 locale: "fr"
+sectionTitle: "Mes projets"
 title: "Personal-website-v1"
 technologies:
   [
