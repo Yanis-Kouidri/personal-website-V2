@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       # Setup Node.js 24 just to satisfy Astro 6 verification
       - name: Setup Node.js
@@ -37,7 +37,7 @@ jobs:
       image: ${{ steps.image.outputs.name }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Extract version from package.json
         id: pkg
@@ -60,7 +60,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Connect to GitHub Container Registry
         uses: redhat-actions/podman-login@v1
