@@ -1,0 +1,21 @@
+---
+locale: "ru"
+title: "Янис Куидри"
+subtitle: "Аспирант первого года обучения по программе CIFRE между IRIT и Neusta"
+ctaLabel: "Узнать больше"
+ctaHref: "#phd"
+imageAlt: "Янис Куидри"
+socialLinks:
+  - href: "https://yanis-kouidri.github.io/personal-doc/"
+    icon: "BookMarked"
+    label: "Документы"
+  - href: "https://linkedin.com/in/yanis-kouidri"
+    icon: "Linkedin"
+    label: "LinkedIn"
+  - href: "mailto:yanis.kouidri@neusta.fr"
+    icon: "Mail"
+    label: "Email"
+  - href: "https://github.com/Yanis-Kouidri"
+    icon: "Github"
+    label: "GitHub"
+---

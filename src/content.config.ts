@@ -4,7 +4,7 @@ import { z } from "astro/zod";
 
 const projectsCollection = defineCollection({
   loader: glob({
-    pattern: "{fr,en}/projects/**/[^_]*.md",
+    pattern: "{fr,en,ru}/projects/**/[^_]*.md",
     base: "./src/content",
   }),
   schema: z.object({
@@ -20,7 +20,7 @@ const projectsCollection = defineCollection({
 
 const contactsCollection = defineCollection({
   loader: glob({
-    pattern: "{fr,en}/contacts/**/[^_]*.md",
+    pattern: "{fr,en,ru}/contacts/**/[^_]*.md",
     base: "./src/content",
   }),
   schema: z.object({
@@ -38,7 +38,7 @@ const contactsCollection = defineCollection({
 
 const journeyCollection = defineCollection({
   loader: glob({
-    pattern: "{fr,en}/journey/**/[^_]*.md",
+    pattern: "{fr,en,ru}/journey/**/[^_]*.md",
     base: "./src/content",
   }),
   schema: z.object({
@@ -62,7 +62,10 @@ const journeyCollection = defineCollection({
 });
 
 const phdCollection = defineCollection({
-  loader: glob({ pattern: "{fr,en}/phd/**/[^_]*.md", base: "./src/content" }),
+  loader: glob({
+    pattern: "{fr,en,ru}/phd/**/[^_]*.md",
+    base: "./src/content",
+  }),
   schema: z.object({
     locale: z.string(),
     title: z.string(),
@@ -83,7 +86,7 @@ const phdCollection = defineCollection({
 
 const skillsCollection = defineCollection({
   loader: glob({
-    pattern: "{fr,en}/skills/**/[^_]*.md",
+    pattern: "{fr,en,ru}/skills/**/[^_]*.md",
     base: "./src/content",
   }),
   schema: z.object({
@@ -94,7 +97,10 @@ const skillsCollection = defineCollection({
 });
 
 const homeCollection = defineCollection({
-  loader: glob({ pattern: "{fr,en}/home/**/[^_]*.md", base: "./src/content" }),
+  loader: glob({
+    pattern: "{fr,en,ru}/home/**/[^_]*.md",
+    base: "./src/content",
+  }),
   schema: z.object({
     locale: z.string(),
     title: z.string(),
@@ -114,7 +120,7 @@ const homeCollection = defineCollection({
 
 const headerCollection = defineCollection({
   loader: glob({
-    pattern: "{fr,en}/header/**/[^_]*.md",
+    pattern: "{fr,en,ru}/header/**/[^_]*.md",
     base: "./src/content",
   }),
   schema: z.object({
@@ -135,7 +141,7 @@ const headerCollection = defineCollection({
 
 const metaCollection = defineCollection({
   loader: glob({
-    pattern: "{fr,en}/meta/**/[^_]*.md",
+    pattern: "{fr,en,ru}/meta/**/[^_]*.md",
     base: "./src/content",
   }),
   schema: z.object({
@@ -147,7 +153,7 @@ const metaCollection = defineCollection({
 
 const footerCollection = defineCollection({
   loader: glob({
-    pattern: "{fr,en}/footer/**/[^_]*.md",
+    pattern: "{fr,en,ru}/footer/**/[^_]*.md",
     base: "./src/content",
   }),
   schema: z.object({
