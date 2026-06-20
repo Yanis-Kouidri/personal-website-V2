@@ -133,6 +133,18 @@ const headerCollection = defineCollection({
   }),
 });
 
+const metaCollection = defineCollection({
+  loader: glob({
+    pattern: "{fr,en}/meta/**/[^_]*.md",
+    base: "./src/content",
+  }),
+  schema: z.object({
+    locale: z.string(),
+    title: z.string(),
+    description: z.string(),
+  }),
+});
+
 const footerCollection = defineCollection({
   loader: glob({
     pattern: "{fr,en}/footer/**/[^_]*.md",
@@ -151,6 +163,7 @@ export const collections = {
   footer: footerCollection,
   header: headerCollection,
   home: homeCollection,
+  meta: metaCollection,
   phd: phdCollection,
   skills: skillsCollection,
 };

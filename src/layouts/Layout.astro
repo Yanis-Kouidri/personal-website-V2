@@ -1,23 +1,19 @@
 ---
+import { getCollection } from "astro:content";
 import "../styles/global.css";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 
 const currentLocale = Astro.currentLocale ?? "fr";
-const htmlLang = currentLocale === "fr" ? "fr" : "en";
 
-const title =
-  currentLocale === "fr"
-    ? "Yanis Kouidri - Doctorant en informatique"
-    : "Yanis Kouidri - PhD student in computer science";
-const description =
-  currentLocale === "fr"
-    ? "Portfolio de Yanis Kouidri, doctorant en première année de thèse CIFRE entre l'IRIT et Neusta. Spécialiste IoT, WSN et LoRa."
-    : "Portfolio of Yanis Kouidri, first-year PhD candidate in a CIFRE thesis between IRIT and Neusta. Specialist in IoT, WSN and LoRa.";
+const metaEntries = await getCollection("meta", (entry) => {
+  return entry.data.locale === currentLocale;
+});
+const { title, description } = metaEntries[0].data;
 ---
 
 <!doctype html>
-<html lang={htmlLang}>
+<html lang={currentLocale}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
