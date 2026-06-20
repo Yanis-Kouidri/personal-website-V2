@@ -1,0 +1,21 @@
+---
+locale: "es"
+title: "Yanis Kouidri"
+subtitle: "Doctorando de primer año en una tesis CIFRE entre el IRIT y Neusta"
+ctaLabel: "Saber más"
+ctaHref: "#phd"
+imageAlt: "Yanis Kouidri"
+socialLinks:
+  - href: "https://yanis-kouidri.github.io/personal-doc/"
+    icon: "BookMarked"
+    label: "Documentos"
+  - href: "https://linkedin.com/in/yanis-kouidri"
+    icon: "Linkedin"
+    label: "LinkedIn"
+  - href: "mailto:yanis.kouidri@neusta.fr"
+    icon: "Mail"
+    label: "Email"
+  - href: "https://github.com/Yanis-Kouidri"
+    icon: "Github"
+    label: "GitHub"
+---

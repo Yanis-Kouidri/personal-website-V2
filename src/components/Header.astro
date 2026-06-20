@@ -81,7 +81,7 @@ const brandName = headerData.brandName;
                   />
                 </g>
               </svg>
-            ) : (
+            ) : currentLocale === "ru" ? (
               <svg
                 class="flag-icon"
                 viewBox="0 0 9 6"
@@ -91,6 +91,15 @@ const brandName = headerData.brandName;
                 <rect y="0" width="9" height="2" fill="#0039A6" />
                 <rect y="4" width="9" height="2" fill="#D52B1E" />
               </svg>
+            ) : (
+              <svg
+                class="flag-icon"
+                viewBox="0 0 9 6"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect y="0" width="9" height="6" fill="#C60B1E" />
+                <rect y="2" width="9" height="2" fill="#FFC400" />
+              </svg>
             )
           }
           <span class="lang-label">
@@ -99,7 +108,9 @@ const brandName = headerData.brandName;
                 ? "FR"
                 : currentLocale === "en"
                   ? "EN"
-                  : "RU"
+                  : currentLocale === "ru"
+                    ? "RU"
+                    : "ES"
             }
           </span>
           <svg
@@ -180,6 +191,22 @@ const brandName = headerData.brandName;
                 <rect y="4" width="9" height="2" fill="#D52B1E"></rect>
               </svg>
               Русский
+            </a>
+          </li>
+          <li>
+            <a
+              href="/es/"
+              class={`lang-option ${currentLocale === "es" ? "active" : ""}`}
+            >
+              <svg
+                class="flag-icon"
+                viewBox="0 0 9 6"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect y="0" width="9" height="6" fill="#C60B1E"></rect>
+                <rect y="2" width="9" height="2" fill="#FFC400"></rect>
+              </svg>
+              Español
             </a>
           </li>
         </ul>
@@ -265,6 +292,20 @@ const brandName = headerData.brandName;
           <rect y="4" width="9" height="2" fill="#D52B1E"></rect>
         </svg>
         Русский
+      </a>
+      <a
+        href="/es/"
+        class={`mobile-lang-link ${currentLocale === "es" ? "active" : ""}`}
+      >
+        <svg
+          class="flag-icon"
+          viewBox="0 0 9 6"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect y="0" width="9" height="6" fill="#C60B1E"></rect>
+          <rect y="2" width="9" height="2" fill="#FFC400"></rect>
+        </svg>
+        Español
       </a>
     </div>
   </div>

@@ -10,7 +10,7 @@ export default defineConfig({
   site: "https://www.kouidri.fr",
   i18n: {
     defaultLocale: "fr",
-    locales: ["fr", "en", "ru"],
+    locales: ["fr", "en", "ru", "es"],
     routing: {
       prefixDefaultLocale: false,
     },
