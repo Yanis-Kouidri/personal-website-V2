@@ -93,6 +93,7 @@ const skillsCollection = defineCollection({
     locale: z.string(),
     sectionTitle: z.string(),
     title: z.string(),
+    categoryLabels: z.record(z.string(), z.string()),
   }),
 });
 

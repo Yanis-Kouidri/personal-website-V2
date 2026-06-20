@@ -10,6 +10,7 @@ const skillsEntries = await getCollection("skills", (entry) => {
 });
 const skillsData = skillsEntries[0].data;
 const sectionTitle = skillsData.sectionTitle;
+const categoryLabels = skillsData.categoryLabels;
 ---
 
 <section id="skills" class="section skills-section">
@@ -29,7 +30,7 @@ const sectionTitle = skillsData.sectionTitle;
             >
               <span class="btn-content">
                 <category.icon size={20} class="category-icon" />
-                <span>{category.label}</span>
+                <span>{categoryLabels[category.id] ?? category.label}</span>
               </span>
               <ChevronRight size={16} class="chevron" />
             </button>
@@ -45,7 +46,9 @@ const sectionTitle = skillsData.sectionTitle;
               class={`skills-panel ${index === 0 ? "" : "hidden"}`}
               role="tabpanel"
             >
-              <h3 class="panel-title">{category.label}</h3>
+              <h3 class="panel-title">
+                {categoryLabels[category.id] ?? category.label}
+              </h3>
               <div class="tags-container">
                 {category.skills.map((skill) => (
                   <SkillCard
