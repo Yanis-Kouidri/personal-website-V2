@@ -1,6 +1,5 @@
 ---
 locale: "en"
-sectionTitle: "My Projects"
 title: "Personal-website-v1"
 technologies:
   [

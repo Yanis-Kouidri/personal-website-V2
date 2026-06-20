@@ -9,12 +9,12 @@ const projectsCollection = defineCollection({
   }),
   schema: z.object({
     locale: z.string(),
-    sectionTitle: z.string(),
-    title: z.string(),
-    technologies: z.array(z.string()),
-    githubUrl: z.url(),
-    date: z.string(),
-    imagePath: z.string(),
+    sectionTitle: z.string().optional(),
+    title: z.string().optional(),
+    technologies: z.array(z.string()).optional(),
+    githubUrl: z.url().optional(),
+    date: z.string().optional(),
+    imagePath: z.string().optional(),
   }),
 });
 

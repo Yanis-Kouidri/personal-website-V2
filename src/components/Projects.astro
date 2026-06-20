@@ -1,17 +1,21 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, getEntry } from "astro:content";
 import AProject from "./AProject.astro";
 
 const currentLocale = Astro.currentLocale ?? "fr";
 const projectEntries = await getCollection("projects", (entry) => {
-  return entry.data.locale === currentLocale;
+  return entry.data.locale === currentLocale && !entry.id.endsWith("/projects");
 });
 
 const sortedProjects = projectEntries.sort(
   (a, b) => Number(b.data.date) - Number(a.data.date),
 );
 
-const sectionTitle = projectEntries[0]?.data?.sectionTitle ?? "";
+const sectionEntry = await getEntry(
+  "projects",
+  `${currentLocale}/projects/projects`,
+);
+const sectionTitle = sectionEntry?.data?.sectionTitle ?? "";
 ---
 
 <section id="projects" class="section projects-container">
