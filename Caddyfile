@@ -4,23 +4,32 @@
 
 :8080 {
 	root * /usr/share/caddy
-
 	encode gzip zstd
-
-	try_files {path} /index.html
-
-	file_server
-
-	log {
-		output stdout
-		format json
-	}
 
 	header {
 		X-Content-Type-Options "nosniff"
 		X-Frame-Options "DENY"
 		Referrer-Policy "strict-origin-when-cross-origin"
 	}
-
 	import ./csp_header.caddy
+
+	route {
+		handle /healthz {
+			respond "OK" 200
+		}
+
+		handle /ready {
+			@file_exists file /index.html
+			respond @file_exists "Ready" 200
+			respond "Not Ready" 503
+		}
+
+		try_files {path} /index.html
+		file_server
+	}
+
+	log {
+		output stdout
+		format json
+	}
 }
