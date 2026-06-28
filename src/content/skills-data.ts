@@ -1,12 +1,12 @@
 import type { Icon as IconType } from "@lucide/astro";
 import {
-  Code2,
+  CodeXml,
   Globe,
   Infinity as InfinityLogo,
   Network,
   Server,
   ShieldCheck,
-} from "lucide-astro";
+} from "@lucide/astro";
 
 export interface SkillItem {
   name: string;
@@ -87,7 +87,7 @@ export const skillCategories: SkillCategory[] = [
   {
     id: "programming",
     label: "Programming",
-    icon: Code2,
+    icon: CodeXml,
     skills: [
       {
         name: "Ada",

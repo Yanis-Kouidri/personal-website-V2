@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import { Menu, X } from "lucide-astro";
+import { Menu, X } from "@lucide/astro";
 
 const currentLocale = Astro.currentLocale ?? "fr";
 const headerEntries = await getCollection("header", (entry) => {

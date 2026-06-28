@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import { Briefcase, Globe, GraduationCap } from "lucide-astro";
+import { Briefcase, Globe, GraduationCap } from "@lucide/astro";
 
 const currentLocale = Astro.currentLocale ?? "fr";
 const journeyEntries = await getCollection("journey", (entry) => {

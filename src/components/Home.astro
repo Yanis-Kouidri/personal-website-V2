@@ -1,7 +1,10 @@
 ---
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
-import { BookMarked, Github, Linkedin, Mail } from "lucide-astro";
+import { BookMarked, Mail } from "@lucide/astro";
+import { Github } from "simple-icons-astro";
+import LinkedinIcon from "./LinkedinIcon.astro";
+
 import profileImage from "../assets/Yanis_Kouidri_home.jpg";
 
 type LucideIcon = typeof BookMarked;
@@ -11,7 +14,6 @@ type LucideIcon = typeof BookMarked;
 const iconMap: Record<string, LucideIcon> = {
   BookMarked,
   Github,
-  Linkedin,
   Mail,
 };
 
@@ -35,7 +37,8 @@ const { title, subtitle, ctaLabel, ctaHref, imageAlt, socialLinks } = homeData;
       <div class="social-links">
         {
           socialLinks.map((social) => {
-            const IconComponent = iconMap[social.icon];
+            const IconComponent =
+              social.icon === "Linkedin" ? LinkedinIcon : iconMap[social.icon];
             return (
               <a
                 href={social.href}

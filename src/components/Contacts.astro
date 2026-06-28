@@ -1,11 +1,12 @@
 ---
 import { getCollection } from "astro:content";
-import { Bitcoin, FileText, Github, Linkedin, Mail } from "lucide-astro";
+import { Bitcoin, FileText, Mail } from "@lucide/astro";
+import { Github } from "simple-icons-astro";
+import LinkedinIcon from "./LinkedinIcon.astro";
 
 /** Display social links and contact points from content collection */
 
-const iconMap: Record<string, typeof Linkedin> = {
-  Linkedin,
+const iconMap: Record<string, typeof Mail> = {
   Mail,
   FileText,
   Github,
@@ -30,7 +31,8 @@ const contactLinks = contactData?.links ?? [];
     <div class="contact-grid">
       {
         contactLinks.map((contact) => {
-          const Icon = iconMap[contact.icon];
+          const Icon =
+            contact.icon === "Linkedin" ? LinkedinIcon : iconMap[contact.icon];
           return (
             <a
               href={contact.href}

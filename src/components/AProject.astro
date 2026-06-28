@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import { render } from "astro:content";
-import { Github } from "lucide-astro";
+import { Github } from "simple-icons-astro";
 
 const { project } = Astro.props;
 const { title, technologies, githubUrl, date, imagePath } = project.data;
@@ -39,7 +39,7 @@ if (!imageGlob)
         class="github-link"
         aria-label={`Voir le code source de ${title}`}
       >
-        <Github size={20} />
+        <Github size={24} />
       </a>
     </div>
 
