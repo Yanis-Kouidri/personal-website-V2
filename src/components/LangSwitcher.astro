@@ -1,0 +1,313 @@
+---
+const currentLocale = Astro.currentLocale ?? "fr";
+---
+
+<div class="lang-switcher">
+  <button
+    id="lang-button"
+    type="button"
+    class="lang-btn"
+    aria-label="Switch language"
+    aria-expanded="false"
+  >
+    {
+      currentLocale === "fr" ? (
+        <svg
+          class="flag-icon"
+          viewBox="0 0 3 2"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect width="1" height="2" fill="#002395" />
+          <rect x="1" width="1" height="2" fill="#FFF" />
+          <rect x="2" width="1" height="2" fill="#ED2939" />
+        </svg>
+      ) : currentLocale === "en" ? (
+        <svg
+          class="flag-icon"
+          viewBox="0 0 60 30"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <clipPath id="uk-clip">
+            <path d="M0 0v30h60V0z" />
+          </clipPath>
+          <g clip-path="url(#uk-clip)">
+            <path d="M0 0v30h60V0z" fill="#012169" />
+            <path d="M0 0l60 30m0-30L0 30" stroke="#FFF" stroke-width="6" />
+            <path
+              d="M0 0l60 30m0-30L0 30"
+              clip-path="url(#uk-clip)"
+              stroke="#C8102E"
+              stroke-width="4"
+            />
+            <path d="M0 15h60M30 0v30" stroke="#FFF" stroke-width="10" />
+            <path d="M0 15h60M30 0v30" stroke="#C8102E" stroke-width="6" />
+          </g>
+        </svg>
+      ) : currentLocale === "ru" ? (
+        <svg
+          class="flag-icon"
+          viewBox="0 0 9 6"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect width="9" height="6" fill="#FFF" />
+          <rect y="0" width="9" height="2" fill="#0039A6" />
+          <rect y="4" width="9" height="2" fill="#D52B1E" />
+        </svg>
+      ) : (
+        <svg
+          class="flag-icon"
+          viewBox="0 0 9 6"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect y="0" width="9" height="6" fill="#C60B1E" />
+          <rect y="2" width="9" height="2" fill="#FFC400" />
+        </svg>
+      )
+    }
+    <span class="lang-label">
+      {
+        currentLocale === "fr"
+          ? "FR"
+          : currentLocale === "en"
+            ? "EN"
+            : currentLocale === "ru"
+              ? "RU"
+              : "ES"
+      }
+    </span>
+    <svg
+      class="lang-chevron"
+      width="12"
+      height="12"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
+  </button>
+  <ul id="lang-dropdown" class="lang-dropdown">
+    <li>
+      <a
+        href="/"
+        class={`lang-option ${currentLocale === "fr" ? "active" : ""}`}
+      >
+        <svg
+          class="flag-icon"
+          viewBox="0 0 3 2"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect width="1" height="2" fill="#002395"></rect>
+          <rect x="1" width="1" height="2" fill="#FFF"></rect>
+          <rect x="2" width="1" height="2" fill="#ED2939"></rect>
+        </svg>
+        Français
+      </a>
+    </li>
+    <li>
+      <a
+        href="/en/"
+        class={`lang-option ${currentLocale === "en" ? "active" : ""}`}
+      >
+        <svg
+          class="flag-icon"
+          viewBox="0 0 60 30"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <clipPath id="uk-clip-mobile"
+            ><path d="M0 0v30h60V0z"></path></clipPath
+          >
+          <g clip-path="url(#uk-clip-mobile)">
+            <path d="M0 0v30h60V0z" fill="#012169"></path>
+            <path d="M0 0l60 30m0-30L0 30" stroke="#FFF" stroke-width="6"
+            ></path>
+            <path
+              d="M0 0l60 30m0-30L0 30"
+              clip-path="url(#uk-clip-mobile)"
+              stroke="#C8102E"
+              stroke-width="4"></path>
+            <path d="M0 15h60M30 0v30" stroke="#FFF" stroke-width="10"></path>
+            <path d="M0 15h60M30 0v30" stroke="#C8102E" stroke-width="6"></path>
+          </g>
+        </svg>
+        English
+      </a>
+    </li>
+    <li>
+      <a
+        href="/ru/"
+        class={`lang-option ${currentLocale === "ru" ? "active" : ""}`}
+      >
+        <svg
+          class="flag-icon"
+          viewBox="0 0 9 6"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect width="9" height="6" fill="#FFF"></rect>
+          <rect y="0" width="9" height="2" fill="#0039A6"></rect>
+          <rect y="4" width="9" height="2" fill="#D52B1E"></rect>
+        </svg>
+        Русский
+      </a>
+    </li>
+    <li>
+      <a
+        href="/es/"
+        class={`lang-option ${currentLocale === "es" ? "active" : ""}`}
+      >
+        <svg
+          class="flag-icon"
+          viewBox="0 0 9 6"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect y="0" width="9" height="6" fill="#C60B1E"></rect>
+          <rect y="2" width="9" height="2" fill="#FFC400"></rect>
+        </svg>
+        Español
+      </a>
+    </li>
+  </ul>
+</div>
+
+<style>
+  .lang-switcher {
+    position: relative;
+  }
+
+  .lang-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.75rem;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    background: transparent;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-font);
+    transition: border-color 0.2s ease;
+  }
+
+  .lang-btn:hover {
+    border-color: var(--color-primary);
+  }
+
+  .flag-icon {
+    width: 24px;
+    height: 16px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .lang-label {
+    font-size: 0.8rem;
+  }
+
+  .lang-chevron {
+    transition: transform 0.2s ease;
+  }
+
+  .lang-btn[aria-expanded="true"] .lang-chevron {
+    transform: rotate(180deg);
+  }
+
+  .lang-dropdown {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0.4rem;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    min-width: 150px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition:
+      opacity 0.2s ease,
+      visibility 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .lang-dropdown.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .lang-option {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    text-decoration: none;
+    color: var(--color-font);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.15s ease;
+  }
+
+  .lang-option:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  .lang-option.active {
+    background-color: rgba(0, 110, 26, 0.08);
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+</style>
+
+<script>
+  /**
+   * Setup language switcher dropdown behavior (desktop)
+   */
+  const setupLangSwitcher = (): void => {
+    const langBtn = document.getElementById(
+      "lang-button",
+    ) as HTMLButtonElement | null;
+    const langDropdown = document.getElementById(
+      "lang-dropdown",
+    ) as HTMLElement | null;
+
+    if (!langBtn || !langDropdown) return;
+
+    // Toggle dropdown on button click
+    langBtn.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const isOpen = langDropdown.classList.toggle("is-open");
+      langBtn.setAttribute("aria-expanded", isOpen.toString());
+    });
+
+    // Close dropdown on outside click
+    document.addEventListener("click", (event) => {
+      if (
+        !langBtn.contains(event.target as Node) &&
+        !langDropdown.contains(event.target as Node)
+      ) {
+        langDropdown.classList.remove("is-open");
+        langBtn.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    // Close dropdown on Escape
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        langDropdown.classList.remove("is-open");
+        langBtn.setAttribute("aria-expanded", "false");
+        langBtn.focus();
+      }
+    });
+  };
+
+  // Initialize on DOM load
+  setupLangSwitcher();
+</script>
