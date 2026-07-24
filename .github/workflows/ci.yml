@@ -67,7 +67,7 @@ jobs:
           echo "image=ghcr.io/$OWNER_LC/$REPO_NAME_LC" >> "$GITHUB_OUTPUT"
 
       - name: Connect to GitHub Container Registry
-        uses: redhat-actions/podman-login@v1
+        uses: redhat-actions/podman-login@v2
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
