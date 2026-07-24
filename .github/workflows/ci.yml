@@ -75,7 +75,7 @@ jobs:
 
       - name: Build podman image
         id: build-image
-        uses: redhat-actions/buildah-build@v2
+        uses: redhat-actions/buildah-build@v3
         with:
           image: ${{ steps.meta.outputs.image }}
           context: .
