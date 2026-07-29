@@ -64,7 +64,7 @@ jobs:
           REPO_NAME_LC=$(echo "${{ github.event.repository.name }}" | tr '[:upper:]' '[:lower:]')
 
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
-          echo "image=ghcr.io/$OWNER_LC/$REPO_NAME_LC" >> "$GITHUB_OUTPUT"
+          echo "image=$OWNER_LC/$REPO_NAME_LC" >> "$GITHUB_OUTPUT"
 
       - name: Connect to GitHub Container Registry
         uses: redhat-actions/podman-login@v2
