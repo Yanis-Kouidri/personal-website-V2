@@ -16,10 +16,10 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@astrojs/check": "0.9.9",
+    "@astrojs/check": "0.9.10",
     "@astrojs/sitemap": "^3.7.3",
     "@lucide/astro": "^1.21.0",
-    "astro": "7.1.2",
+    "astro": "7.1.5",
     "simple-icons-astro": "^16.1.0",
     "typescript": "^6.0.3"
   },
