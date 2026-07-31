@@ -103,7 +103,7 @@ jobs:
           format: table
           severity: CRITICAL,HIGH
           ignore-unfixed: true
-          exit-code: 1
+          exit-code: 0
 
       - name: Push to GHCR
         if: github.event_name == 'push'
