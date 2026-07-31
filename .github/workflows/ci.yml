@@ -94,7 +94,7 @@ jobs:
             ./Containerfile
 
       - name: Export image to archive
-        run: buildah push ${{ steps.build-image.outputs.image-with-tag }} oci-archive:image.tar
+        run: buildah push ${{ steps.build-image.outputs.image-with-tag }} docker-archive:image.tar:${{ steps.build-image.outputs.image-with-tag }}
 
       - name: Scan image with Trivy
         uses: aquasecurity/trivy-action@v0.36.0
