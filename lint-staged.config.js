@@ -1,5 +1,7 @@
 const config = {
-  "*.{js,ts,astro,mjs,cjs,json,md}": ["prettier --write"],
+  "*.{js,ts,mjs,cjs}": ["eslint --fix", "prettier --write"],
+  "*.astro": ["eslint --fix", "prettier --write"],
+  "*.{json,md}": ["prettier --write"],
 };
 
 export default config;
