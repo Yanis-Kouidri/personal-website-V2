@@ -14,7 +14,9 @@
     "typecheck": "astro check",
     "typecheck:watch": "astro check --watch",
     "prepare": "husky",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@astrojs/check": "0.9.10",
@@ -35,6 +37,7 @@
     "lint-staged": "^17.2.0",
     "prettier": "^3.9.6",
     "prettier-plugin-astro": "^0.14.1",
-    "typescript-eslint": "^8.65.0"
+    "typescript-eslint": "^8.65.0",
+    "vitest": "^4.1.10"
   }
 }
