@@ -48,7 +48,8 @@ export default function astroCspHash(options = {}) {
               walkDir(fullPath);
             } else if (file.endsWith(".html")) {
               const html = fs.readFileSync(fullPath, "utf8");
-              const scriptRegex = /<script\b[^>]*>([\s\S]*?)<\/script>/gi;
+              const scriptRegex =
+                /<script\b[^>]*>([\s\S]*?)<\/script\b[^>]*>/gi;
 
               // Match inline scripts and generate SHA-256 hashes
               const matches = html.matchAll(scriptRegex);
