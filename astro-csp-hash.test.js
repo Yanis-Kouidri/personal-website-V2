@@ -1,5 +1,5 @@
-import { describe, it, expect } from "vitest";
-import {
+import { afterEach, describe, expect, it, vi } from "vitest";
+import astroCspHash, {
   extractScriptHashes,
   buildCspDirectives,
   collectHashesFromDir,
@@ -9,6 +9,7 @@ import crypto from "node:crypto";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 
 function sha256(content) {
   return `'sha256-${crypto.createHash("sha256").update(content).digest("base64")}'`;
@@ -126,5 +127,45 @@ describe("collectHashesFromDir", () => {
     expect(collectHashesFromDir(tmpDir).size).toBe(0);
 
     fs.rmSync(tmpDir, { recursive: true, force: true });
+  });
+});
+
+describe("astroCspHash", () => {
+  let tmpDir;
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+    if (tmpDir) {
+      fs.rmSync(tmpDir, { recursive: true, force: true });
+      tmpDir = undefined;
+    }
+  });
+
+  it("writes a Caddy header containing hashes discovered after the build", async () => {
+    tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "csp-build-test-"));
+    const script = "window.analyticsEnabled = true";
+    fs.writeFileSync(
+      path.join(tmpDir, "index.html"),
+      `<script>${script}</script>`,
+    );
+    const writeFileSync = vi
+      .spyOn(fs, "writeFileSync")
+      .mockImplementation(() => {});
+
+    const integration = astroCspHash({ "img-src": "'self' https:" });
+    await integration.hooks["astro:build:done"]({
+      dir: pathToFileURL(`${tmpDir}${path.sep}`),
+    });
+
+    expect(writeFileSync).toHaveBeenCalledWith(
+      path.join(process.cwd(), "csp_header.caddy"),
+      expect.stringContaining(
+        `header Content-Security-Policy "default-src 'none'; img-src 'self' https:`,
+      ),
+    );
+    expect(writeFileSync).toHaveBeenCalledWith(
+      path.join(process.cwd(), "csp_header.caddy"),
+      expect.stringContaining(`script-src 'self' ${sha256(script)}`),
+    );
   });
 });
