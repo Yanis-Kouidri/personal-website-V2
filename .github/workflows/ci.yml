@@ -130,6 +130,25 @@ jobs:
           ignore-unfixed: true
           exit-code: 0
 
+      - name: Smoke test container
+        run: |
+          podman run -d --name smoke-test -p 8080:8080 ${{ steps.build-image.outputs.image-with-tag }}
+
+          for i in $(seq 1 10); do
+            if curl -fsS http://localhost:8080/healthz -o /dev/null; then
+              echo "Container responded successfully."
+              break
+            fi
+            if [ "$i" -eq 10 ]; then
+              echo "Container did not respond after 10 attempts."
+              podman logs smoke-test
+              exit 1
+            fi
+            sleep 1
+          done
+
+          podman stop smoke-test
+
       - name: Push to GHCR
         if: github.event_name == 'push'
         uses: redhat-actions/push-to-registry@v3
