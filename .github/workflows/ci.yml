@@ -26,6 +26,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
 
+      - name: Lint Containerfile with Hadolint
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: Containerfile
+
       - name: Setup Node.js
         uses: actions/setup-node@v7
         with:
