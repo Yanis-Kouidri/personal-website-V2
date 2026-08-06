@@ -24,7 +24,7 @@
     "@lucide/astro": "^1.27.0",
     "astro": "7.1.5",
     "simple-icons-astro": "^16.1.0",
-    "typescript": "^6.0.3"
+    "typescript": "^7.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
