@@ -32,44 +32,40 @@ function getIcon(type: "academic" | "professional" | "international") {
     <h2>{sectionTitle}</h2>
 
     <div class="timeline">
-      {
-        items.map((item) => {
-          const Icon = getIcon(item.type);
-          return (
-            <div class="timeline-item">
-              <div class="timeline-marker">
-                <div class="timeline-icon">
-                  <Icon size={18} />
-                </div>
-                <div class="timeline-line" />
+      {items.map((item) => {
+        const Icon = getIcon(item.type);
+        return (
+          <div class="timeline-item">
+            <div class="timeline-marker">
+              <div class="timeline-icon">
+                <Icon size={18} />
               </div>
-
-              <div class="timeline-content">
-                <span class="badge badge--pill period-badge">
-                  {item.period}
-                </span>
-                <h3 class="job-title">{item.title}</h3>
-                <p class="org-info">
-                  <strong>{item.organization}</strong>{" "}
-                  <span class="location">| {item.location}</span>
-                </p>
-
-                {item.description && (
-                  <p class="description">{item.description}</p>
-                )}
-
-                {item.details && (
-                  <ul class="details-list">
-                    {item.details.map((detail) => (
-                      <li>{detail}</li>
-                    ))}
-                  </ul>
-                )}
-              </div>
+              <div class="timeline-line" />
             </div>
-          );
-        })
-      }
+
+            <div class="timeline-content">
+              <span class="badge badge--pill period-badge">{item.period}</span>
+              <h3 class="job-title">{item.title}</h3>
+              <p class="org-info">
+                <strong>{item.organization}</strong>{" "}
+                <span class="location">| {item.location}</span>
+              </p>
+
+              {item.description && (
+                <p class="description">{item.description}</p>
+              )}
+
+              {item.details && (
+                <ul class="details-list">
+                  {item.details.map((detail) => (
+                    <li>{detail}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
+        );
+      })}
     </div>
   </div>
 </section>

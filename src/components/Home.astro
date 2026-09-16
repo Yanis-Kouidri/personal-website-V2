@@ -31,30 +31,24 @@ const { title, subtitle, ctaLabel, ctaHref, imageAlt, socialLinks } = homeData;
   <div class="content-wrapper">
     <div class="text-content">
       <h1 class="name-title">{title}</h1>
-      <p class="description">
-        {subtitle}
-      </p>
+      <p class="description">{subtitle}</p>
 
       <div class="social-links">
-        {
-          socialLinks.map((social) => {
-            const IconComponent =
-              social.icon === "Linkedin" ? LinkedinIcon : iconMap[social.icon];
-            return (
-              <a
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={social.label}
-                class="link-icon"
-              >
-                {IconComponent && (
-                  <IconComponent size={32} stroke-width="2.5" />
-                )}
-              </a>
-            );
-          })
-        }
+        {socialLinks.map((social) => {
+          const IconComponent =
+            social.icon === "Linkedin" ? LinkedinIcon : iconMap[social.icon];
+          return (
+            <a
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={social.label}
+              class="link-icon"
+            >
+              {IconComponent && <IconComponent size={32} stroke-width="2.5" />}
+            </a>
+          );
+        })}
       </div>
 
       <a href={ctaHref} class="btn-cta">

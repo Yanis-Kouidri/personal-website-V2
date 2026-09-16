@@ -29,26 +29,24 @@ const contactLinks = contactData?.links ?? [];
     <p class="section-subtitle">{contactMessage}</p>
 
     <div class="contact-grid">
-      {
-        contactLinks.map((contact) => {
-          const Icon =
-            contact.icon === "Linkedin" ? LinkedinIcon : iconMap[contact.icon];
-          return (
-            <a
-              href={contact.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="contact-card card card--hover"
-              aria-label={contact.label}
-            >
-              <div class="icon-wrapper">
-                {Icon && <Icon size={32} stroke-width="1.5" />}
-              </div>
-              <span class="contact-label">{contact.label}</span>
-            </a>
-          );
-        })
-      }
+      {contactLinks.map((contact) => {
+        const Icon =
+          contact.icon === "Linkedin" ? LinkedinIcon : iconMap[contact.icon];
+        return (
+          <a
+            href={contact.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="contact-card card card--hover"
+            aria-label={contact.label}
+          >
+            <div class="icon-wrapper">
+              {Icon && <Icon size={32} stroke-width="1.5" />}
+            </div>
+            <span class="contact-label">{contact.label}</span>
+          </a>
+        );
+      })}
     </div>
   </div>
 </section>

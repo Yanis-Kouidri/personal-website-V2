@@ -23,7 +23,9 @@ const sectionTitle = sectionEntry?.data?.sectionTitle ?? "";
     <h2 class="section-title">{sectionTitle}</h2>
 
     <div class="projects-grid">
-      {sortedProjects.map((project) => <AProject project={project} />)}
+      {sortedProjects.map((project) => (
+        <AProject project={project} />
+      ))}
     </div>
   </div>
 </section>

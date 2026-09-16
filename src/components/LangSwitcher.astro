@@ -10,70 +10,66 @@ const currentLocale = Astro.currentLocale ?? "fr";
     aria-label="Switch language"
     aria-expanded="false"
   >
-    {
-      currentLocale === "fr" ? (
-        <svg
-          class="flag-icon"
-          viewBox="0 0 3 2"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <rect width="1" height="2" fill="#002395" />
-          <rect x="1" width="1" height="2" fill="#FFF" />
-          <rect x="2" width="1" height="2" fill="#ED2939" />
-        </svg>
-      ) : currentLocale === "en" ? (
-        <svg
-          class="flag-icon"
-          viewBox="0 0 60 30"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <clipPath id="uk-clip">
-            <path d="M0 0v30h60V0z" />
-          </clipPath>
-          <g clip-path="url(#uk-clip)">
-            <path d="M0 0v30h60V0z" fill="#012169" />
-            <path d="M0 0l60 30m0-30L0 30" stroke="#FFF" stroke-width="6" />
-            <path
-              d="M0 0l60 30m0-30L0 30"
-              clip-path="url(#uk-clip)"
-              stroke="#C8102E"
-              stroke-width="4"
-            />
-            <path d="M0 15h60M30 0v30" stroke="#FFF" stroke-width="10" />
-            <path d="M0 15h60M30 0v30" stroke="#C8102E" stroke-width="6" />
-          </g>
-        </svg>
-      ) : currentLocale === "ru" ? (
-        <svg
-          class="flag-icon"
-          viewBox="0 0 9 6"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <rect width="9" height="6" fill="#FFF" />
-          <rect y="2" width="9" height="2" fill="#0039A6" />
-          <rect y="4" width="9" height="2" fill="#D52B1E" />
-        </svg>
-      ) : (
-        <svg
-          class="flag-icon"
-          viewBox="0 0 9 6"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <rect y="0" width="9" height="6" fill="#C60B1E" />
-          <rect y="2" width="9" height="2" fill="#FFC400" />
-        </svg>
-      )
-    }
+    {currentLocale === "fr" ? (
+      <svg
+        class="flag-icon"
+        viewBox="0 0 3 2"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <rect width="1" height="2" fill="#002395" />
+        <rect x="1" width="1" height="2" fill="#FFF" />
+        <rect x="2" width="1" height="2" fill="#ED2939" />
+      </svg>
+    ) : currentLocale === "en" ? (
+      <svg
+        class="flag-icon"
+        viewBox="0 0 60 30"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <clipPath id="uk-clip">
+          <path d="M0 0v30h60V0z" />
+        </clipPath>
+        <g clip-path="url(#uk-clip)">
+          <path d="M0 0v30h60V0z" fill="#012169" />
+          <path d="M0 0l60 30m0-30L0 30" stroke="#FFF" stroke-width="6" />
+          <path
+            d="M0 0l60 30m0-30L0 30"
+            clip-path="url(#uk-clip)"
+            stroke="#C8102E"
+            stroke-width="4"
+          />
+          <path d="M0 15h60M30 0v30" stroke="#FFF" stroke-width="10" />
+          <path d="M0 15h60M30 0v30" stroke="#C8102E" stroke-width="6" />
+        </g>
+      </svg>
+    ) : currentLocale === "ru" ? (
+      <svg
+        class="flag-icon"
+        viewBox="0 0 9 6"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <rect width="9" height="6" fill="#FFF" />
+        <rect y="2" width="9" height="2" fill="#0039A6" />
+        <rect y="4" width="9" height="2" fill="#D52B1E" />
+      </svg>
+    ) : (
+      <svg
+        class="flag-icon"
+        viewBox="0 0 9 6"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <rect y="0" width="9" height="6" fill="#C60B1E" />
+        <rect y="2" width="9" height="2" fill="#FFC400" />
+      </svg>
+    )}
     <span class="lang-label">
-      {
-        currentLocale === "fr"
-          ? "FR"
-          : currentLocale === "en"
-            ? "EN"
-            : currentLocale === "ru"
-              ? "RU"
-              : "ES"
-      }
+      {currentLocale === "fr"
+        ? "FR"
+        : currentLocale === "en"
+          ? "EN"
+          : currentLocale === "ru"
+            ? "RU"
+            : "ES"}
     </span>
     <svg
       class="lang-chevron"
@@ -117,18 +113,22 @@ const currentLocale = Astro.currentLocale ?? "fr";
           viewBox="0 0 60 30"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <clipPath id="uk-clip-mobile"
-            ><path d="M0 0v30h60V0z"></path></clipPath
-          >
+          <clipPath id="uk-clip-mobile">
+            <path d="M0 0v30h60V0z"></path>
+          </clipPath>
           <g clip-path="url(#uk-clip-mobile)">
             <path d="M0 0v30h60V0z" fill="#012169"></path>
-            <path d="M0 0l60 30m0-30L0 30" stroke="#FFF" stroke-width="6"
+            <path
+              d="M0 0l60 30m0-30L0 30"
+              stroke="#FFF"
+              stroke-width="6"
             ></path>
             <path
               d="M0 0l60 30m0-30L0 30"
               clip-path="url(#uk-clip-mobile)"
               stroke="#C8102E"
-              stroke-width="4"></path>
+              stroke-width="4"
+            ></path>
             <path d="M0 15h60M30 0v30" stroke="#FFF" stroke-width="10"></path>
             <path d="M0 15h60M30 0v30" stroke="#C8102E" stroke-width="6"></path>
           </g>

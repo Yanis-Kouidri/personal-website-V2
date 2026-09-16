@@ -19,48 +19,44 @@ const categoryLabels = skillsData.categoryLabels;
 
     <div class="skills-grid">
       <div class="categories-menu" role="tablist">
-        {
-          skillCategories.map((category, index) => (
-            <button
-              class={`category-btn ${index === 0 ? "active" : ""}`}
-              data-category={category.id}
-              role="tab"
-              aria-selected={index === 0 ? "true" : "false"}
-              aria-controls={`panel-${category.id}`}
-            >
-              <span class="btn-content">
-                <category.icon size={20} class="category-icon" />
-                <span>{categoryLabels[category.id] ?? category.label}</span>
-              </span>
-              <ChevronRight size={16} class="chevron" />
-            </button>
-          ))
-        }
+        {skillCategories.map((category, index) => (
+          <button
+            class={`category-btn ${index === 0 ? "active" : ""}`}
+            data-category={category.id}
+            role="tab"
+            aria-selected={index === 0 ? "true" : "false"}
+            aria-controls={`panel-${category.id}`}
+          >
+            <span class="btn-content">
+              <category.icon size={20} class="category-icon" />
+              <span>{categoryLabels[category.id] ?? category.label}</span>
+            </span>
+            <ChevronRight size={16} class="chevron" />
+          </button>
+        ))}
       </div>
 
       <div class="skills-display card">
-        {
-          skillCategories.map((category, index) => (
-            <div
-              id={`panel-${category.id}`}
-              class={`skills-panel ${index === 0 ? "" : "hidden"}`}
-              role="tabpanel"
-            >
-              <h3 class="panel-title">
-                {categoryLabels[category.id] ?? category.label}
-              </h3>
-              <div class="tags-container">
-                {category.skills.map((skill) => (
-                  <SkillCard
-                    name={skill.name}
-                    logoPath={skill.logoPath}
-                    url={skill.url}
-                  />
-                ))}
-              </div>
+        {skillCategories.map((category, index) => (
+          <div
+            id={`panel-${category.id}`}
+            class={`skills-panel ${index === 0 ? "" : "hidden"}`}
+            role="tabpanel"
+          >
+            <h3 class="panel-title">
+              {categoryLabels[category.id] ?? category.label}
+            </h3>
+            <div class="tags-container">
+              {category.skills.map((skill) => (
+                <SkillCard
+                  name={skill.name}
+                  logoPath={skill.logoPath}
+                  url={skill.url}
+                />
+              ))}
             </div>
-          ))
-        }
+          </div>
+        ))}
       </div>
     </div>
   </div>

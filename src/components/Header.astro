@@ -17,19 +17,19 @@ const brandName = headerData.brandName;
 <header>
   <nav class="nav-bar">
     <div class="nav-identity">
-      <a id="brand-name" href="/">{brandName}</a>
+      <a id="brand-name" href="/">
+        {brandName}
+      </a>
     </div>
 
     <ul class="nav-menu-desktop">
-      {
-        mainLinks.map((link) => (
-          <li>
-            <a href={link.href} class="nav-item">
-              {link.label}
-            </a>
-          </li>
-        ))
-      }
+      {mainLinks.map((link) => (
+        <li>
+          <a href={link.href} class="nav-item">
+            {link.label}
+          </a>
+        </li>
+      ))}
     </ul>
 
     <div class="nav-actions">
@@ -52,13 +52,11 @@ const brandName = headerData.brandName;
   </nav>
 
   <div id="mobile-menu" class="mobile-menu-overlay">
-    {
-      [...mainLinks, contactLink].map((link) => (
-        <a href={link.href} class="mobile-nav-link">
-          {link.label}
-        </a>
-      ))
-    }
+    {[...mainLinks, contactLink].map((link) => (
+      <a href={link.href} class="mobile-nav-link">
+        {link.label}
+      </a>
+    ))}
     <div class="mobile-lang-divider"></div>
     <div class="mobile-lang-options">
       <a
@@ -85,16 +83,22 @@ const brandName = headerData.brandName;
           viewBox="0 0 60 30"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <clipPath id="uk-clip-mob"><path d="M0 0v30h60V0z"></path></clipPath>
+          <clipPath id="uk-clip-mob">
+            <path d="M0 0v30h60V0z"></path>
+          </clipPath>
           <g clip-path="url(#uk-clip-mob)">
             <path d="M0 0v30h60V0z" fill="#012169"></path>
-            <path d="M0 0l60 30m0-30L0 30" stroke="#FFF" stroke-width="6"
+            <path
+              d="M0 0l60 30m0-30L0 30"
+              stroke="#FFF"
+              stroke-width="6"
             ></path>
             <path
               d="M0 0l60 30m0-30L0 30"
               clip-path="url(#uk-clip-mob)"
               stroke="#C8102E"
-              stroke-width="4"></path>
+              stroke-width="4"
+            ></path>
             <path d="M0 15h60M30 0v30" stroke="#FFF" stroke-width="10"></path>
             <path d="M0 15h60M30 0v30" stroke="#C8102E" stroke-width="6"></path>
           </g>
