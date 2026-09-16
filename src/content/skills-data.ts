@@ -1,4 +1,4 @@
-import type { Icon as IconType } from "@lucide/astro";
+import type { AstroComponent } from "@lucide/astro";
 import {
   CodeXml,
   Globe,
@@ -17,7 +17,7 @@ export interface SkillItem {
 export interface SkillCategory {
   id: string;
   label: string;
-  icon: typeof IconType;
+  icon: AstroComponent;
   skills: SkillItem[];
 }
 
