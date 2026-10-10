@@ -1,4 +1,4 @@
-FROM docker.io/oven/bun:1.4.2-alpine AS build
+FROM docker.io/oven/bun:1.4.3-alpine AS build
 WORKDIR /usr/src/app
 
 COPY package.json bun.lock ./
