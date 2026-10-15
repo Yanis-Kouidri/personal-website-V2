@@ -1,4 +1,4 @@
-FROM docker.io/oven/bun:1.4.2-alpine AS build
+FROM docker.io/oven/bun:1.4.3-alpine AS build
 WORKDIR /usr/src/app
 
 COPY package.json bun.lock ./
@@ -7,7 +7,7 @@ COPY . .
 ENV NODE_ENV=production
 RUN bun run build
 
-FROM docker.io/library/caddy:2.11.4-alpine AS release
+FROM docker.io/library/caddy:2.11.7-alpine AS release
 
 COPY --from=build /usr/src/app/dist /usr/share/caddy
 COPY Caddyfile /etc/caddy/Caddyfile
