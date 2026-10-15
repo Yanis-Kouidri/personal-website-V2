@@ -1,7 +1,20 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
+  "minimumReleaseAge": "3 days",
+  "platformAutomerge": false,
+  "automergeType": "pr",
+  "automergeStrategy": "merge-commit",
+  "lockFileMaintenance": {
+    "enabled": true,
+    "automerge": true
+  },
   "packageRules": [
+    {
+      "description": "Automerge non-major updates once CI passes",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true
+    },
     {
       "description": "TypeScript 7 is not yet supported by astro check and typescript-eslint",
       "matchPackageNames": ["typescript"],
