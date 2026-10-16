@@ -5,7 +5,6 @@ projectCode: "DMX : Data Mule eXpress"
 subtitle: "Dorsales de communication éphémères pour la collecte de données dans les réseaux de capteurs sans fil"
 period: "2026 — 2029"
 description: "Ma thèse porte sur l'optimisation de la collecte de données dans l'Internet des Objets (IoT). Au sein du projet DMX, je développe des architectures réseaux éphémères capables de s'adapter aux mouvements de collecteurs mobiles (comme des drones ou des véhicules). En combinant des techniques de calculs de bord (edge computing) et de communications opportunistes, mon objectif est de rendre les réseaux de capteurs plus intelligents, plus efficaces et plus économes en énergie, même dans des environnements complexes."
-collaborationText: "Thèse <strong>CIFRE</strong> menée en collaboration entre l'<strong>IRIT</strong> et <strong>Neusta France</strong> à Toulouse."
 keywords:
   - "WSN"
   - "UAV"
@@ -30,3 +29,5 @@ sidebarDetails:
     value: "En cours"
 overviewLabel: "Aperçu du projet"
 ---
+
+Thèse **CIFRE** menée en collaboration entre l'**IRIT** et **Neusta France** à Toulouse.

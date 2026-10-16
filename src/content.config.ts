@@ -87,7 +87,6 @@ const phdCollection = defineCollection({
     subtitle: z.string(),
     period: z.string(),
     description: z.string(),
-    collaborationText: z.string(),
     keywords: z.array(z.string()),
     sidebarDetails: z.array(
       z.object({
