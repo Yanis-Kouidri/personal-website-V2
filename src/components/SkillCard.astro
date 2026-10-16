@@ -3,21 +3,21 @@
  * SkillCard Component
  * Represents an individual skill with a logo, name and external link
  */
-interface Props {
-  name: string;
-  logoPath?: string;
-  url?: string;
-  color?: string;
-}
+import type { SkillItem } from "../content/skills-data";
 
-const { name, logoPath = "/icons/default-skill.svg", url = "#" } = Astro.props;
+type Props = SkillItem;
+
+const { name, logoPath, url } = Astro.props;
 ---
 
 <a href={url} target="_blank" rel="noopener noreferrer" class="skill-card card">
   <div class="logo-wrapper">
+    <!-- Decorative: the skill name is already rendered as text below -->
     <img
       src={logoPath}
-      alt={`${name} logo`}
+      alt=""
+      width="48"
+      height="48"
       class="skill-logo"
       loading="lazy"
     />
