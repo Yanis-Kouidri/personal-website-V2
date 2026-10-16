@@ -301,7 +301,10 @@ const currentLocale = Astro.currentLocale ?? "fr";
 
     // Close dropdown on Escape
     document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") {
+      if (
+        event.key === "Escape" &&
+        langDropdown.classList.contains("is-open")
+      ) {
         langDropdown.classList.remove("is-open");
         langBtn.setAttribute("aria-expanded", "false");
         langBtn.focus();
