@@ -1,5 +1,12 @@
 {
 	auto_https off
+
+	# Envoy Gateway talks to the backend over HTTP/1.1 (no appProtocol on the
+	# Service). Caddy would otherwise accept cleartext HTTP/2 (h2c) with prior
+	# knowledge, which only widens the attack surface.
+	servers {
+		protocols h1
+	}
 }
 
 (security_headers) {
