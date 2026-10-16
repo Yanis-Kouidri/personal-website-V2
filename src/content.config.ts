@@ -7,15 +7,26 @@ const projectsCollection = defineCollection({
     pattern: "{fr,en,ru,es}/projects/**/[^_]*.md",
     base: "./src/content",
   }),
+  schema: ({ image }) =>
+    z.object({
+      locale: z.string(),
+      title: z.string(),
+      technologies: z.array(z.string()).min(1),
+      githubUrl: z.url(),
+      date: z.number().int(),
+      image: image(),
+    }),
+});
+
+const projectsSectionCollection = defineCollection({
+  loader: glob({
+    pattern: "{fr,en,ru,es}/projects-section/**/[^_]*.md",
+    base: "./src/content",
+  }),
   schema: z.object({
     locale: z.string(),
-    sectionTitle: z.string().optional(),
-    sourceCodeLabel: z.string().optional(),
-    title: z.string().optional(),
-    technologies: z.array(z.string()).optional(),
-    githubUrl: z.url().optional(),
-    date: z.string().optional(),
-    imagePath: z.string().optional(),
+    sectionTitle: z.string(),
+    sourceCodeLabel: z.string(),
   }),
 });
 
@@ -170,6 +181,7 @@ const footerCollection = defineCollection({
 
 export const collections = {
   projects: projectsCollection,
+  projectsSection: projectsSectionCollection,
   contacts: contactsCollection,
   journey: journeyCollection,
   footer: footerCollection,
