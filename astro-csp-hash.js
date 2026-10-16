@@ -38,10 +38,12 @@ export function extractScriptHashes(html) {
   const scriptRegex = /<script\b[^>]*>([\s\S]*?)<\/script\b[^>]*>/gi;
 
   for (const match of html.matchAll(scriptRegex)) {
-    const scriptContent = match[1].trim();
+    // Hash the exact content: browsers hash the raw script body, including
+    // any surrounding whitespace, so it must not be trimmed.
+    const scriptContent = match[1];
 
     // Skip external or empty script tags
-    if (scriptContent) {
+    if (scriptContent.trim()) {
       const hash = crypto
         .createHash("sha256")
         .update(scriptContent)
