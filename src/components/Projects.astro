@@ -16,6 +16,7 @@ const sectionEntry = await getEntry(
   `${currentLocale}/projects/projects`,
 );
 const sectionTitle = sectionEntry?.data?.sectionTitle ?? "";
+const sourceCodeLabel = sectionEntry?.data?.sourceCodeLabel ?? "";
 ---
 
 <section id="projects" class="section projects-container">
@@ -24,7 +25,7 @@ const sectionTitle = sectionEntry?.data?.sectionTitle ?? "";
 
     <div class="projects-grid">
       {sortedProjects.map((project) => (
-        <AProject project={project} />
+        <AProject project={project} sourceCodeLabel={sourceCodeLabel} />
       ))}
     </div>
   </div>

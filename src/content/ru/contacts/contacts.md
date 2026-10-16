@@ -21,4 +21,5 @@ links:
   - href: "bitcoin:bc1ptj6z8a6h4aw6ne8vr5ju6ymdw3z48caaanyfh9ljtswrmjkkxfeqvhxf70"
     icon: "Bitcoin"
     label: "Bitcoin"
+sectionTitle: "Контакты"
 ---

@@ -1,4 +1,9 @@
 ---
+interface Props {
+  label: string;
+}
+
+const { label } = Astro.props;
 const currentLocale = Astro.currentLocale ?? "fr";
 ---
 
@@ -7,7 +12,7 @@ const currentLocale = Astro.currentLocale ?? "fr";
     id="lang-button"
     type="button"
     class="lang-btn"
-    aria-label="Switch language"
+    aria-label={label}
     aria-expanded="false"
   >
     {currentLocale === "fr" ? (

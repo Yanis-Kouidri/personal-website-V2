@@ -19,13 +19,14 @@ const contactEntries = await getCollection("contacts", (entry) => {
 });
 const contactData = contactEntries[0]?.data;
 
+const sectionTitle = contactData?.sectionTitle ?? "";
 const contactMessage: string = contactData?.message ?? "";
 const contactLinks = contactData?.links ?? [];
 ---
 
 <section id="contact" class="section contact-section">
   <div class="container">
-    <h2>Contact</h2>
+    <h2>{sectionTitle}</h2>
     <p class="section-subtitle">{contactMessage}</p>
 
     <div class="contact-grid">

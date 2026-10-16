@@ -33,7 +33,7 @@ const brandName = headerData.brandName;
     </ul>
 
     <div class="nav-actions">
-      <LangSwitcher />
+      <LangSwitcher label={headerData.langSwitcherLabel} />
 
       <a href={contactLink.href} class="contact-cta-desktop">
         {contactLink.label}
@@ -42,7 +42,7 @@ const brandName = headerData.brandName;
       <button
         id="menu-button"
         type="button"
-        aria-label="Toggle menu"
+        aria-label={headerData.menuToggleLabel}
         aria-expanded="false"
         aria-controls="mobile-menu"
       >
