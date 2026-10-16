@@ -12,3 +12,16 @@ helm-charts
 .editorconfig
 .idea
 coverage*
+
+# Build outputs, regenerated inside the image
+dist
+.astro
+csp_header.caddy
+
+# CI, tooling and agent config, not needed to build the site
+.github
+.husky
+.trivyignore.yaml
+.clinerules
+.claude
+CLAUDE.md
