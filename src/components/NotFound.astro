@@ -1,0 +1,54 @@
+---
+/**
+ * NotFound Component
+ * Localized 404 page body, wrapped in the shared layout
+ */
+import { getCollection } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import Layout from "../layouts/Layout.astro";
+
+const currentLocale = Astro.currentLocale ?? "fr";
+const notFoundEntries = await getCollection("notFound", (entry) => {
+  return entry.data.locale === currentLocale;
+});
+const { metaTitle, title, message, backLabel } = notFoundEntries[0].data;
+---
+
+<Layout title={metaTitle} noindex>
+  <section class="section not-found">
+    <div class="container">
+      <p class="error-code" aria-hidden="true">
+        404
+      </p>
+      <h1 class="not-found-title">{title}</h1>
+      <p class="section-subtitle">{message}</p>
+      <a href={getRelativeLocaleUrl(currentLocale)} class="btn-cta">
+        {backLabel}
+      </a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .not-found {
+    min-height: calc(100vh - 220px);
+    display: flex;
+    align-items: center;
+    text-align: center;
+  }
+
+  .error-code {
+    font-size: clamp(4rem, 15vw, 8rem);
+    font-weight: 800;
+    line-height: 1;
+    margin: 0;
+    color: var(--color-primary);
+  }
+
+  .not-found-title {
+    font-size: 2rem;
+    font-weight: 800;
+    margin: 1rem 0;
+    color: var(--color-font);
+  }
+</style>

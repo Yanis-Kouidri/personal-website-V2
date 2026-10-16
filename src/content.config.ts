@@ -179,6 +179,20 @@ const footerCollection = defineCollection({
   }),
 });
 
+const notFoundCollection = defineCollection({
+  loader: glob({
+    pattern: "{fr,en,ru,es}/notFound/**/[^_]*.md",
+    base: "./src/content",
+  }),
+  schema: z.object({
+    locale: z.string(),
+    metaTitle: z.string(),
+    title: z.string(),
+    message: z.string(),
+    backLabel: z.string(),
+  }),
+});
+
 export const collections = {
   projects: projectsCollection,
   projectsSection: projectsSectionCollection,
@@ -188,6 +202,7 @@ export const collections = {
   header: headerCollection,
   home: homeCollection,
   meta: metaCollection,
+  notFound: notFoundCollection,
   phd: phdCollection,
   skills: skillsCollection,
 };
