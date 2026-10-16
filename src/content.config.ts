@@ -20,7 +20,7 @@ const projectsCollection = defineCollection({
 
 const projectsSectionCollection = defineCollection({
   loader: glob({
-    pattern: "{fr,en,ru,es}/projects-section/**/[^_]*.md",
+    pattern: "{fr,en,ru,es}/projectsSection/**/[^_]*.md",
     base: "./src/content",
   }),
   schema: z.object({
