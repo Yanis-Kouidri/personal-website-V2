@@ -6,10 +6,19 @@
 	root * /usr/share/caddy
 	encode gzip zstd
 
+	# Baseline security headers. On the clearnet HTTPS listener, the Envoy
+	# Gateway ClientTrafficPolicy overrides most of these and adds HSTS; the
+	# .onion route goes through the plain HTTP listener, where these are the
+	# only headers served. HSTS is intentionally omitted: it is ignored over
+	# HTTP and handled by the gateway for HTTPS.
 	header {
 		X-Content-Type-Options "nosniff"
 		X-Frame-Options "DENY"
 		Referrer-Policy "strict-origin-when-cross-origin"
+		Permissions-Policy "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()"
+		Cross-Origin-Opener-Policy "same-origin"
+		Cross-Origin-Resource-Policy "same-origin"
+		-Server
 	}
 	import ./csp_header.caddy
 
