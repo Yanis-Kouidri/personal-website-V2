@@ -8,6 +8,11 @@ import sitemap from "@astrojs/sitemap";
 // https://astro.build/config
 export default defineConfig({
   site: "https://www.kouidri.fr",
+  build: {
+    // The CSP only allows same-origin stylesheets (style-src 'self'), so
+    // small stylesheets must not be inlined into <style> tags
+    inlineStylesheets: "never",
+  },
   i18n: {
     defaultLocale: "fr",
     locales: ["fr", "en", "ru", "es"],
