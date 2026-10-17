@@ -57,6 +57,8 @@ export async function renderOgImage(locale: string): Promise<Buffer> {
     {
       width: "100%",
       height: "100%",
+      // Padding and border must stay inside the 1200x630 canvas
+      boxSizing: "border-box",
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
