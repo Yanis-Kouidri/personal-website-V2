@@ -1,17 +1,37 @@
 {
 	auto_https off
+
+	# Envoy Gateway talks to the backend over HTTP/1.1 (no appProtocol on the
+	# Service). Caddy would otherwise accept cleartext HTTP/2 (h2c) with prior
+	# knowledge, which only widens the attack surface.
+	servers {
+		protocols h1
+	}
+}
+
+(security_headers) {
+	# Baseline security headers. On the clearnet HTTPS listener, the Envoy
+	# Gateway ClientTrafficPolicy overrides most of these and adds HSTS; the
+	# .onion route goes through the plain HTTP listener, where these are the
+	# only headers served. HSTS is intentionally omitted: it is ignored over
+	# HTTP and handled by the gateway for HTTPS.
+	header {
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "DENY"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		Permissions-Policy "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()"
+		Cross-Origin-Opener-Policy "same-origin"
+		Cross-Origin-Resource-Policy "same-origin"
+		-Server
+	}
+	import ./csp_header.caddy
 }
 
 :8080 {
 	root * /usr/share/caddy
 	encode gzip zstd
 
-	header {
-		X-Content-Type-Options "nosniff"
-		X-Frame-Options "DENY"
-		Referrer-Policy "strict-origin-when-cross-origin"
-	}
-	import ./csp_header.caddy
+	import security_headers
 
 	route {
 		handle /healthz {
@@ -26,7 +46,22 @@
 			respond "Not Ready" 503
 		}
 
-		try_files {path} {path}/index.html /index.html
+		try_files {path} {path}/index.html
+		file_server
+	}
+
+	# Serve the localized 404 page (with a real 404 status) for missing files
+	handle_errors 404 {
+		# Deferred headers from the main route are not kept on error responses
+		import security_headers
+
+		@localized path_regexp locale ^/(en|ru|es)(/|$)
+		handle @localized {
+			rewrite * /{re.locale.1}/404/index.html
+		}
+		handle {
+			rewrite * /404.html
+		}
 		file_server
 	}
 

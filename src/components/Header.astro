@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
 import { Menu, X } from "@lucide/astro";
 import LangSwitcher from "./LangSwitcher.astro";
 
@@ -9,15 +10,24 @@ const headerEntries = await getCollection("header", (entry) => {
 });
 const headerData = headerEntries[0].data;
 
-const mainLinks = headerData.navLinks;
-const contactLink = headerData.contactLink;
+// Anchor links point to the localized home page so they also work from
+// pages other than the home page (e.g. the 404 page). On the home page
+// itself, the browser treats them as same-document fragment navigation.
+const homeUrl = getRelativeLocaleUrl(currentLocale);
+const toHomeAnchor = (link: { href: string; label: string }) => ({
+  ...link,
+  href: link.href.startsWith("#") ? `${homeUrl}${link.href}` : link.href,
+});
+
+const mainLinks = headerData.navLinks.map(toHomeAnchor);
+const contactLink = toHomeAnchor(headerData.contactLink);
 const brandName = headerData.brandName;
 ---
 
 <header>
   <nav class="nav-bar">
     <div class="nav-identity">
-      <a id="brand-name" href="/">
+      <a id="brand-name" href={homeUrl}>
         {brandName}
       </a>
     </div>

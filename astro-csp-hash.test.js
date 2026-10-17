@@ -26,6 +26,18 @@ describe("extractScriptHashes", () => {
     expect(hashes.has(sha256(script))).toBe(true);
   });
 
+  it("hash le contenu exact sans retirer les espaces autour du script", () => {
+    // Le navigateur calcule le hash sur le contenu brut, espaces et retours
+    // à la ligne compris : un contenu « trimé » ne correspondrait pas.
+    const script = "\n  console.log('hello');\n";
+    const html = `<script>${script}</script>`;
+
+    const hashes = extractScriptHashes(html);
+
+    expect(hashes.has(sha256(script))).toBe(true);
+    expect(hashes.has(sha256(script.trim()))).toBe(false);
+  });
+
   it("ignore les balises script vides", () => {
     const html = `<html><body><script></script><script>   </script></body></html>`;
     expect(extractScriptHashes(html).size).toBe(0);

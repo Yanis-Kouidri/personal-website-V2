@@ -1,0 +1,7 @@
+---
+locale: "en"
+metaTitle: "Page not found - Yanis Kouidri"
+title: "Page not found"
+message: "The page you are looking for does not exist or has been moved."
+backLabel: "Back to home"
+---

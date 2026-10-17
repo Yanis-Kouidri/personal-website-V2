@@ -1,11 +1,13 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 
 const currentLocale = Astro.currentLocale ?? "fr";
 const phdEntries = await getCollection("phd", (entry) => {
   return entry.data.locale === currentLocale;
 });
 const phdData = phdEntries[0].data;
+// The collaboration text is the Markdown body of the entry
+const { Content: CollaborationText } = await render(phdEntries[0]);
 
 const {
   title,
@@ -14,7 +16,6 @@ const {
   subtitle,
   period,
   description,
-  collaborationText,
   keywords,
   sidebarDetails,
 } = phdData;
@@ -45,7 +46,9 @@ const {
 
       <aside class="details-column">
         <div class="info-card">
-          <p class="collaboration-text" set:html={collaborationText} />
+          <div class="collaboration-text">
+            <CollaborationText />
+          </div>
 
           <div class="details-grid">
             {sidebarDetails.map((item) => (
@@ -134,6 +137,10 @@ const {
     margin-bottom: 2rem;
     padding-bottom: 1.5rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .collaboration-text :global(p) {
+    margin: 0;
   }
 
   .collaboration-text :global(strong) {

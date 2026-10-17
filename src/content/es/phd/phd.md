@@ -5,7 +5,6 @@ projectCode: "DMX : Data Mule eXpress"
 subtitle: "Columnas vertebrales de comunicación efímeras para la recolección de datos en redes de sensores inalámbricos"
 period: "2026 — 2029"
 description: "Mi tesis se centra en la optimización de la recolección de datos en el Internet de las Cosas (IoT). Dentro del proyecto DMX, desarrollo arquitecturas de red efímeras capaces de adaptarse a los movimientos de recolectores móviles (como drones o vehículos). Combinando técnicas de computación en el borde (edge computing) y comunicaciones oportunistas, mi objetivo es hacer que las redes de sensores sean más inteligentes, eficientes y energéticamente eficientes, incluso en entornos complejos."
-collaborationText: "Tesis <strong>CIFRE</strong> realizada en colaboración entre <strong>IRIT</strong> y <strong>Neusta France</strong> en Toulouse."
 keywords:
   - "WSN"
   - "UAV"
@@ -30,3 +29,5 @@ sidebarDetails:
     value: "En curso"
 overviewLabel: "Resumen del proyecto"
 ---
+
+Tesis **CIFRE** realizada en colaboración entre **IRIT** y **Neusta France** en Toulouse.

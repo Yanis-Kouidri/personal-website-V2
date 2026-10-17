@@ -4,12 +4,22 @@ import "../styles/global.css";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 
+interface Props {
+  /** Overrides the localized default page title */
+  title?: string;
+  /** Asks search engines not to index the page */
+  noindex?: boolean;
+}
+
+const { title: titleOverride, noindex = false } = Astro.props;
+
 const currentLocale = Astro.currentLocale ?? "fr";
 
 const metaEntries = await getCollection("meta", (entry) => {
   return entry.data.locale === currentLocale;
 });
-const { title, description } = metaEntries[0].data;
+const { description } = metaEntries[0].data;
+const title = titleOverride ?? metaEntries[0].data.title;
 ---
 
 <!doctype html>
@@ -20,8 +30,8 @@ const { title, description } = metaEntries[0].data;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
     <title>{title}</title>
   </head>
   <body>

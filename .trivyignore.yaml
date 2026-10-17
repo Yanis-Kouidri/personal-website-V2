@@ -1,0 +1,32 @@
+# Trivy exceptions, read by the CI image scan (trivy-action `trivyignores`).
+#
+# Only add vulnerabilities that cannot be fixed in this repository, e.g. Go
+# dependencies compiled into the upstream Caddy binary. Every entry needs a
+# statement and an expiry date: once expired, the scan fails again so the
+# exception gets reviewed (bump Caddy, or extend with a new justification).
+
+vulnerabilities:
+  # Go dependencies of caddy 2.11.7 (latest release as of 2026-10-16).
+  - id: CVE-2026-78669
+    paths:
+      - usr/bin/caddy
+    statement: >-
+      HTTP/2 SETTINGS frames DoS in Go net/http and x/net. Caddy is
+      restricted to HTTP/1.1 (servers protocols h1, no TLS), so HTTP/2 is not
+      served by the container; TLS and HTTP/2 terminate at Envoy Gateway.
+    expired_at: 2026-11-16
+  - id: CVE-2026-78667
+    paths:
+      - usr/bin/caddy
+    statement: >-
+      Range header DoS in Go net/http. Reachable through file_server; accepted
+      until an upstream Caddy release ships a patched Go toolchain. The pod is
+      only reachable through Envoy Gateway.
+    expired_at: 2026-11-16
+  - id: CVE-2026-97031
+    paths:
+      - usr/bin/caddy
+    statement: >-
+      ECH handling DoS in Go crypto/tls. The container serves plain HTTP and
+      never terminates TLS.
+    expired_at: 2026-11-16
