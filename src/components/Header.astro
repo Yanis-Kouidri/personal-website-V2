@@ -33,7 +33,7 @@ const brandName = headerData.brandName;
     </ul>
 
     <div class="nav-actions">
-      <LangSwitcher />
+      <LangSwitcher label={headerData.langSwitcherLabel} />
 
       <a href={contactLink.href} class="contact-cta-desktop">
         {contactLink.label}
@@ -42,8 +42,9 @@ const brandName = headerData.brandName;
       <button
         id="menu-button"
         type="button"
-        aria-label="Toggle menu"
+        aria-label={headerData.menuToggleLabel}
         aria-expanded="false"
+        aria-controls="mobile-menu"
       >
         <Menu id="icon-menu" class="nav-icon" />
         <X id="icon-close" class="nav-icon hidden" />
@@ -51,7 +52,7 @@ const brandName = headerData.brandName;
     </div>
   </nav>
 
-  <div id="mobile-menu" class="mobile-menu-overlay">
+  <div id="mobile-menu" class="mobile-menu-overlay" inert>
     {[...mainLinks, contactLink].map((link) => (
       <a href={link.href} class="mobile-nav-link">
         {link.label}
@@ -115,7 +116,7 @@ const brandName = headerData.brandName;
           xmlns="http://www.w3.org/2000/svg"
         >
           <rect width="9" height="6" fill="#FFF"></rect>
-          <rect y="0" width="9" height="2" fill="#0039A6"></rect>
+          <rect y="2" width="9" height="2" fill="#0039A6"></rect>
           <rect y="4" width="9" height="2" fill="#D52B1E"></rect>
         </svg>
         Русский
@@ -469,6 +470,8 @@ const brandName = headerData.brandName;
     const toggleMenu = (isOpen: boolean): void => {
       menuOverlay.classList.toggle("is-open", isOpen);
       toggleBtn.setAttribute("aria-expanded", isOpen.toString());
+      // Keep hidden links out of the tab order and accessibility tree
+      menuOverlay.inert = !isOpen;
 
       if (isOpen) {
         openIcon.classList.add("hidden");
@@ -492,6 +495,14 @@ const brandName = headerData.brandName;
       link.addEventListener("click", () => {
         toggleMenu(false);
       });
+    });
+
+    // Close mobile menu on Escape and return focus to the toggle button
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && menuOverlay.classList.contains("is-open")) {
+        toggleMenu(false);
+        toggleBtn.focus();
+      }
     });
   };
 

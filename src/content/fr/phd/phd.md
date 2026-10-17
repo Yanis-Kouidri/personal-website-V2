@@ -28,4 +28,5 @@ sidebarDetails:
     value: "Toulouse, France"
   - label: "Statut"
     value: "En cours"
+overviewLabel: "Aperçu du projet"
 ---

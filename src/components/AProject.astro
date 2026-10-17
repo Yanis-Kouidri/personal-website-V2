@@ -1,27 +1,22 @@
 ---
 import { Image } from "astro:assets";
-import { render } from "astro:content";
+import { type CollectionEntry, render } from "astro:content";
 import { Github } from "simple-icons-astro";
 
-const { project } = Astro.props;
-const { title, technologies, githubUrl, date, imagePath } = project.data;
+interface Props {
+  project: CollectionEntry<"projects">;
+  sourceCodeLabel: string;
+}
+
+const { project, sourceCodeLabel } = Astro.props;
+const { title, technologies, githubUrl, date, image } = project.data;
 const { Content } = await render(project);
-
-const images = import.meta.glob<{ default: ImageMetadata }>(
-  "/src/assets/projects/*",
-);
-
-const imageGlob = images[imagePath];
-if (!imageGlob)
-  throw new Error(
-    `"${imagePath}" doesn't exist in the folder "src/assets/projects/"`,
-  );
 ---
 
 <article class="project-card card card--hover">
   <div class="image-container">
     <Image
-      src={imageGlob()}
+      src={image}
       alt={title}
       width={1200}
       height={675}
@@ -37,7 +32,7 @@ if (!imageGlob)
         target="_blank"
         rel="noopener noreferrer"
         class="github-link"
-        aria-label={`Voir le code source de ${title}`}
+        aria-label={`${sourceCodeLabel} ${title}`}
       >
         <Github size={24} />
       </a>
@@ -50,7 +45,7 @@ if (!imageGlob)
     </div>
 
     <div class="tech-stack">
-      {technologies.map((tech: string) => (
+      {technologies.map((tech) => (
         <span class="tag tag--neutral">{tech}</span>
       ))}
     </div>

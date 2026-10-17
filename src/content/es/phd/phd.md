@@ -28,4 +28,5 @@ sidebarDetails:
     value: "Toulouse, Francia"
   - label: "Estado"
     value: "En curso"
+overviewLabel: "Resumen del proyecto"
 ---

@@ -13,8 +13,8 @@ technologies:
     "Multer",
   ]
 githubUrl: "https://github.com/yanis-kouidri/personal-website-v1"
-date: "2024"
-imagePath: "/src/assets/projects/screenshot-personal-website-v1.png"
+date: 2024
+image: "../../../assets/projects/screenshot-personal-website-v1.png"
 ---
 
 Mon premier gros projet web, c'est l'ancêtre de ce site. L'objectif était pour moi d'apprendre et de mettre en pratique le développement web full stack, j'ai alors choisi la stack **MERN** (MongoDB Express React Node.js).

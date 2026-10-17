@@ -9,6 +9,7 @@ const phdData = phdEntries[0].data;
 
 const {
   title,
+  overviewLabel,
   projectCode,
   subtitle,
   period,
@@ -32,7 +33,7 @@ const {
 
     <div class="content-layout">
       <div class="description-column">
-        <h4 class="column-label">Aperçu du projet</h4>
+        <h4 class="column-label">{overviewLabel}</h4>
         <p class="description-text">{description}</p>
 
         <div class="tags-group">

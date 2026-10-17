@@ -1,8 +1,8 @@
 ---
 locale: "es"
 title: "Personal-website-v2"
-date: "2026"
-imagePath: "/src/assets/projects/screenshot-personal-website-v2.png"
+date: 2026
+image: "../../../assets/projects/screenshot-personal-website-v2.png"
 githubUrl: "https://github.com/yanis-kouidri/personal-website-v2"
 technologies: ["Astro", "HTML5", "CSS3", "Markdown", "Bun", "JavaScript"]
 ---

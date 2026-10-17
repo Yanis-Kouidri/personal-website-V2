@@ -15,4 +15,6 @@ navLinks:
 contactLink:
   href: "#contact"
   label: "Contact"
+menuToggleLabel: "Toggle menu"
+langSwitcherLabel: "Switch language"
 ---

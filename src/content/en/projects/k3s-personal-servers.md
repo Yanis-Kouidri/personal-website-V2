@@ -1,8 +1,8 @@
 ---
 locale: "en"
 title: "k3s-personal-servers"
-date: "2026"
-imagePath: "/src/assets/projects/k3s-personal-server.png"
+date: 2026
+image: "../../../assets/projects/k3s-personal-server.png"
 githubUrl: "https://github.com/Yanis-Kouidri/k3s-personal-servers"
 technologies: ["K3s", "Kubernetes", "FluxCD", "Helm", "SOPS", "Linux"]
 ---

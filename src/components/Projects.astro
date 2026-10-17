@@ -1,21 +1,18 @@
 ---
-import { getCollection, getEntry } from "astro:content";
+import { getCollection } from "astro:content";
 import AProject from "./AProject.astro";
 
 const currentLocale = Astro.currentLocale ?? "fr";
 const projectEntries = await getCollection("projects", (entry) => {
-  return entry.data.locale === currentLocale && !entry.id.endsWith("/projects");
+  return entry.data.locale === currentLocale;
 });
 
-const sortedProjects = projectEntries.sort(
-  (a, b) => Number(b.data.date) - Number(a.data.date),
-);
+const sortedProjects = projectEntries.sort((a, b) => b.data.date - a.data.date);
 
-const sectionEntry = await getEntry(
-  "projects",
-  `${currentLocale}/projects/projects`,
-);
-const sectionTitle = sectionEntry?.data?.sectionTitle ?? "";
+const sectionEntries = await getCollection("projectsSection", (entry) => {
+  return entry.data.locale === currentLocale;
+});
+const { sectionTitle, sourceCodeLabel } = sectionEntries[0].data;
 ---
 
 <section id="projects" class="section projects-container">
@@ -24,7 +21,7 @@ const sectionTitle = sectionEntry?.data?.sectionTitle ?? "";
 
     <div class="projects-grid">
       {sortedProjects.map((project) => (
-        <AProject project={project} />
+        <AProject project={project} sourceCodeLabel={sourceCodeLabel} />
       ))}
     </div>
   </div>

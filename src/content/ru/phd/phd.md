@@ -28,4 +28,5 @@ sidebarDetails:
     value: "Тулуза, Франция"
   - label: "Статус"
     value: "В процессе"
+overviewLabel: "Обзор проекта"
 ---
