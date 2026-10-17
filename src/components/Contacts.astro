@@ -1,27 +1,15 @@
 ---
-import { getCollection } from "astro:content";
-import { Bitcoin, FileText, Mail } from "@lucide/astro";
-import { Github } from "simple-icons-astro";
-import LinkedinIcon from "./LinkedinIcon.astro";
+import { getLocalizedEntry } from "../i18n/content";
+import { ICONS } from "./icons";
 
 /** Display social links and contact points from content collection */
 
-const iconMap: Record<string, typeof Mail> = {
-  Mail,
-  FileText,
-  Github,
-  Bitcoin,
-};
-
-const currentLocale = Astro.currentLocale ?? "fr";
-const contactEntries = await getCollection("contacts", (entry) => {
-  return entry.data.locale === currentLocale;
-});
-const contactData = contactEntries[0]?.data;
-
-const sectionTitle = contactData?.sectionTitle ?? "";
-const contactMessage: string = contactData?.message ?? "";
-const contactLinks = contactData?.links ?? [];
+const contactEntry = await getLocalizedEntry("contacts", Astro.currentLocale);
+const {
+  sectionTitle,
+  message: contactMessage,
+  links: contactLinks,
+} = contactEntry.data;
 ---
 
 <section id="contact" class="section contact-section">
@@ -31,8 +19,7 @@ const contactLinks = contactData?.links ?? [];
 
     <div class="contact-grid">
       {contactLinks.map((contact) => {
-        const Icon =
-          contact.icon === "Linkedin" ? LinkedinIcon : iconMap[contact.icon];
+        const Icon = ICONS[contact.icon];
         return (
           <a
             href={contact.href}
@@ -42,7 +29,7 @@ const contactLinks = contactData?.links ?? [];
             aria-label={contact.label}
           >
             <div class="icon-wrapper">
-              {Icon && <Icon size={32} stroke-width="1.5" />}
+              <Icon size={32} stroke-width="1.5" />
             </div>
             <span class="contact-label">{contact.label}</span>
           </a>

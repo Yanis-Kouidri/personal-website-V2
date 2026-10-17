@@ -1,18 +1,19 @@
 ---
-import { getCollection } from "astro:content";
+import { getLocalizedEntries, getLocalizedEntry } from "../i18n/content";
 import AProject from "./AProject.astro";
 
-const currentLocale = Astro.currentLocale ?? "fr";
-const projectEntries = await getCollection("projects", (entry) => {
-  return entry.data.locale === currentLocale;
-});
+const projectEntries = await getLocalizedEntries(
+  "projects",
+  Astro.currentLocale,
+);
 
 const sortedProjects = projectEntries.sort((a, b) => b.data.date - a.data.date);
 
-const sectionEntries = await getCollection("projectsSection", (entry) => {
-  return entry.data.locale === currentLocale;
-});
-const { sectionTitle, sourceCodeLabel } = sectionEntries[0].data;
+const sectionEntry = await getLocalizedEntry(
+  "projectsSection",
+  Astro.currentLocale,
+);
+const { sectionTitle, sourceCodeLabel } = sectionEntry.data;
 ---
 
 <section id="projects" class="section projects-container">

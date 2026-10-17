@@ -1,10 +1,18 @@
 ---
+/**
+ * LangSwitcher Component
+ * Desktop language dropdown (the mobile menu lists the languages itself)
+ */
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { LANGUAGES, LOCALES, toLocale } from "../i18n/locales";
+import Flag from "./Flag.astro";
+
 interface Props {
   label: string;
 }
 
 const { label } = Astro.props;
-const currentLocale = Astro.currentLocale ?? "fr";
+const currentLocale = toLocale(Astro.currentLocale);
 ---
 
 <div class="lang-switcher">
@@ -15,67 +23,8 @@ const currentLocale = Astro.currentLocale ?? "fr";
     aria-label={label}
     aria-expanded="false"
   >
-    {currentLocale === "fr" ? (
-      <svg
-        class="flag-icon"
-        viewBox="0 0 3 2"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <rect width="1" height="2" fill="#002395" />
-        <rect x="1" width="1" height="2" fill="#FFF" />
-        <rect x="2" width="1" height="2" fill="#ED2939" />
-      </svg>
-    ) : currentLocale === "en" ? (
-      <svg
-        class="flag-icon"
-        viewBox="0 0 60 30"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <clipPath id="uk-clip">
-          <path d="M0 0v30h60V0z" />
-        </clipPath>
-        <g clip-path="url(#uk-clip)">
-          <path d="M0 0v30h60V0z" fill="#012169" />
-          <path d="M0 0l60 30m0-30L0 30" stroke="#FFF" stroke-width="6" />
-          <path
-            d="M0 0l60 30m0-30L0 30"
-            clip-path="url(#uk-clip)"
-            stroke="#C8102E"
-            stroke-width="4"
-          />
-          <path d="M0 15h60M30 0v30" stroke="#FFF" stroke-width="10" />
-          <path d="M0 15h60M30 0v30" stroke="#C8102E" stroke-width="6" />
-        </g>
-      </svg>
-    ) : currentLocale === "ru" ? (
-      <svg
-        class="flag-icon"
-        viewBox="0 0 9 6"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <rect width="9" height="6" fill="#FFF" />
-        <rect y="2" width="9" height="2" fill="#0039A6" />
-        <rect y="4" width="9" height="2" fill="#D52B1E" />
-      </svg>
-    ) : (
-      <svg
-        class="flag-icon"
-        viewBox="0 0 9 6"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <rect y="0" width="9" height="6" fill="#C60B1E" />
-        <rect y="2" width="9" height="2" fill="#FFC400" />
-      </svg>
-    )}
-    <span class="lang-label">
-      {currentLocale === "fr"
-        ? "FR"
-        : currentLocale === "en"
-          ? "EN"
-          : currentLocale === "ru"
-            ? "RU"
-            : "ES"}
-    </span>
+    <Flag locale={currentLocale} />
+    <span class="lang-label">{currentLocale.toUpperCase()}</span>
     <svg
       class="lang-chevron"
       width="12"
@@ -86,100 +35,39 @@ const currentLocale = Astro.currentLocale ?? "fr";
       stroke-width="2"
       stroke-linecap="round"
       stroke-linejoin="round"
+      aria-hidden="true"
     >
       <polyline points="6 9 12 15 18 9"></polyline>
     </svg>
   </button>
   <ul id="lang-dropdown" class="lang-dropdown">
-    <li>
-      <a
-        href="/"
-        class={`lang-option ${currentLocale === "fr" ? "active" : ""}`}
-      >
-        <svg
-          class="flag-icon"
-          viewBox="0 0 3 2"
-          xmlns="http://www.w3.org/2000/svg"
+    {LOCALES.map((locale) => (
+      <li>
+        <a
+          href={getRelativeLocaleUrl(locale)}
+          lang={locale}
+          hreflang={locale}
+          class:list={["lang-option", { active: locale === currentLocale }]}
         >
-          <rect width="1" height="2" fill="#002395"></rect>
-          <rect x="1" width="1" height="2" fill="#FFF"></rect>
-          <rect x="2" width="1" height="2" fill="#ED2939"></rect>
-        </svg>
-        Français
-      </a>
-    </li>
-    <li>
-      <a
-        href="/en/"
-        class={`lang-option ${currentLocale === "en" ? "active" : ""}`}
-      >
-        <svg
-          class="flag-icon"
-          viewBox="0 0 60 30"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <clipPath id="uk-clip-mobile">
-            <path d="M0 0v30h60V0z"></path>
-          </clipPath>
-          <g clip-path="url(#uk-clip-mobile)">
-            <path d="M0 0v30h60V0z" fill="#012169"></path>
-            <path
-              d="M0 0l60 30m0-30L0 30"
-              stroke="#FFF"
-              stroke-width="6"
-            ></path>
-            <path
-              d="M0 0l60 30m0-30L0 30"
-              clip-path="url(#uk-clip-mobile)"
-              stroke="#C8102E"
-              stroke-width="4"
-            ></path>
-            <path d="M0 15h60M30 0v30" stroke="#FFF" stroke-width="10"></path>
-            <path d="M0 15h60M30 0v30" stroke="#C8102E" stroke-width="6"></path>
-          </g>
-        </svg>
-        English
-      </a>
-    </li>
-    <li>
-      <a
-        href="/ru/"
-        class={`lang-option ${currentLocale === "ru" ? "active" : ""}`}
-      >
-        <svg
-          class="flag-icon"
-          viewBox="0 0 9 6"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <rect width="9" height="6" fill="#FFF"></rect>
-          <rect y="2" width="9" height="2" fill="#0039A6"></rect>
-          <rect y="4" width="9" height="2" fill="#D52B1E"></rect>
-        </svg>
-        Русский
-      </a>
-    </li>
-    <li>
-      <a
-        href="/es/"
-        class={`lang-option ${currentLocale === "es" ? "active" : ""}`}
-      >
-        <svg
-          class="flag-icon"
-          viewBox="0 0 9 6"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <rect y="0" width="9" height="6" fill="#C60B1E"></rect>
-          <rect y="2" width="9" height="2" fill="#FFC400"></rect>
-        </svg>
-        Español
-      </a>
-    </li>
+          <Flag locale={locale} />
+          {LANGUAGES[locale].label}
+        </a>
+      </li>
+    ))}
   </ul>
 </div>
 
 <style>
+  /* Desktop only: on mobile, the languages are listed in the burger menu */
   .lang-switcher {
+    display: none;
     position: relative;
+  }
+
+  @media (min-width: 1024px) {
+    .lang-switcher {
+      display: block;
+    }
   }
 
   .lang-btn {
@@ -199,14 +87,6 @@ const currentLocale = Astro.currentLocale ?? "fr";
 
   .lang-btn:hover {
     border-color: var(--color-primary);
-  }
-
-  .flag-icon {
-    width: 24px;
-    height: 16px;
-    border-radius: 2px;
-    outline: 1px solid rgba(0, 0, 0, 0.12);
-    flex-shrink: 0;
   }
 
   .lang-label {

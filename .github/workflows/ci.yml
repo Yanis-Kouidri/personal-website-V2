@@ -49,7 +49,7 @@ jobs:
         run: bun audit --audit-level=high
 
       - name: Check formatting with Prettier
-        run: bun run check
+        run: bun run format
 
       - name: Lint with ESLint
         run: bun run lint

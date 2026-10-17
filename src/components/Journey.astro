@@ -1,15 +1,9 @@
 ---
-import { getCollection } from "astro:content";
+import { getLocalizedEntry } from "../i18n/content";
 import { Briefcase, Globe, GraduationCap } from "@lucide/astro";
 
-const currentLocale = Astro.currentLocale ?? "fr";
-const journeyEntries = await getCollection("journey", (entry) => {
-  return entry.data.locale === currentLocale;
-});
-const journeyEntry = journeyEntries[0];
-const journeyData = journeyEntry?.data;
-const sectionTitle = journeyData?.sectionTitle ?? "";
-const items = journeyData?.items ?? [];
+const journeyEntry = await getLocalizedEntry("journey", Astro.currentLocale);
+const { sectionTitle, items = [] } = journeyEntry.data;
 
 /**
  * Maps the experience type to its corresponding Lucide icon component

@@ -1,15 +1,27 @@
 import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
+import { ICON_NAMES } from "./components/icon-names";
+import { LOCALES } from "./i18n/locales";
+
+/**
+ * Every collection is localized: entries live in
+ * src/content/<locale>/<collection>/*.md (files starting with "_" are
+ * ignored) and declare their locale in the frontmatter.
+ */
+const localizedLoader = (collection: string) =>
+  glob({
+    pattern: `{${LOCALES.join(",")}}/${collection}/**/[^_]*.md`,
+    base: "./src/content",
+  });
+
+const locale = z.enum(LOCALES);
 
 const projectsCollection = defineCollection({
-  loader: glob({
-    pattern: "{fr,en,ru,es}/projects/**/[^_]*.md",
-    base: "./src/content",
-  }),
+  loader: localizedLoader("projects"),
   schema: ({ image }) =>
     z.object({
-      locale: z.string(),
+      locale,
       title: z.string(),
       technologies: z.array(z.string()).min(1),
       githubUrl: z.url(),
@@ -19,30 +31,24 @@ const projectsCollection = defineCollection({
 });
 
 const projectsSectionCollection = defineCollection({
-  loader: glob({
-    pattern: "{fr,en,ru,es}/projectsSection/**/[^_]*.md",
-    base: "./src/content",
-  }),
+  loader: localizedLoader("projectsSection"),
   schema: z.object({
-    locale: z.string(),
+    locale,
     sectionTitle: z.string(),
     sourceCodeLabel: z.string(),
   }),
 });
 
 const contactsCollection = defineCollection({
-  loader: glob({
-    pattern: "{fr,en,ru,es}/contacts/**/[^_]*.md",
-    base: "./src/content",
-  }),
+  loader: localizedLoader("contacts"),
   schema: z.object({
-    locale: z.string(),
+    locale,
     sectionTitle: z.string(),
     message: z.string(),
     links: z.array(
       z.object({
         href: z.string(),
-        icon: z.string(),
+        icon: z.enum(ICON_NAMES),
         label: z.string(),
       }),
     ),
@@ -50,12 +56,9 @@ const contactsCollection = defineCollection({
 });
 
 const journeyCollection = defineCollection({
-  loader: glob({
-    pattern: "{fr,en,ru,es}/journey/**/[^_]*.md",
-    base: "./src/content",
-  }),
+  loader: localizedLoader("journey"),
   schema: z.object({
-    locale: z.string(),
+    locale,
     sectionTitle: z.string(),
     title: z.string(),
     items: z
@@ -75,12 +78,9 @@ const journeyCollection = defineCollection({
 });
 
 const phdCollection = defineCollection({
-  loader: glob({
-    pattern: "{fr,en,ru,es}/phd/**/[^_]*.md",
-    base: "./src/content",
-  }),
+  loader: localizedLoader("phd"),
   schema: z.object({
-    locale: z.string(),
+    locale,
     title: z.string(),
     overviewLabel: z.string(),
     projectCode: z.string(),
@@ -98,12 +98,9 @@ const phdCollection = defineCollection({
 });
 
 const skillsCollection = defineCollection({
-  loader: glob({
-    pattern: "{fr,en,ru,es}/skills/**/[^_]*.md",
-    base: "./src/content",
-  }),
+  loader: localizedLoader("skills"),
   schema: z.object({
-    locale: z.string(),
+    locale,
     sectionTitle: z.string(),
     title: z.string(),
     categoryLabels: z.record(z.string(), z.string()),
@@ -111,12 +108,9 @@ const skillsCollection = defineCollection({
 });
 
 const homeCollection = defineCollection({
-  loader: glob({
-    pattern: "{fr,en,ru,es}/home/**/[^_]*.md",
-    base: "./src/content",
-  }),
+  loader: localizedLoader("home"),
   schema: z.object({
-    locale: z.string(),
+    locale,
     title: z.string(),
     subtitle: z.string(),
     ctaLabel: z.string(),
@@ -125,7 +119,7 @@ const homeCollection = defineCollection({
     socialLinks: z.array(
       z.object({
         href: z.string(),
-        icon: z.string(),
+        icon: z.enum(ICON_NAMES),
         label: z.string(),
       }),
     ),
@@ -133,12 +127,9 @@ const homeCollection = defineCollection({
 });
 
 const headerCollection = defineCollection({
-  loader: glob({
-    pattern: "{fr,en,ru,es}/header/**/[^_]*.md",
-    base: "./src/content",
-  }),
+  loader: localizedLoader("header"),
   schema: z.object({
-    locale: z.string(),
+    locale,
     brandName: z.string(),
     menuToggleLabel: z.string(),
     langSwitcherLabel: z.string(),
@@ -156,35 +147,26 @@ const headerCollection = defineCollection({
 });
 
 const metaCollection = defineCollection({
-  loader: glob({
-    pattern: "{fr,en,ru,es}/meta/**/[^_]*.md",
-    base: "./src/content",
-  }),
+  loader: localizedLoader("meta"),
   schema: z.object({
-    locale: z.string(),
+    locale,
     title: z.string(),
     description: z.string(),
   }),
 });
 
 const footerCollection = defineCollection({
-  loader: glob({
-    pattern: "{fr,en,ru,es}/footer/**/[^_]*.md",
-    base: "./src/content",
-  }),
+  loader: localizedLoader("footer"),
   schema: z.object({
-    locale: z.string(),
+    locale,
     authorName: z.string(),
   }),
 });
 
 const notFoundCollection = defineCollection({
-  loader: glob({
-    pattern: "{fr,en,ru,es}/notFound/**/[^_]*.md",
-    base: "./src/content",
-  }),
+  loader: localizedLoader("notFound"),
   schema: z.object({
-    locale: z.string(),
+    locale,
     metaTitle: z.string(),
     title: z.string(),
     message: z.string(),
