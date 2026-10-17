@@ -100,30 +100,6 @@ const { title, subtitle, ctaLabel, ctaHref, imageAlt, socialLinks } = homeData;
     align-items: center;
   }
 
-  @media (min-width: 1024px) {
-    .content-wrapper {
-      flex-direction: row;
-      justify-content: center;
-      text-align: left;
-
-      gap: 8rem;
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 0 10% 6rem 10%;
-    }
-
-    .text-content {
-      align-items: flex-start;
-      flex: 0 1 auto;
-    }
-
-    .profile-image-container {
-      flex-shrink: 0;
-      width: 380px;
-      height: 380px;
-    }
-  }
-
   .name-title {
     font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 800;
@@ -150,6 +126,31 @@ const { title, subtitle, ctaLabel, ctaHref, imageAlt, socialLinks } = homeData;
     border-radius: 50%;
     overflow: hidden;
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  }
+
+  /* --- Desktop Breakpoint (1024px+) --- */
+  @media (min-width: 1024px) {
+    .content-wrapper {
+      flex-direction: row;
+      justify-content: center;
+      text-align: left;
+
+      gap: 8rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 10% 6rem 10%;
+    }
+
+    .text-content {
+      align-items: flex-start;
+      flex: 0 1 auto;
+    }
+
+    .profile-image-container {
+      flex-shrink: 0;
+      width: 380px;
+      height: 380px;
+    }
   }
 </style>
 
