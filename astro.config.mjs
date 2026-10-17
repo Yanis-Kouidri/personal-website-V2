@@ -4,6 +4,7 @@ import { defineConfig } from "astro/config";
 import astroCspHash from "./astro-csp-hash.js";
 
 import sitemap from "@astrojs/sitemap";
+import { DEFAULT_LOCALE, LOCALES } from "./src/i18n/locales.ts";
 
 // https://astro.build/config
 export default defineConfig({
@@ -14,8 +15,8 @@ export default defineConfig({
     inlineStylesheets: "never",
   },
   i18n: {
-    defaultLocale: "fr",
-    locales: ["fr", "en", "ru", "es"],
+    defaultLocale: DEFAULT_LOCALE,
+    locales: [...LOCALES],
     routing: {
       prefixDefaultLocale: false,
     },
@@ -27,8 +28,8 @@ export default defineConfig({
       filter: (page) => !new URL(page).pathname.endsWith("/404/"),
       // Adds xhtml:link hreflang alternates between the localized pages
       i18n: {
-        defaultLocale: "fr",
-        locales: { fr: "fr", en: "en", ru: "ru", es: "es" },
+        defaultLocale: DEFAULT_LOCALE,
+        locales: Object.fromEntries(LOCALES.map((locale) => [locale, locale])),
       },
     }),
   ],
