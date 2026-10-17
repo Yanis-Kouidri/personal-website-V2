@@ -192,7 +192,9 @@ a:focus-visible {
     text-align: left;
     font-size: 2.5rem;
   }
+  /* Fill the section up to the 1000px max-width (also inside flex sections)
+     without overflowing viewports barely wider than 1024px */
   .container {
-    width: 1000px;
+    width: 100%;
   }
 }
