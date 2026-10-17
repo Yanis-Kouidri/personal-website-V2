@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import { Picture } from "astro:assets";
 import { type CollectionEntry, render } from "astro:content";
 import { Github } from "simple-icons-astro";
 
@@ -15,11 +15,17 @@ const { Content } = await render(project);
 
 <article class="project-card card card--hover">
   <div class="image-container">
-    <Image
+    <!-- Full card width: the 1000px container on desktop, the viewport
+         minus the section padding below that -->
+    <Picture
       src={image}
+      formats={["avif"]}
+      fallbackFormat="webp"
       alt={title}
-      width={1200}
-      height={675}
+      width={1000}
+      height={563}
+      widths={[640, 828, 1000, 1280, 2000]}
+      sizes="(min-width: 1024px) 1000px, calc(100vw - 3rem)"
       class="img-cover project-image"
     />
   </div>

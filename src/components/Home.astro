@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import { Picture } from "astro:assets";
 import { getCollection } from "astro:content";
 import { BookMarked, GraduationCap, Mail } from "@lucide/astro";
 import { Github } from "simple-icons-astro";
@@ -57,12 +57,17 @@ const { title, subtitle, ctaLabel, ctaHref, imageAlt, socialLinks } = homeData;
     </div>
 
     <div class="profile-image-container">
-      <Image
+      <!-- Rendered at 250px (mobile) and 380px (desktop), 1x and 2x -->
+      <Picture
         src={profileImage}
+        formats={["avif"]}
+        fallbackFormat="webp"
         alt={imageAlt}
         class="img-cover"
         width={380}
         height={380}
+        widths={[250, 380, 500, 760]}
+        sizes="(min-width: 1024px) 380px, 250px"
         priority
       />
     </div>
