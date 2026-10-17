@@ -153,15 +153,3 @@ const { title, subtitle, ctaLabel, ctaHref, imageAlt, socialLinks } = homeData;
     }
   }
 </style>
-
-<script>
-  const ctaButton = document.querySelector<HTMLAnchorElement>(".btn-cta");
-
-  ctaButton?.addEventListener("click", (e) => {
-    e.preventDefault();
-    const target = document.getElementById("phd");
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth" });
-    }
-  });
-</script>

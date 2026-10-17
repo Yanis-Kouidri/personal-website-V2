@@ -25,6 +25,14 @@
   --color-font-over-secondary: #004911;
 }
 
+/* Smooth scrolling for in-page anchor links (hero CTA, navigation),
+   disabled for users who ask for reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 .hidden {
   display: none;
 }
