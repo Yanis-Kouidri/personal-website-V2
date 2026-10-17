@@ -34,7 +34,7 @@ Husky + lint-staged run ESLint/Prettier on staged files at commit time (`lint-st
 ### Content collections
 
 - Defined in `src/content.config.ts`. Each collection (`projects`, `projectsSection`, `contacts`, `notFound`, `journey`, `footer`, `header`, `home`, `meta`, `phd`, `skills`) loads Markdown via `glob({ pattern: "{fr,en,ru,es}/<name>/**/[^_]*.md", base: "./src/content" })` and validates frontmatter with a Zod schema.
-- Content files live at `src/content/<locale>/<collection>/*.md` and always require a `locale` field matching the directory. A single `raw_content_fr.md` exists as scratch/reference content — files prefixed with `_` are excluded from the glob pattern by convention.
+- Content files live at `src/content/<locale>/<collection>/*.md` and always require a `locale` field matching the directory. Files prefixed with `_` are excluded from the glob pattern by convention (drafts, notes).
 - Page components (`src/components/*.astro`) fetch their own collection entries filtered by locale rather than receiving content as props — each section component is self-contained.
 - `src/content/skills-data.ts` is a separate, non-Markdown, hardcoded TypeScript data source (skill categories/icons from `@lucide/astro`) — not part of the Content Collections system. It's tested directly in `skills-data.test.ts`.
 
