@@ -20,6 +20,11 @@ export default defineConfig({
     sitemap({
       // Localized 404 pages are built as regular routes (e.g. /en/404/)
       filter: (page) => !new URL(page).pathname.endsWith("/404/"),
+      // Adds xhtml:link hreflang alternates between the localized pages
+      i18n: {
+        defaultLocale: "fr",
+        locales: { fr: "fr", en: "en", ru: "ru", es: "es" },
+      },
     }),
   ],
 });

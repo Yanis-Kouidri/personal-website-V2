@@ -1,5 +1,9 @@
 ---
+import { getImage } from "astro:assets";
+import { i18n } from "astro:config/server";
 import { getCollection } from "astro:content";
+import { getAbsoluteLocaleUrl, getRelativeLocaleUrl } from "astro:i18n";
+import profileImage from "../assets/Yanis_Kouidri_home.jpg";
 import interFontUrl from "../assets/fonts/InterVariable.woff2?url";
 import "../styles/global.css";
 import Footer from "../components/Footer.astro";
@@ -21,13 +25,50 @@ const metaEntries = await getCollection("meta", (entry) => {
 });
 const { description } = metaEntries[0].data;
 const title = titleOverride ?? metaEntries[0].data.title;
+
+const homeEntries = await getCollection("home", (entry) => {
+  return entry.data.locale === currentLocale;
+});
+const { imageAlt } = homeEntries[0].data;
+
+// --- SEO: canonical URL and language alternates ---
+const locales = (i18n?.locales ?? []).map((locale) =>
+  typeof locale === "string" ? locale : locale.path,
+);
+const defaultLocale = i18n?.defaultLocale ?? "fr";
+// Path of the current page inside its locale ("" for a locale home page)
+const pathInLocale = Astro.url.pathname.slice(
+  getRelativeLocaleUrl(currentLocale).length,
+);
+const canonicalUrl = getAbsoluteLocaleUrl(currentLocale, pathInLocale);
+const alternates = locales.map((locale) => ({
+  hreflang: locale,
+  href: getAbsoluteLocaleUrl(locale, pathInLocale),
+}));
+
+// --- Open Graph ---
+// og:locale expects language_TERRITORY
+const OG_LOCALES: Record<string, string> = {
+  fr: "fr_FR",
+  en: "en_US",
+  ru: "ru_RU",
+  es: "es_ES",
+};
+// JPEG for the widest support among link preview crawlers
+const ogImage = await getImage({
+  src: profileImage,
+  width: 1200,
+  height: 1200,
+  format: "jpg",
+});
+const ogImageUrl = new URL(ogImage.src, Astro.site).href;
 ---
 
 <!doctype html>
 <html lang={currentLocale}>
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -41,6 +82,47 @@ const title = titleOverride ?? metaEntries[0].data.title;
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex" />}
     <title>{title}</title>
+
+    {
+      /* Not on noindex pages (e.g. the 404 page, served at any missing URL) */
+      !noindex && (
+        <>
+          <link rel="canonical" href={canonicalUrl} />
+          {alternates.map(({ hreflang, href }) => (
+            <link rel="alternate" hreflang={hreflang} href={href} />
+          ))}
+          <link
+            rel="alternate"
+            hreflang="x-default"
+            href={getAbsoluteLocaleUrl(defaultLocale, pathInLocale)}
+          />
+        </>
+      )
+    }
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Yanis Kouidri" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {!noindex && <meta property="og:url" content={canonicalUrl} />}
+    <meta property="og:locale" content={OG_LOCALES[currentLocale]} />
+    {locales
+      .filter((locale) => locale !== currentLocale)
+      .map((locale) => (
+        <meta property="og:locale:alternate" content={OG_LOCALES[locale]} />
+      ))}
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta
+      property="og:image:width"
+      content={String(ogImage.attributes.width)}
+    />
+    <meta
+      property="og:image:height"
+      content={String(ogImage.attributes.height)}
+    />
+    <meta property="og:image:alt" content={imageAlt} />
+    <meta name="twitter:card" content="summary" />
   </head>
   <body>
     <Header />
