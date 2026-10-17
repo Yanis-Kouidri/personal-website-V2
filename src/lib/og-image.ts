@@ -40,7 +40,7 @@ const h = (
 export async function renderOgImage(locale: string): Promise<Buffer> {
   const [home] = await getCollection("home", (e) => e.data.locale === locale);
   const [phd] = await getCollection("phd", (e) => e.data.locale === locale);
-  const { title, subtitle } = home.data;
+  const { title, subtitle, ctaLabel } = home.data;
   const keywords = phd.data.keywords.slice(0, 4);
 
   const [regular, extraBold, photo] = await Promise.all([
@@ -100,16 +100,31 @@ export async function renderOgImage(locale: string): Promise<Buffer> {
             ),
           ),
         ),
-        h(
-          "div",
-          {
-            fontSize: 28,
-            fontWeight: 800,
-            color: COLORS.primary,
-            marginTop: 44,
-          },
-          "www.kouidri.fr",
-        ),
+        // Call to action: the localized hero button label, styled as a button
+        h("div", { display: "flex", alignItems: "center", marginTop: 44 }, [
+          h(
+            "div",
+            {
+              fontSize: 28,
+              fontWeight: 800,
+              color: "#ffffff",
+              backgroundColor: COLORS.primary,
+              padding: "14px 30px",
+              borderRadius: 999,
+            },
+            `${ctaLabel} →`,
+          ),
+          h(
+            "div",
+            {
+              fontSize: 26,
+              fontWeight: 800,
+              color: COLORS.primary,
+              marginLeft: 24,
+            },
+            "www.kouidri.fr",
+          ),
+        ]),
       ]),
       h("img", { width: 380, height: 380, borderRadius: "50%" }, undefined, {
         src: `data:image/jpeg;base64,${photo.toString("base64")}`,
