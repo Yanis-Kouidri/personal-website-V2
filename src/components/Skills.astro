@@ -20,17 +20,26 @@ const categoryLabel = (id: string): string => {
 
 <section id="skills" class="section skills-section">
   <div class="container">
-    <h2>{sectionTitle}</h2>
+    <h2 id="skills-title">{sectionTitle}</h2>
 
     <div class="skills-grid">
-      <div class="categories-menu" role="tablist">
+      <!-- WAI-ARIA tabs pattern: arrows/Home/End move between tabs, only the
+           selected tab is in the Tab order -->
+      <div
+        class="categories-menu"
+        role="tablist"
+        aria-labelledby="skills-title"
+        aria-orientation="vertical"
+      >
         {skillCategories.map((category, index) => (
           <button
-            class={`category-btn ${index === 0 ? "active" : ""}`}
-            data-category={category.id}
+            type="button"
+            id={`tab-${category.id}`}
+            class="category-btn"
             role="tab"
             aria-selected={index === 0 ? "true" : "false"}
             aria-controls={`panel-${category.id}`}
+            tabindex={index === 0 ? 0 : -1}
           >
             <span class="btn-content">
               <category.icon size={20} class="category-icon" />
@@ -45,8 +54,10 @@ const categoryLabel = (id: string): string => {
         {skillCategories.map((category, index) => (
           <div
             id={`panel-${category.id}`}
-            class={`skills-panel ${index === 0 ? "" : "hidden"}`}
+            class="skills-panel"
             role="tabpanel"
+            aria-labelledby={`tab-${category.id}`}
+            hidden={index !== 0}
           >
             <h3 class="panel-title">{categoryLabel(category.id)}</h3>
             <div class="tags-container">
@@ -103,7 +114,7 @@ const categoryLabel = (id: string): string => {
     transform: translateX(4px);
   }
 
-  .category-btn.active {
+  .category-btn[aria-selected="true"] {
     background-color: var(--color-primary);
     color: white;
     border-color: var(--color-primary);
@@ -115,11 +126,11 @@ const categoryLabel = (id: string): string => {
     gap: 1rem;
   }
 
-  .active .category-icon {
+  [aria-selected="true"] .category-icon {
     opacity: 1;
   }
 
-  .active .chevron {
+  [aria-selected="true"] .chevron {
     transform: rotate(90deg);
   }
 
@@ -179,32 +190,38 @@ const categoryLabel = (id: string): string => {
 </style>
 
 <script>
-  /** Handle skill category switching */
-  const initSkills = (): void => {
-    const buttons =
-      document.querySelectorAll<HTMLButtonElement>(".category-btn");
-    const panels = document.querySelectorAll<HTMLElement>(".skills-panel");
+  /** Skill category tabs (WAI-ARIA tabs pattern, automatic activation) */
+  const tabs = [
+    ...document.querySelectorAll<HTMLButtonElement>('[role="tab"]'),
+  ];
 
-    const setActiveCategory = (categoryId: string): void => {
-      buttons.forEach((btn) => {
-        const isActive = btn.dataset.category === categoryId;
-        btn.classList.toggle("active", isActive);
-        btn.setAttribute("aria-selected", isActive.toString());
-      });
-
-      panels.forEach((panel) => {
-        const isTarget = panel.id === `panel-${categoryId}`;
-        panel.classList.toggle("hidden", !isTarget);
-      });
-    };
-
-    buttons.forEach((button) => {
-      button.addEventListener("click", () => {
-        const categoryId = button.dataset.category;
-        if (categoryId) setActiveCategory(categoryId);
-      });
-    });
+  const select = (selected: HTMLButtonElement): void => {
+    for (const tab of tabs) {
+      const isSelected = tab === selected;
+      tab.setAttribute("aria-selected", String(isSelected));
+      tab.tabIndex = isSelected ? 0 : -1;
+      const panelId = tab.getAttribute("aria-controls");
+      const panel = panelId ? document.getElementById(panelId) : null;
+      if (panel) panel.hidden = !isSelected;
+    }
   };
 
-  document.addEventListener("DOMContentLoaded", initSkills);
+  const NEXT_KEYS = ["ArrowDown", "ArrowRight"];
+  const PREVIOUS_KEYS = ["ArrowUp", "ArrowLeft"];
+
+  for (const [index, tab] of tabs.entries()) {
+    tab.addEventListener("click", () => select(tab));
+    tab.addEventListener("keydown", (event) => {
+      let target: number | undefined;
+      if (NEXT_KEYS.includes(event.key)) target = (index + 1) % tabs.length;
+      if (PREVIOUS_KEYS.includes(event.key))
+        target = (index - 1 + tabs.length) % tabs.length;
+      if (event.key === "Home") target = 0;
+      if (event.key === "End") target = tabs.length - 1;
+      if (target === undefined) return;
+      event.preventDefault();
+      tabs[target].focus();
+      select(tabs[target]);
+    });
+  }
 </script>
