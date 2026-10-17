@@ -4,13 +4,11 @@
  * (/og/fr.jpg, /og/en.jpg, ...), referenced by og:image in the layout.
  */
 import type { APIRoute, GetStaticPaths } from "astro";
-import { i18n } from "astro:config/server";
+import { LOCALES } from "../../i18n/locales";
 import { renderOgImage } from "../../lib/og-image";
 
 export const getStaticPaths = (() =>
-  (i18n?.locales ?? []).map((locale) => ({
-    params: { locale: typeof locale === "string" ? locale : locale.path },
-  }))) satisfies GetStaticPaths;
+  LOCALES.map((locale) => ({ params: { locale } }))) satisfies GetStaticPaths;
 
 export const GET: APIRoute = async ({ params }) => {
   const jpeg = await renderOgImage(params.locale ?? "fr");

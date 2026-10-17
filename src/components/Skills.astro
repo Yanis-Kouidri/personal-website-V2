@@ -1,14 +1,11 @@
 ---
-import { getCollection } from "astro:content";
+import { getLocalizedEntry } from "../i18n/content";
 import { ChevronRight } from "@lucide/astro";
 import { skillCategories } from "../content/skills-data";
 import SkillCard from "./SkillCard.astro";
 
-const currentLocale = Astro.currentLocale ?? "fr";
-const skillsEntries = await getCollection("skills", (entry) => {
-  return entry.data.locale === currentLocale;
-});
-const skillsData = skillsEntries[0].data;
+const skillsEntry = await getLocalizedEntry("skills", Astro.currentLocale);
+const skillsData = skillsEntry.data;
 const sectionTitle = skillsData.sectionTitle;
 const categoryLabels = skillsData.categoryLabels;
 ---

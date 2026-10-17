@@ -6,7 +6,7 @@
  */
 import { readFile } from "node:fs/promises";
 import path from "node:path";
-import { getCollection } from "astro:content";
+import { getLocalizedEntry } from "../i18n/content";
 import satori from "satori";
 import sharp from "sharp";
 
@@ -38,8 +38,10 @@ const h = (
 
 /** Renders the Open Graph card of a locale as a JPEG */
 export async function renderOgImage(locale: string): Promise<Buffer> {
-  const [home] = await getCollection("home", (e) => e.data.locale === locale);
-  const [phd] = await getCollection("phd", (e) => e.data.locale === locale);
+  const [home, phd] = await Promise.all([
+    getLocalizedEntry("home", locale),
+    getLocalizedEntry("phd", locale),
+  ]);
   const { title, subtitle, ctaLabel } = home.data;
   const keywords = phd.data.keywords.slice(0, 4);
 

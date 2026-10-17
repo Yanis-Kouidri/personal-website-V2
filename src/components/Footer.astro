@@ -4,15 +4,13 @@
  * Displays footer information loaded from content collection
  * Data structure is validated at build time by the Zod schema in src/content.config.ts.
  */
-import { getCollection, render } from "astro:content";
+import { getLocalizedEntry } from "../i18n/content";
+import { render } from "astro:content";
 import packageJson from "../../package.json";
 
-const currentLocale = Astro.currentLocale ?? "fr";
-const footerEntries = await getCollection("footer", (entry) => {
-  return entry.data.locale === currentLocale;
-});
-const footerData = footerEntries[0].data;
-const { Content } = await render(footerEntries[0]);
+const footerEntry = await getLocalizedEntry("footer", Astro.currentLocale);
+const footerData = footerEntry.data;
+const { Content } = await render(footerEntry);
 
 const currentYear = new Date().getFullYear();
 const currentVersion = packageJson.version;

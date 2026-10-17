@@ -1,5 +1,5 @@
 ---
-import { getCollection } from "astro:content";
+import { getLocalizedEntry } from "../i18n/content";
 import { Bitcoin, FileText, Mail } from "@lucide/astro";
 import { Github } from "simple-icons-astro";
 import LinkedinIcon from "./LinkedinIcon.astro";
@@ -13,15 +13,12 @@ const iconMap: Record<string, typeof Mail> = {
   Bitcoin,
 };
 
-const currentLocale = Astro.currentLocale ?? "fr";
-const contactEntries = await getCollection("contacts", (entry) => {
-  return entry.data.locale === currentLocale;
-});
-const contactData = contactEntries[0]?.data;
-
-const sectionTitle = contactData?.sectionTitle ?? "";
-const contactMessage: string = contactData?.message ?? "";
-const contactLinks = contactData?.links ?? [];
+const contactEntry = await getLocalizedEntry("contacts", Astro.currentLocale);
+const {
+  sectionTitle,
+  message: contactMessage,
+  links: contactLinks,
+} = contactEntry.data;
 ---
 
 <section id="contact" class="section contact-section">

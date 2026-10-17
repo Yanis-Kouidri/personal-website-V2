@@ -1,6 +1,6 @@
 ---
+import { getLocalizedEntry } from "../i18n/content";
 import { Picture } from "astro:assets";
-import { getCollection } from "astro:content";
 import { BookMarked, GraduationCap, Mail } from "@lucide/astro";
 import { Github } from "simple-icons-astro";
 import LinkedinIcon from "./LinkedinIcon.astro";
@@ -18,11 +18,8 @@ const iconMap: Record<string, LucideIcon> = {
   Mail,
 };
 
-const currentLocale = Astro.currentLocale ?? "fr";
-const homeEntries = await getCollection("home", (entry) => {
-  return entry.data.locale === currentLocale;
-});
-const homeData = homeEntries[0].data;
+const homeEntry = await getLocalizedEntry("home", Astro.currentLocale);
+const homeData = homeEntry.data;
 
 const { title, subtitle, ctaLabel, ctaHref, imageAlt, socialLinks } = homeData;
 ---

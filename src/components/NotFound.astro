@@ -3,15 +3,14 @@
  * NotFound Component
  * Localized 404 page body, wrapped in the shared layout
  */
-import { getCollection } from "astro:content";
+import { getLocalizedEntry } from "../i18n/content";
+import { toLocale } from "../i18n/locales";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import Layout from "../layouts/Layout.astro";
 
-const currentLocale = Astro.currentLocale ?? "fr";
-const notFoundEntries = await getCollection("notFound", (entry) => {
-  return entry.data.locale === currentLocale;
-});
-const { metaTitle, title, message, backLabel } = notFoundEntries[0].data;
+const currentLocale = toLocale(Astro.currentLocale);
+const notFoundEntry = await getLocalizedEntry("notFound", currentLocale);
+const { metaTitle, title, message, backLabel } = notFoundEntry.data;
 ---
 
 <Layout title={metaTitle} noindex>

@@ -1,13 +1,11 @@
 ---
-import { getCollection, render } from "astro:content";
+import { getLocalizedEntry } from "../i18n/content";
+import { render } from "astro:content";
 
-const currentLocale = Astro.currentLocale ?? "fr";
-const phdEntries = await getCollection("phd", (entry) => {
-  return entry.data.locale === currentLocale;
-});
-const phdData = phdEntries[0].data;
+const phdEntry = await getLocalizedEntry("phd", Astro.currentLocale);
+const phdData = phdEntry.data;
 // The collaboration text is the Markdown body of the entry
-const { Content: CollaborationText } = await render(phdEntries[0]);
+const { Content: CollaborationText } = await render(phdEntry);
 
 const {
   title,

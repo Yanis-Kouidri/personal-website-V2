@@ -1,6 +1,6 @@
 ---
-import { i18n } from "astro:config/server";
-import { getCollection } from "astro:content";
+import { getLocalizedEntry } from "../i18n/content";
+import { DEFAULT_LOCALE, LANGUAGES, LOCALES, toLocale } from "../i18n/locales";
 import { getAbsoluteLocaleUrl, getRelativeLocaleUrl } from "astro:i18n";
 import interFontUrl from "../assets/fonts/InterVariable.woff2?url";
 import "../styles/global.css";
@@ -17,42 +17,27 @@ interface Props {
 
 const { title: titleOverride, noindex = false } = Astro.props;
 
-const currentLocale = Astro.currentLocale ?? "fr";
+const currentLocale = toLocale(Astro.currentLocale);
 
-const metaEntries = await getCollection("meta", (entry) => {
-  return entry.data.locale === currentLocale;
-});
-const { description } = metaEntries[0].data;
-const title = titleOverride ?? metaEntries[0].data.title;
+const metaEntry = await getLocalizedEntry("meta", currentLocale);
+const { description } = metaEntry.data;
+const title = titleOverride ?? metaEntry.data.title;
 
-const homeEntries = await getCollection("home", (entry) => {
-  return entry.data.locale === currentLocale;
-});
-const { title: name, subtitle } = homeEntries[0].data;
+const homeEntry = await getLocalizedEntry("home", currentLocale);
+const { title: name, subtitle } = homeEntry.data;
 
 // --- SEO: canonical URL and language alternates ---
-const locales = (i18n?.locales ?? []).map((locale) =>
-  typeof locale === "string" ? locale : locale.path,
-);
-const defaultLocale = i18n?.defaultLocale ?? "fr";
 // Path of the current page inside its locale ("" for a locale home page)
 const pathInLocale = Astro.url.pathname.slice(
   getRelativeLocaleUrl(currentLocale).length,
 );
 const canonicalUrl = getAbsoluteLocaleUrl(currentLocale, pathInLocale);
-const alternates = locales.map((locale) => ({
+const alternates = LOCALES.map((locale) => ({
   hreflang: locale,
   href: getAbsoluteLocaleUrl(locale, pathInLocale),
 }));
 
 // --- Open Graph ---
-// og:locale expects language_TERRITORY
-const OG_LOCALES: Record<string, string> = {
-  fr: "fr_FR",
-  en: "en_US",
-  ru: "ru_RU",
-  es: "es_ES",
-};
 // Localized preview card generated at build time by src/pages/og/[locale].jpg.ts
 const ogImageUrl = new URL(`/og/${currentLocale}.jpg`, Astro.site).href;
 const ogImageAlt = `${name} – ${subtitle}`;
@@ -88,7 +73,7 @@ const ogImageAlt = `${name} – ${subtitle}`;
           <link
             rel="alternate"
             hreflang="x-default"
-            href={getAbsoluteLocaleUrl(defaultLocale, pathInLocale)}
+            href={getAbsoluteLocaleUrl(DEFAULT_LOCALE, pathInLocale)}
           />
         </>
       )
@@ -99,12 +84,13 @@ const ogImageAlt = `${name} – ${subtitle}`;
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     {!noindex && <meta property="og:url" content={canonicalUrl} />}
-    <meta property="og:locale" content={OG_LOCALES[currentLocale]} />
-    {locales
-      .filter((locale) => locale !== currentLocale)
-      .map((locale) => (
-        <meta property="og:locale:alternate" content={OG_LOCALES[locale]} />
-      ))}
+    <meta property="og:locale" content={LANGUAGES[currentLocale].ogLocale} />
+    {LOCALES.filter((locale) => locale !== currentLocale).map((locale) => (
+      <meta
+        property="og:locale:alternate"
+        content={LANGUAGES[locale].ogLocale}
+      />
+    ))}
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content={String(OG_IMAGE_WIDTH)} />
