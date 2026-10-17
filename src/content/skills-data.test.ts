@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import fs from "node:fs";
 import path from "node:path";
+import { LOCALES } from "../i18n/locales";
 
 // Mock @lucide/astro car il exporte des composants Astro (.astro) que
 // Vitest ne peut pas parser. Les icônes ne sont pas utilisées dans les tests
@@ -22,6 +23,7 @@ vi.mock("@lucide/astro", () => {
 const { skillCategories } = await import("./skills-data.ts");
 
 const PUBLIC_DIR = path.resolve(import.meta.dirname, "../../public");
+const CONTENT_DIR = import.meta.dirname;
 
 describe("skillCategories", () => {
   // ── Structure globale
@@ -34,8 +36,6 @@ describe("skillCategories", () => {
     for (const category of skillCategories) {
       expect(category).toHaveProperty("id");
       expect(typeof category.id).toBe("string");
-      expect(category).toHaveProperty("label");
-      expect(typeof category.label).toBe("string");
       expect(category).toHaveProperty("icon");
       expect(category).toHaveProperty("skills");
       expect(Array.isArray(category.skills)).toBe(true);
@@ -63,6 +63,21 @@ describe("skillCategories", () => {
       "security",
       "devops",
     ]);
+  });
+
+  it("chaque langue traduit le nom de chaque catégorie", () => {
+    const ids = skillCategories.map((c) => c.id).sort();
+    for (const locale of LOCALES) {
+      const skillsMd = fs.readFileSync(
+        path.join(CONTENT_DIR, locale, "skills", "skills.md"),
+        "utf8",
+      );
+      const block = skillsMd.match(/^categoryLabels:\n((?: {2}.+\n)+)/m)?.[1];
+      const labelled = [...(block ?? "").matchAll(/^ {2}(\w+):/gm)]
+        .map((m) => m[1])
+        .sort();
+      expect(labelled, locale).toEqual(ids);
+    }
   });
 
   // ── Structure des skills individuels ────────────────────────────
@@ -154,8 +169,7 @@ describe("skillCategories", () => {
   describe("catégorie web", () => {
     const web = skillCategories.find((c) => c.id === "web")!;
 
-    it("a les bons champs", () => {
-      expect(web.label).toBe("Web");
+    it("contient le bon nombre de skills", () => {
       expect(web.skills).toHaveLength(11);
     });
 
@@ -178,8 +192,7 @@ describe("skillCategories", () => {
   describe("catégorie programming", () => {
     const prog = skillCategories.find((c) => c.id === "programming")!;
 
-    it("a les bons champs", () => {
-      expect(prog.label).toBe("Programming");
+    it("contient le bon nombre de skills", () => {
       expect(prog.skills).toHaveLength(6);
     });
 
@@ -197,8 +210,7 @@ describe("skillCategories", () => {
   describe("catégorie networking", () => {
     const net = skillCategories.find((c) => c.id === "networking")!;
 
-    it("a les bons champs", () => {
-      expect(net.label).toBe("Networking");
+    it("contient le bon nombre de skills", () => {
       expect(net.skills).toHaveLength(15);
     });
 
@@ -225,8 +237,7 @@ describe("skillCategories", () => {
   describe("catégorie infrastructure", () => {
     const infra = skillCategories.find((c) => c.id === "infrastructure")!;
 
-    it("a les bons champs", () => {
-      expect(infra.label).toBe("Infrastructure");
+    it("contient le bon nombre de skills", () => {
       expect(infra.skills).toHaveLength(7);
     });
 
@@ -245,8 +256,7 @@ describe("skillCategories", () => {
   describe("catégorie security", () => {
     const sec = skillCategories.find((c) => c.id === "security")!;
 
-    it("a les bons champs", () => {
-      expect(sec.label).toBe("Cyber");
+    it("contient le bon nombre de skills", () => {
       expect(sec.skills).toHaveLength(3);
     });
 
@@ -261,8 +271,7 @@ describe("skillCategories", () => {
   describe("catégorie devops", () => {
     const devops = skillCategories.find((c) => c.id === "devops")!;
 
-    it("a les bons champs", () => {
-      expect(devops.label).toBe("DevOps");
+    it("contient le bon nombre de skills", () => {
       expect(devops.skills).toHaveLength(13);
     });
 

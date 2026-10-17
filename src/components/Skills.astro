@@ -8,6 +8,14 @@ const skillsEntry = await getLocalizedEntry("skills", Astro.currentLocale);
 const skillsData = skillsEntry.data;
 const sectionTitle = skillsData.sectionTitle;
 const categoryLabels = skillsData.categoryLabels;
+
+const categoryLabel = (id: string): string => {
+  const label = categoryLabels[id];
+  if (!label) {
+    throw new Error(`Missing skills.categoryLabels.${id} translation`);
+  }
+  return label;
+};
 ---
 
 <section id="skills" class="section skills-section">
@@ -26,7 +34,7 @@ const categoryLabels = skillsData.categoryLabels;
           >
             <span class="btn-content">
               <category.icon size={20} class="category-icon" />
-              <span>{categoryLabels[category.id] ?? category.label}</span>
+              <span>{categoryLabel(category.id)}</span>
             </span>
             <ChevronRight size={16} class="chevron" />
           </button>
@@ -40,9 +48,7 @@ const categoryLabels = skillsData.categoryLabels;
             class={`skills-panel ${index === 0 ? "" : "hidden"}`}
             role="tabpanel"
           >
-            <h3 class="panel-title">
-              {categoryLabels[category.id] ?? category.label}
-            </h3>
+            <h3 class="panel-title">{categoryLabel(category.id)}</h3>
             <div class="tags-container">
               {category.skills.map((skill) => (
                 <SkillCard

@@ -16,7 +16,6 @@ export interface SkillItem {
 
 export interface SkillCategory {
   id: string;
-  label: string;
   icon: AstroComponent;
   skills: SkillItem[];
 }
@@ -24,7 +23,6 @@ export interface SkillCategory {
 export const skillCategories: SkillCategory[] = [
   {
     id: "web",
-    label: "Web",
     icon: Globe,
     skills: [
       {
@@ -86,7 +84,6 @@ export const skillCategories: SkillCategory[] = [
   },
   {
     id: "programming",
-    label: "Programming",
     icon: CodeXml,
     skills: [
       {
@@ -123,7 +120,6 @@ export const skillCategories: SkillCategory[] = [
   },
   {
     id: "networking",
-    label: "Networking",
     icon: Network,
     skills: [
       {
@@ -205,7 +201,6 @@ export const skillCategories: SkillCategory[] = [
   },
   {
     id: "infrastructure",
-    label: "Infrastructure",
     icon: Server,
     skills: [
       {
@@ -247,7 +242,6 @@ export const skillCategories: SkillCategory[] = [
   },
   {
     id: "security",
-    label: "Cyber",
     icon: ShieldCheck,
     skills: [
       {
@@ -269,7 +263,6 @@ export const skillCategories: SkillCategory[] = [
   },
   {
     id: "devops",
-    label: "DevOps",
     icon: InfinityLogo,
     skills: [
       {
