@@ -33,6 +33,19 @@
 
 	import security_headers
 
+	# Cache policy. Files in /_astro/ carry a content hash in their name and
+	# never change: cache them for a year. Every other file keeps a stable URL
+	# across deployments (HTML, fonts, skill logos, CV...): browsers must
+	# revalidate it, which is cheap thanks to ETag/Last-Modified (304).
+	# The file matcher keeps a missing /_astro/ URL from being cached.
+	@hashed_assets {
+		path /_astro/*
+		file
+	}
+	header @hashed_assets Cache-Control "public, max-age=31536000, immutable"
+	@unhashed not path /_astro/*
+	header @unhashed Cache-Control "no-cache"
+
 	route {
 		handle /healthz {
 			log_skip

@@ -1,6 +1,14 @@
+/*
+ * Inter Variable (https://rsms.me/inter/), subset to the scripts used by the
+ * site (Latin + Cyrillic) to cut its size. Kept in src/assets so the build
+ * gives it a content-hashed URL (long-term caching); preloaded in Layout.
+ * Regenerate with:
+ *   pyftsubset InterVariable.woff2 --flavor=woff2 --layout-features='*' \
+ *     --unicodes="U+0000-024F,U+0300-036F,U+0400-04FF,U+2000-206F,U+20AC,U+2122,U+2190-2193,U+2212"
+ */
 @font-face {
   font-family: "Inter Custom";
-  src: url("/fonts/InterVariable.woff2") format("woff2-variations");
+  src: url("../assets/fonts/InterVariable.woff2") format("woff2");
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
@@ -15,6 +23,14 @@
   --color-primary: #006e1a;
   --color-secondary: #8ae68e;
   --color-font-over-secondary: #004911;
+}
+
+/* Smooth scrolling for in-page anchor links (hero CTA, navigation),
+   disabled for users who ask for reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 .hidden {
@@ -184,7 +200,9 @@ a:focus-visible {
     text-align: left;
     font-size: 2.5rem;
   }
+  /* Fill the section up to the 1000px max-width (also inside flex sections)
+     without overflowing viewports barely wider than 1024px */
   .container {
-    width: 1000px;
+    width: 100%;
   }
 }

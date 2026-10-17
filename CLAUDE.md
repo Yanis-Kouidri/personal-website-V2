@@ -18,6 +18,7 @@ Package manager/runtime is **Bun**. Do not use npm, yarn, or pnpm.
 - `bun run format` / `bun run format:fix` — Prettier check/write (`.astro` files use `prettier-plugin-astro`)
 - `bun run test` — run the Vitest suite once
 - `bun run test:watch` — Vitest watch mode
+- `bun run optimize:svg` — losslessly optimize every SVG under `public/` with svgo (run after adding a logo)
 - Run a single test file: `bun run test astro-csp-hash.test.js` or `bunx vitest run src/content/skills-data.test.ts`
 
 Husky + lint-staged run ESLint/Prettier on staged files at commit time (`lint-staged.config.js`).

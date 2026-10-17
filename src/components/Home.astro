@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import { Picture } from "astro:assets";
 import { getCollection } from "astro:content";
 import { BookMarked, GraduationCap, Mail } from "@lucide/astro";
 import { Github } from "simple-icons-astro";
@@ -57,12 +57,18 @@ const { title, subtitle, ctaLabel, ctaHref, imageAlt, socialLinks } = homeData;
     </div>
 
     <div class="profile-image-container">
-      <Image
+      <!-- Rendered at 250px (mobile) and 380px (desktop), 1x and 2x -->
+      <Picture
         src={profileImage}
+        formats={["avif"]}
+        fallbackFormat="webp"
         alt={imageAlt}
         class="img-cover"
         width={380}
         height={380}
+        widths={[250, 380, 500, 760]}
+        sizes="(min-width: 1024px) 380px, 250px"
+        priority
       />
     </div>
   </div>
@@ -94,30 +100,6 @@ const { title, subtitle, ctaLabel, ctaHref, imageAlt, socialLinks } = homeData;
     align-items: center;
   }
 
-  @media (min-width: 1024px) {
-    .content-wrapper {
-      flex-direction: row;
-      justify-content: center;
-      text-align: left;
-
-      gap: 8rem;
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 0 10% 6rem 10%;
-    }
-
-    .text-content {
-      align-items: flex-start;
-      flex: 0 1 auto;
-    }
-
-    .profile-image-container {
-      flex-shrink: 0;
-      width: 380px;
-      height: 380px;
-    }
-  }
-
   .name-title {
     font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 800;
@@ -145,16 +127,29 @@ const { title, subtitle, ctaLabel, ctaHref, imageAlt, socialLinks } = homeData;
     overflow: hidden;
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
   }
-</style>
 
-<script>
-  const ctaButton = document.querySelector<HTMLAnchorElement>(".btn-cta");
+  /* --- Desktop Breakpoint (1024px+) --- */
+  @media (min-width: 1024px) {
+    .content-wrapper {
+      flex-direction: row;
+      justify-content: center;
+      text-align: left;
 
-  ctaButton?.addEventListener("click", (e) => {
-    e.preventDefault();
-    const target = document.getElementById("phd");
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth" });
+      gap: 8rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 10% 6rem 10%;
     }
-  });
-</script>
+
+    .text-content {
+      align-items: flex-start;
+      flex: 0 1 auto;
+    }
+
+    .profile-image-container {
+      flex-shrink: 0;
+      width: 380px;
+      height: 380px;
+    }
+  }
+</style>
