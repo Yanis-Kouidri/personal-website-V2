@@ -1,6 +1,7 @@
 import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
+import { ICON_NAMES } from "./components/icon-names";
 import { LOCALES } from "./i18n/locales";
 
 /**
@@ -47,7 +48,7 @@ const contactsCollection = defineCollection({
     links: z.array(
       z.object({
         href: z.string(),
-        icon: z.string(),
+        icon: z.enum(ICON_NAMES),
         label: z.string(),
       }),
     ),
@@ -118,7 +119,7 @@ const homeCollection = defineCollection({
     socialLinks: z.array(
       z.object({
         href: z.string(),
-        icon: z.string(),
+        icon: z.enum(ICON_NAMES),
         label: z.string(),
       }),
     ),

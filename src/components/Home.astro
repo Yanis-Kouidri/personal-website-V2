@@ -1,27 +1,12 @@
 ---
 import { getLocalizedEntry } from "../i18n/content";
 import { Picture } from "astro:assets";
-import { BookMarked, GraduationCap, Mail } from "@lucide/astro";
-import { Github } from "simple-icons-astro";
-import LinkedinIcon from "./LinkedinIcon.astro";
-
 import profileImage from "../assets/Yanis_Kouidri_home.jpg";
-
-type LucideIcon = typeof BookMarked;
-/**
- * Mapping between icon names (from content frontmatter) and Lucide components
- */
-const iconMap: Record<string, LucideIcon> = {
-  BookMarked,
-  GraduationCap,
-  Github,
-  Mail,
-};
+import { ICONS } from "./icons";
 
 const homeEntry = await getLocalizedEntry("home", Astro.currentLocale);
-const homeData = homeEntry.data;
-
-const { title, subtitle, ctaLabel, ctaHref, imageAlt, socialLinks } = homeData;
+const { title, subtitle, ctaLabel, ctaHref, imageAlt, socialLinks } =
+  homeEntry.data;
 ---
 
 <section id="home" class="hero-container">
@@ -32,8 +17,7 @@ const { title, subtitle, ctaLabel, ctaHref, imageAlt, socialLinks } = homeData;
 
       <div class="social-links">
         {socialLinks.map((social) => {
-          const IconComponent =
-            social.icon === "Linkedin" ? LinkedinIcon : iconMap[social.icon];
+          const IconComponent = ICONS[social.icon];
           return (
             <a
               href={social.href}
@@ -42,7 +26,7 @@ const { title, subtitle, ctaLabel, ctaHref, imageAlt, socialLinks } = homeData;
               aria-label={social.label}
               class="link-icon"
             >
-              {IconComponent && <IconComponent size={32} stroke-width="2.5" />}
+              <IconComponent size={32} stroke-width="2.5" />
             </a>
           );
         })}
