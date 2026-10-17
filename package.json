@@ -9,8 +9,6 @@
     "astro": "astro",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
-    "check": "prettier --check .",
-    "check:fix": "prettier --write .",
     "typecheck": "astro check",
     "typecheck:watch": "astro check --watch",
     "prepare": "husky",
@@ -20,16 +18,15 @@
     "optimize:svg": "svgo -r -f public --multipass"
   },
   "dependencies": {
-    "@astrojs/check": "0.9.10",
     "@astrojs/sitemap": "^3.7.4",
     "@lucide/astro": "^1.57.0",
     "astro": "7.4.0",
     "satori": "^0.57.0",
     "sharp": "^0.35.5",
-    "simple-icons-astro": "^16.1.0",
-    "typescript": "6.0.3"
+    "simple-icons-astro": "^16.1.0"
   },
   "devDependencies": {
+    "@astrojs/check": "0.9.10",
     "@eslint/js": "^10.0.1",
     "@types/bun": "^1.4.3",
     "eslint": "^10.12.0",
@@ -41,6 +38,7 @@
     "prettier": "^3.9.10",
     "prettier-plugin-astro": "^1.1.1",
     "svgo": "^4.1.0",
+    "typescript": "6.0.3",
     "typescript-eslint": "^8.71.2",
     "vitest": "^5.0.5"
   },
