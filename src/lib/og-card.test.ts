@@ -21,7 +21,7 @@ const isClose = (a: Rgb, b: Rgb, tolerance = 24) =>
   a.every((value, i) => Math.abs(value - b[i]) <= tolerance);
 
 let pixels: Buffer;
-let info: sharp.OutputInfo;
+let info: { width: number; height: number; channels: number };
 const pixelAt = (x: number, y: number): Rgb => {
   const offset = (y * info.width + x) * info.channels;
   return [pixels[offset], pixels[offset + 1], pixels[offset + 2]];
