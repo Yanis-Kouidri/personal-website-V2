@@ -1,12 +1,12 @@
 /**
- * Open Graph image rendering
- * Builds the 1200x630 link preview card of a locale. Satori lays out the card
- * and converts the text to vector paths, so no system font is needed to
- * rasterize it. Served by src/pages/og/[locale].jpg.ts.
+ * Open Graph card rendering
+ * Builds the 1200x630 link preview card from plain texts (no Astro imports,
+ * so it is unit-tested in og-card.test.ts). Satori lays out the card and
+ * converts the text to vector paths, so no system font is needed to
+ * rasterize it. Served per locale by src/pages/og/[locale].jpg.ts.
  */
 import { readFile } from "node:fs/promises";
 import path from "node:path";
-import { getLocalizedEntry } from "../i18n/content";
 import satori from "satori";
 import sharp from "sharp";
 
@@ -14,7 +14,7 @@ export const OG_IMAGE_WIDTH = 1200;
 export const OG_IMAGE_HEIGHT = 630;
 
 // Same palette as the :root variables in src/styles/global.css
-const COLORS = {
+export const COLORS = {
   background: "#f2f4f3",
   font: "#070b07",
   primary: "#006e1a",
@@ -22,7 +22,7 @@ const COLORS = {
   fontOverSecondary: "#004911",
 };
 
-// Files are read from the project root: the endpoint runs during the build
+// Files are read from the project root (build and tests run from there)
 const fromRoot = (file: string) => path.join(process.cwd(), file);
 
 type Node = {
@@ -36,15 +36,20 @@ const h = (
   props: Record<string, unknown> = {},
 ): Node => ({ type, props: { style, children, ...props } });
 
-/** Renders the Open Graph card of a locale as a JPEG */
-export async function renderOgImage(locale: string): Promise<Buffer> {
-  const [home, phd] = await Promise.all([
-    getLocalizedEntry("home", locale),
-    getLocalizedEntry("phd", locale),
-  ]);
-  const { title, subtitle, ctaLabel } = home.data;
-  const keywords = phd.data.keywords.slice(0, 4);
+export interface OgCardContent {
+  title: string;
+  subtitle: string;
+  keywords: string[];
+  ctaLabel: string;
+}
 
+/** Renders an Open Graph card as a JPEG */
+export async function renderOgCard({
+  title,
+  subtitle,
+  keywords,
+  ctaLabel,
+}: OgCardContent): Promise<Buffer> {
   const [regular, extraBold, photo] = await Promise.all([
     readFile(fromRoot("src/assets/og/Inter-Regular.ttf")),
     readFile(fromRoot("src/assets/og/Inter-ExtraBold.ttf")),
