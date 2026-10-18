@@ -1,7 +1,7 @@
 /** Components behind the icon names of the content (see icon-names.ts) */
 import {
   Bitcoin,
-  BookMarked,
+  BookBookmark,
   FileText,
   GraduationCap,
   Mail,
@@ -12,7 +12,7 @@ import LinkedinIcon from "./LinkedinIcon.astro";
 
 export const ICONS = {
   Bitcoin,
-  BookMarked,
+  BookBookmark,
   FileText,
   Github,
   GraduationCap,
