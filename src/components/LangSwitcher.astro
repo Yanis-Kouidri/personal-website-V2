@@ -13,6 +13,7 @@ interface Props {
 
 const { label } = Astro.props;
 const currentLocale = toLocale(Astro.currentLocale);
+const currentCode = currentLocale.toUpperCase();
 ---
 
 <div class="lang-switcher">
@@ -20,11 +21,11 @@ const currentLocale = toLocale(Astro.currentLocale);
     id="lang-button"
     type="button"
     class="lang-btn"
-    aria-label={label}
+    aria-label={`${label} – ${currentCode}`}
     aria-expanded="false"
   >
     <Flag locale={currentLocale} />
-    <span class="lang-label">{currentLocale.toUpperCase()}</span>
+    <span class="lang-label">{currentCode}</span>
     <svg
       class="lang-chevron"
       width="12"

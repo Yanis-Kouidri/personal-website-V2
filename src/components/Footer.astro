@@ -73,9 +73,17 @@ const authorName = footerData.authorName;
     font-size: 0.85rem;
     font-weight: 500;
     line-height: 1.5;
-    color: var(--color-font);
-    opacity: 0.8; /* Slight fade for secondary text hierarchy */
+    /* Muted text for the secondary hierarchy (same look as the former 0.8
+       opacity, 9:1 contrast). A color rather than opacity, which also faded
+       the link below WCAG AA contrast. */
+    color: #363a36;
     margin: 0;
+  }
+
+  /* Links inside running text must not rely on color alone (WCAG 1.4.1) */
+  .credits :global(a) {
+    text-decoration: underline;
+    text-underline-offset: 2px;
   }
 
   /* --- Desktop Breakpoint (1024px+) --- */
