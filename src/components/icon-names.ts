@@ -5,7 +5,7 @@
  */
 export const ICON_NAMES = [
   "Bitcoin",
-  "BookMarked",
+  "BookBookmark",
   "FileText",
   "Github",
   "GraduationCap",

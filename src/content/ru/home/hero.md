@@ -7,7 +7,7 @@ ctaHref: "#phd"
 imageAlt: "Янис Куидри"
 socialLinks:
   - href: "https://yanis-kouidri.github.io/personal-doc/"
-    icon: "BookMarked"
+    icon: "BookBookmark"
     label: "Документы"
   - href: "https://yanis-kouidri.github.io/DMX/"
     icon: "GraduationCap"
