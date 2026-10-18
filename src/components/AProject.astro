@@ -1,7 +1,7 @@
 ---
 import { Picture } from "astro:assets";
 import { type CollectionEntry, render } from "astro:content";
-import { Github } from "simple-icons-astro";
+import GithubIcon from "./GithubIcon.astro";
 
 interface Props {
   project: CollectionEntry<"projects">;
@@ -40,7 +40,7 @@ const { Content } = await render(project);
         class="github-link"
         aria-label={`${sourceCodeLabel} ${title}`}
       >
-        <Github size={24} />
+        <GithubIcon size={24} />
       </a>
     </div>
 
