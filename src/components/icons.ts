@@ -6,7 +6,7 @@ import {
   GraduationCap,
   Mail,
 } from "@lucide/astro";
-import { Github } from "simple-icons-astro";
+import GithubIcon from "./GithubIcon.astro";
 import type { IconName } from "./icon-names";
 import LinkedinIcon from "./LinkedinIcon.astro";
 
@@ -14,7 +14,7 @@ export const ICONS = {
   Bitcoin,
   BookBookmark,
   FileText,
-  Github,
+  Github: GithubIcon,
   GraduationCap,
   Linkedin: LinkedinIcon,
   Mail,
