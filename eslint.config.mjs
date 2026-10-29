@@ -7,7 +7,7 @@ import globals from "globals";
 
 export default defineConfig([
   {
-    ignores: ["dist/", ".astro/"],
+    ignores: ["dist/", ".astro/", "public/count.js"],
   },
   {
     files: ["**/*.{js,ts,astro}"],
