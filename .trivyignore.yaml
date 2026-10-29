@@ -30,3 +30,18 @@ vulnerabilities:
       ECH handling DoS in Go crypto/tls. The container serves plain HTTP and
       never terminates TLS.
     expired_at: 2026-11-16
+  - id: CVE-2026-116587
+    paths:
+      - usr/bin/caddy
+    statement: >-
+      go-jose DoS when parsing JWKs with RSA keys. Caddy only parses JWKs for
+      ACME, which is disabled (auto_https off): no untrusted JWK is parsed.
+    expired_at: 2026-11-29
+  - id: CVE-2026-111943
+    paths:
+      - usr/bin/caddy
+    statement: >-
+      MITM through untrusted intermediates in Go crypto/x509. The container
+      makes no outbound TLS connection (no ACME, no reverse_proxy) and never
+      verifies client certificates.
+    expired_at: 2026-11-29
