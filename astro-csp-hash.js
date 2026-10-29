@@ -22,7 +22,8 @@ export const DEFAULT_CSP_CONFIG = {
   "form-action": "'none'",
   "frame-src": "'none'",
   "media-src": "'none'",
-  "connect-src": "'none'",
+  // GoatCounter sends hits to /count (sendBeacon)
+  "connect-src": "'self'",
   "font-src": "'self'",
   "base-uri": "'none'",
 };
